@@ -1,9 +1,11 @@
-import { format } from "date-fns";
-
-const TIME_FORMAT = "h:mm a"
+const options = {
+  hour: "numeric",
+  minute: "numeric",
+  timeZone: "America/Chicago"
+}
 
 const formatTime = (time) => {
-  return format(new Date(time), TIME_FORMAT);
+  return new Intl.DateTimeFormat("en-US", options).format(new Date(time));
 };
 
 export default formatTime;
