@@ -1,2 +1,0 @@
-# Homepage
-magnum opus
