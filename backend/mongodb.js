@@ -1,7 +1,9 @@
 const mongodb = require('mongodb');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
+// MongoDB connection URI
 const uri = process.env.MONGODB_URI;
 
 const client = new mongodb.MongoClient(uri, {
