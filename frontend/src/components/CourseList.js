@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types"
 import Course from "./Course";
 
-const CourseList = ({
-  courses
-}) => {
+const CourseList = ({courses}) => {
   return (
     <div>
       {courses?.map((course, i) => {
@@ -14,8 +12,6 @@ const CourseList = ({
   );
 };
 
-CourseList.propTypes = {
-  courses: PropTypes.arrayOf(Course.propTypes.course).isRequired
-};
+CourseList.propTypes = {courses: PropTypes.arrayOf(Course.propTypes.course).isRequired};
 
 export default CourseList;
