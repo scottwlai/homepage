@@ -22,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build --output-path=frontend/build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -41,5 +42,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/eslint-parser": "^7.21.8",
+    "@babel/preset-react": "^7.18.6",
+    "eslint": "^8.40.0",
+    "eslint-plugin-react": "^7.32.2",
+    "jest": "^27.5.1"
   }
 }
