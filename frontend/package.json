@@ -21,9 +21,17 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build --output-path=frontend/build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint src --fix"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(axios)/)"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -46,7 +54,10 @@
   "devDependencies": {
     "@babel/core": "^7.21.8",
     "@babel/eslint-parser": "^7.21.8",
+    "@babel/plugin-syntax-jsx": "^7.21.4",
+    "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
+    "babel-jest": "^29.5.0",
     "eslint": "^8.40.0",
     "eslint-plugin-react": "^7.32.2",
     "jest": "^27.5.1"

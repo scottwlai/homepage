@@ -1,10 +1,6 @@
-import React, {
-  useState
-} from "react";
+import React, {useState} from "react";
 import Button from "@mui/material/Button";
-import {
-  getCourses
-} from "../api";
+import {getCourses} from "../api";
 import CourseList from "../components/CourseList";
 
 const Courses = () => {
