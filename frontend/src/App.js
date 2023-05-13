@@ -1,28 +1,24 @@
-import React, { useState } from "react";
-import Button from "@mui/material/Button";
-import { getCourses } from "./api";
-import CourseList from "./components/CourseList";
+import React from "react";
+import {
+  Routes, Route
+} from "react-router-dom";
+import Navbar from "./pages/Navbar";
+import Home from "./pages/Home";
+import Courses from "./pages/Courses";
+import NoMatch from "./pages/NoMatch";
 
-function App() {
-  const [courses, setCourses] = useState([]);
-
-  async function getCoursesData() {
-    try {
-      const response = await getCourses();
-      console.log(response);
-      setCourses(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
+const App = () => {
   return (
-    <div>
-      <Button onClick={getCoursesData} variant="contained">
-        Get Courses
-      </Button>
-      <CourseList courses={courses}></CourseList>
-    </div>
+    <>
+      <Navbar />
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/*" element={<NoMatch />} />
+        </Routes>
+      </div>
+    </>
   );
 }
 
