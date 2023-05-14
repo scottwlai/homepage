@@ -19,7 +19,7 @@ const Layout = ({ title, children }) => {
               flexDirection: "row",
               justifyContent: "right"
             }}>
-              <Button color="inherit" component={Link} to="/" sx={{marginRight: "auto"}}>
+              <Button color="inherit" component={Link} to="/" sx={{ marginRight: "auto" }}>
                 <Typography variant="h6" textTransform="none">Scott Lai</Typography>
               </Button>
               <Button color="inherit" component={Link} to="/courses">
