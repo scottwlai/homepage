@@ -10,6 +10,18 @@ const links = [
     "text": "Scott Lai"
   },
   {
+    "to": "/portfolio",
+    "marginRight": 0,
+    "variant": "button",
+    "text": "Portfolio"
+  },
+  {
+    "to": "/interests",
+    "marginRight": 0,
+    "variant": "button",
+    "text": "Interests"
+  },
+  {
     "to": "/courses",
     "marginRight": 0,
     "variant": "button",
