@@ -16,7 +16,7 @@ const links = [
     "text": "Courses"
   },
   {
-    "to": "/",
+    "to": "/demo",
     "marginRight": 0,
     "variant": "button",
     "text": "Demo"
