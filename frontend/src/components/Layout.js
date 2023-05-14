@@ -10,7 +10,7 @@ const Layout = ({ title, children }) => {
       <Header />
       <main>
         <Container sx={{ paddingY: theme.mixins.toolbar.minHeight / 4 }}>
-          <Typography variant="h6">{title}</Typography>
+          <Typography variant="h1" align="center" gutterBottom>{title}</Typography>
           {children}
         </Container>
       </main>
