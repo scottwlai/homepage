@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import { Button } from "@mui/material";
+import Layout from "../components/Layout";
 // import { PerspectiveCamera, OrbitControls, Sky, Stars } from "@react-three/drei"
 // import { Physics, useBox, usePlane } from "@react-three/cannon";
 
@@ -55,8 +56,7 @@ const Demo = () => {
   }
 
   return (
-    <>
-      <h1>Demo Page</h1>
+    <Layout title="Demo">
       <p>Welcome to the demo page!</p>
       <Button onClick={handleButtonClick} variant="contained">Toggle Demo</Button>
       {show && (
@@ -78,7 +78,7 @@ const Demo = () => {
           </Physics> */}
         </Canvas>
       )}
-    </>
+    </Layout>
   );
 }
 
