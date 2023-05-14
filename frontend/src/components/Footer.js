@@ -46,7 +46,10 @@ const Footer = () => {
                   justifyContent: "center",
                   "@media (max-width: 960px)": {justifyContent: "flex-start"}
                 }}>
-                  <Button color="inherit" component={Link} to={link.to} sx={{px: 2}}>
+                  <Button color="inherit" component={Link} to={link.to} sx={{
+                    px: 2,
+                    borderRadius: "2rem"
+                  }}>
                     {link.icon}
                     <Typography variant="button" textTransform="none">
                       {link.text}
