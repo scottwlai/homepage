@@ -1,13 +1,31 @@
-import {
-  AppBar, Toolbar, Container,
-  Typography, ButtonGroup, Button
-} from "@mui/material";
-import { Link } from "react-router-dom";
 import React from "react";
+import { Link } from "react-router-dom";
+import { AppBar, Toolbar, Container, Typography, ButtonGroup, Button } from "@mui/material";
+
+const links = [
+  {
+    "to": "/",
+    "sx": { marginRight: "auto" },
+    "variant": "h6",
+    "text": "Scott Lai"
+  },
+  {
+    "to": "/courses",
+    "sx": {},
+    "variant": "button",
+    "text": "Courses"
+  },
+  {
+    "to": "/",
+    "sx": {},
+    "variant": "button",
+    "text": "Demo"
+  }
+];
 
 const Header = () => {
   return (
-    <AppBar position="fixed" color="primary">
+    <AppBar position="fixed">
       <Toolbar component="nav">
         <Container>
           <ButtonGroup variant="text" aria-label="navigation buttons" sx={{
@@ -16,15 +34,13 @@ const Header = () => {
             flexDirection: "row",
             justifyContent: "right"
           }}>
-            <Button color="inherit" component={Link} to="/" sx={{ marginRight: "auto" }}>
-              <Typography variant="h6" textTransform="none">Scott Lai</Typography>
-            </Button>
-            <Button color="inherit" component={Link} to="/courses">
-              <Typography variant="button" textTransform="none">Courses</Typography>
-            </Button>
-            <Button color="inherit" component={Link} to="/demo">
-              <Typography variant="button" textTransform="none">Demo</Typography>
-            </Button>
+            {links?.map((link, index) => {
+              return (
+                <Button key={index} color="inherit" component={Link} to={link.to} sx={link.sx}>
+                  <Typography variant={link.variant} textTransform="none">{link.text}</Typography>
+                </Button>
+              );
+            })}
           </ButtonGroup>
         </Container>
       </Toolbar>
