@@ -1,36 +1,40 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Container, Typography, Button } from "@mui/material";
+import {
+  Link
+} from "react-router-dom";
+import {
+  AppBar, Toolbar, Container, Typography, Button
+} from "@mui/material";
 
 const links = [
   {
     "to": "/",
     "marginRight": "auto",
-    "variant": "h6",
+    "fontSize": "1.75rem",
     "text": "Scott Lai"
   },
   {
     "to": "/portfolio",
     "marginRight": 0,
-    "variant": "button",
+    "fontSize": "1.25rem",
     "text": "Portfolio"
   },
   {
     "to": "/interests",
     "marginRight": 0,
-    "variant": "button",
+    "fontSize": "1.25rem",
     "text": "Interests"
   },
   {
     "to": "/courses",
     "marginRight": 0,
-    "variant": "button",
+    "fontSize": "1.25rem",
     "text": "Courses"
   },
   {
     "to": "/demo",
     "marginRight": 0,
-    "variant": "button",
+    "fontSize": "1.25rem",
     "text": "Demo"
   }
 ];
@@ -46,12 +50,16 @@ const Header = () => {
         }}>
           {links?.map((link, index) => {
             return (
-              <Button key={index} color="inherit" component={Link} to={link.to} sx={{
+              <Button key={index} component={Link} to={link.to} sx={{
                 marginRight: link.marginRight,
-                px: 2,
-                borderRadius: "1rem"
+                px: 3,
+                py: 0,
+                borderRadius: "1.5rem"
               }}>
-                <Typography variant={link.variant} textTransform="none">{link.text}</Typography>
+                <Typography fontSize={link.fontSize} variant="button"
+                  textTransform="none">
+                  {link.text}
+                </Typography>
               </Button>
             );
           })}
