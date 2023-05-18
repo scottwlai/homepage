@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types"
 import Meet from "./Meet";
 
-const MeetList = ({meets}) => {
+const MeetList = ({
+  meets
+}) => {
   return (
     <div>
       <h3>Meets</h3>
@@ -13,6 +15,8 @@ const MeetList = ({meets}) => {
   );
 };
 
-MeetList.propTypes = {meets: PropTypes.arrayOf(Meet.propTypes.meet)};
+MeetList.propTypes = {
+  meets: PropTypes.arrayOf(Meet.propTypes.meet)
+};
 
 export default MeetList;

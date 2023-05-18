@@ -1,8 +1,15 @@
-import React, {useState} from "react";
+import React, {
+  useState
+} from "react";
 import Button from "@mui/material/Button";
-import {getCourses} from "../api";
+import {
+  getCourses
+} from "../api";
 import CourseList from "../components/CourseList";
 import Layout from "../components/Layout";
+import {
+  Typography
+} from "@mui/material";
 
 const Courses = () => {
   const [ courses, setCourses ] = useState([]);
@@ -19,7 +26,7 @@ const Courses = () => {
 
   return (
     <Layout title="Courses">
-      <p>Welcome to the courses page!</p>
+      <Typography>Welcome to the courses page!</Typography>
       <Button onClick={getCoursesData} variant="contained">
                 Get Courses
       </Button>
