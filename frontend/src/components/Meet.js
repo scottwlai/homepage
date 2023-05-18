@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types"
 import formatTime from "../timeUtils";
 
-const Meet = ({meet}) => {
+const Meet = ({
+  meet
+}) => {
   let meetData = [ meet.days.join("") ];
   if (meet.startTime) {
     meetData.push(formatTime(meet.startTime) + " - " + formatTime(meet.endTime));

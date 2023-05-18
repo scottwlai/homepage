@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types"
 import MeetList from "./MeetList";
 
-const Course = ({ course }) => {
+const Course = ({
+  course
+}) => {
   const c = course.courseNumber;
   let courseTitle = c.department + " " + c.number + ": " + course.name;
   if (course.nickname) {
