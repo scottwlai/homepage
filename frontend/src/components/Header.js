@@ -43,10 +43,11 @@ const Header = () => {
   return (
     <AppBar position="fixed">
       <Toolbar component="nav">
-        <Container aria-label="navigation buttons" sx={{
+        <Container disableGutters aria-label="navigation buttons" sx={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "right"
+          justifyContent: "right",
+          width: "min(1000px, 90%)"
         }}>
           {links?.map((link, index) => {
             return (

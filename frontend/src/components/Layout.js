@@ -12,10 +12,11 @@ const Layout = ({
   return (
     <>
       <Header />
-      <Container component="main" sx={{
+      <Container disableGutters component="main" sx={{
         paddingY: theme.mixins.toolbar.minHeight / 4,
         display: "grid",
-        gap: "4rem"
+        gap: "4rem",
+        width: "min(1000px, 90%)"
       }}>
         <Typography variant="h1" align="center" gutterBottom>{title}</Typography>
         {children}
