@@ -62,7 +62,7 @@ const Skills = () => {
       <Grid container spacing={"2.5rem"}>
         {skills.map((skill, index) => {
           return (
-            <Grid item key={index} xs={6}>
+            <Grid item key={index} xs={12}>
               <Card component="section" sx={{
                 display: "flex",
                 flexDirection: "row",
