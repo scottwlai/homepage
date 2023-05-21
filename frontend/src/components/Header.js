@@ -26,12 +26,6 @@ const links = [
     "text": "Interests"
   },
   {
-    "to": "/courses",
-    "marginRight": 0,
-    "fontSize": "1.25rem",
-    "text": "Courses"
-  },
-  {
     "to": "/demo",
     "marginRight": 0,
     "fontSize": "1.25rem",
