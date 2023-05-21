@@ -44,12 +44,14 @@ router.get('/', cors(corsOptions), async(req, res, next) => {
   const perPage = parseInt(req.query.perPage) || 5;
   // calculates the number of entries to skip ahead to simulate pages
   const skip = (page - 1) * perPage;
-  // selects the Courses collection in the Homepage database
-  const courses = db.collection('Courses');
-  // finds all documents that match the query
-  const data = await courses.find().skip(skip).limit(perPage).toArray();
+  const data = await db.collection('Courses').find().skip(skip).limit(perPage).toArray();
   // sends the resulting array as a JSON response to the client
-  res.json(data);
+  res.json({
+    "courses": data,
+    "page": page,
+    "pageSize": perPage,
+    "total": 26
+  });
 });
 
 // exports the router object to be mounted to /courses in app.js
