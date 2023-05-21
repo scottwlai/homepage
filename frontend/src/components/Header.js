@@ -26,12 +26,6 @@ const links = [
     "text": "Interests"
   },
   {
-    "to": "/courses",
-    "marginRight": 0,
-    "fontSize": "1.25rem",
-    "text": "Courses"
-  },
-  {
     "to": "/demo",
     "marginRight": 0,
     "fontSize": "1.25rem",
@@ -43,10 +37,11 @@ const Header = () => {
   return (
     <AppBar position="fixed">
       <Toolbar component="nav">
-        <Container aria-label="navigation buttons" sx={{
+        <Container disableGutters aria-label="navigation buttons" sx={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "right"
+          justifyContent: "right",
+          width: "min(1000px, 90%)"
         }}>
           {links?.map((link, index) => {
             return (

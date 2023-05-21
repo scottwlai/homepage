@@ -14,7 +14,8 @@ const router = express.Router();
 // creates a list of whitelisted origins
 const whitelist = [
   'https://scottlai.tech',
-  'https://www.scottlai.tech'
+  'https://www.scottlai.tech',
+  'http://localhost:3000'
 ];
 
 // allows the server to serve origins in the whitelist only
@@ -23,7 +24,8 @@ corsOptions = {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error(origin + ' not allowed by CORS'));
+      // callback(null, true);
     }
   }
 };
@@ -37,12 +39,19 @@ corsOptions = {
 router.get('/', cors(corsOptions), async(req, res, next) => {
   // connects to the Homepage database in the MongoDB instance
   const db = mongodb.db('Homepage');
-  // selects the Courses collection in the Homepage database
-  const collection = db.collection('Courses');
-  // queries for all documents in the Courses collection
-  const courses = await collection.find().toArray();
+  // parses URL query parameters, setting default values if null
+  const page = parseInt(req.query.page) || 1;
+  const perPage = parseInt(req.query.perPage) || 5;
+  // calculates the number of entries to skip ahead to simulate pages
+  const skip = (page - 1) * perPage;
+  const data = await db.collection('Courses').find().skip(skip).limit(perPage).toArray();
   // sends the resulting array as a JSON response to the client
-  res.json(courses);
+  res.json({
+    "courses": data,
+    "page": page,
+    "pageSize": perPage,
+    "total": 26
+  });
 });
 
 // exports the router object to be mounted to /courses in app.js

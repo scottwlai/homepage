@@ -47,7 +47,9 @@ const Footer = () => {
       <Toolbar component="nav" sx={{
         py: 2
       }}>
-        <Container aria-label="footer buttons">
+        <Container disableGutters aria-label="footer buttons" sx={{
+          width: "min(1000px, 90%)"
+        }}>
           <Grid container>
             {links.map((link, index) => {
               return (
@@ -60,8 +62,9 @@ const Footer = () => {
                 }}>
                   <Button
                     variant="text" component={Link} to={link.to} sx={{
-                      px: 2,
-                      borderRadius: "2rem"
+                      px: 3,
+                      py: 0,
+                      borderRadius: "1.5rem"
                     }}>
                     {link.icon}
                     <Typography fontSize="1rem" variant="button" textTransform="none">
