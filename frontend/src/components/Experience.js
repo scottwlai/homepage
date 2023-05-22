@@ -9,18 +9,24 @@ const jobs = [
   {
     "image": "../logo192.png",
     "title": "Student Lab Assistant",
-    "subtitle": "UT Austin School of Nursing, Simulation and Skills Center",
-    "subtitleIcon": <WorkIcon sx={{
-      fontSize: "1.375rem",
-      color: "#333"
-    }} />,
+    "subtitles": [
+      {
+        "subtitle": "UT Austin School of Nursing, Simulation and Skills Center",
+        "subtitleIcon": <WorkIcon sx={{
+          fontSize: "1.375rem",
+          color: "#333"
+        }} />
+      }
+    ],
     "startDate": "Sep 2020",
     "endDate": "Dec 2020",
     "location": "Austin, TX",
     "bullets": [
       "Prepared lab equipment for daily simulations; all classes began equipped and on time",
       "Organized supply room; all equipment requests met on demand with 100% accuracy"
-    ]
+    ],
+    "columns": 1,
+    "tags": false
   }
 ];
 
