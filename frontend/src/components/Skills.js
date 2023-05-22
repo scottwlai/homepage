@@ -1,53 +1,87 @@
 import React from "react"
 import {
-  Box, Card, CardContent, Grid, List, ListItem, ListItemText, Typography
+  Box, Grid, Typography
 } from "@mui/material";
+import CustomCard from "./CustomCard";
 
 const skills = [
   {
-    "type": "Languages",
-    "items": [
+    "image": null,
+    "title": "Languages",
+    "subtitles": null,
+    "startDate": null,
+    "endDate": null,
+    "location": null,
+    "bullets": [
       "Java",
       "Python",
-      "C",
       "C++",
+      "LaTeX",
       "HTML",
       "CSS",
       "JavaScript",
-      "SQL",
-      "LaTeX"
-    ]
+      "SQL"
+    ],
+    "columns": 2,
+    "tags": true
   },
   {
-    "type": "Tools",
-    "items": [
+    "image": null,
+    "title": "Tools",
+    "subtitles": null,
+    "startDate": null,
+    "endDate": null,
+    "location": null,
+    "bullets": [
       "Git",
-      "VS Code",
+      "GitHub",
+      "GitLab",
+      "Visual Studio Code",
       "Eclipse",
       "Docker",
-      "PostgreSQL",
+      "AWS Amplify",
+      "AWS Elastic Beanstalk",
       "MySQL",
+      "PostgreSQL",
       "MongoDB",
-      "Neo4j"
-    ]
+      "Neo4j",
+      "Microsoft Excel"
+    ],
+    "columns": 2,
+    "tags": true
   },
   {
-    "type": "Frameworks and Libraries",
-    "items": [
+    "image": null,
+    "title": "Frameworks and Libraries",
+    "subtitles": null,
+    "startDate": null,
+    "endDate": null,
+    "location": null,
+    "bullets": [
       "React",
+      "Material UI",
       "Node",
       "Express",
       "Flask",
       "SQLAlchemy"
-    ]
+    ],
+    "columns": 2,
+    "tags": true
   },
   {
-    "type": "Video Editing",
-    "items": [
+    "image": null,
+    "title": "Video Editing",
+    "subtitles": null,
+    "startDate": null,
+    "endDate": null,
+    "location": null,
+    "bullets": [
       "Adobe Premiere Pro",
       "Sony Vegas Pro",
       "iMovie"
-    ]
+    ],
+    "columns": 1,
+    "tags": true
   }
 ]
 
@@ -63,31 +97,7 @@ const Skills = () => {
         {skills.map((skill, index) => {
           return (
             <Grid item key={index} xs={12}>
-              <Card component="section" sx={{
-                display: "flex",
-                flexDirection: "row",
-                borderRadius: "1.5rem",
-                height: "100%"
-              }}>
-                <CardContent sx={{
-                  p: 6
-                }}>
-                  <Typography variant="h3">
-                    {skill.type}
-                  </Typography>
-                  <List>
-                    {skill.items.map((item, j) => {
-                      return (
-                        <ListItem key={j} sx={{
-                          p: 0
-                        }}>
-                          <ListItemText primary={item} />
-                        </ListItem>
-                      );
-                    })}
-                  </List>
-                </CardContent>
-              </Card>
+              <CustomCard content={skill} flexDirection="column"/>
             </Grid>
           );
         })}
