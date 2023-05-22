@@ -18,41 +18,47 @@ const theme = createTheme({
     },
     secondary: {
       main: "#9c27b0"
-    }
+    },
+    mode: "light"
   },
   typography: {
     h1: {
-      color: "#222"
+      color: "#333"
     },
     h2: {
-      color: "#222"
+      color: "#333",
+      fontSize: "3rem"
     },
     h3: {
-      color: "#222"
+      color: "#333",
+      fontSize: "1.75rem"
     },
     h4: {
-      color: "#222"
+      color: "#333",
+      fontSize: "1.5rem"
     },
     h5: {
-      color: "#222"
+      color: "#333",
+      fontSize: "1.25rem"
     },
     h6: {
-      color: "#222"
+      color: "#333",
+      fontSize: "1.125rem"
     },
     body1: {
-      color: "#222"
+      color: "#333"
     },
     body2: {
-      color: "#222"
+      color: "#333"
     },
     subtitle1: {
-      color: "#222"
+      color: "#333"
     },
     subtitle2: {
-      color: "#222"
+      color: "#333"
     },
     caption: {
-      color: "#222"
+      color: "#333"
     }
   }
 });
@@ -70,6 +76,14 @@ theme.components = {
     styleOverrides: {
       root: {
         color: theme.palette.primary.contrastText
+      }
+    }
+  },
+  MuiCardContent: {
+    styleOverrides: {
+      root: {
+        padding: 32,
+        width: "100%"
       }
     }
   }
