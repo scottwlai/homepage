@@ -3,8 +3,19 @@ import React, {
 } from "react"
 import {
   Box,
-  Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Typography
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Typography
 } from "@mui/material";
+import {
+  Link
+} from "react-router-dom";
 import SchoolIcon from '@mui/icons-material/School';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import {
@@ -150,6 +161,11 @@ const Education = () => {
           rowsPerPageOptions={[ 10, 20, 30 ]}
         />
       </CustomCard>
+      <Button component={Link} to={"/portfolio/courses"}>
+        <Typography variant="button" textTransform="none">
+          More Details
+        </Typography>
+      </Button>
     </Box>
   );
 }
