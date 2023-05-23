@@ -49,7 +49,8 @@ const Header = () => {
                 marginRight: link.marginRight,
                 px: 3,
                 py: 0,
-                borderRadius: "1.5rem"
+                borderRadius: "1.5rem",
+                color: "#fafafa"
               }}>
                 <Typography fontSize={link.fontSize} variant="button"
                   textTransform="none">

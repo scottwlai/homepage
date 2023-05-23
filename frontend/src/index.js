@@ -72,13 +72,6 @@ theme.components = {
       }
     }
   },
-  MuiButton: {
-    styleOverrides: {
-      root: {
-        color: theme.palette.primary.contrastText
-      }
-    }
-  },
   MuiCardContent: {
     styleOverrides: {
       root: {
