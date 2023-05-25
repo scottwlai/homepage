@@ -1,17 +1,15 @@
 import React from "react"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   Card,
   CardMedia,
   CardContent,
   Typography,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText
+  List
 } from "@mui/material";
+import CustomListItem from "./CustomListItem";
 
 const CustomCard = ({
   content, flexDirection, children
@@ -19,8 +17,7 @@ const CustomCard = ({
   return (
     <Card component="section" sx={{
       display: "flex",
-      flexDirection: flexDirection,
-      borderRadius: "1.5rem"
+      flexDirection: flexDirection
     }}>
       {content.image && (
         <CardMedia
@@ -39,99 +36,35 @@ const CustomCard = ({
         <List>
           {content.subtitles && content.subtitles.map((subtitle, subtitleIndex) => {
             return (
-              <ListItem key={subtitleIndex} sx={{
-                p: 0
-              }}>
-                <ListItemIcon sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  minWidth: "3rem"
-                }}>
-                  {subtitle.subtitleIcon}
-                </ListItemIcon>
-                <ListItemText primary={subtitle.subtitle} />
-              </ListItem>
+              <CustomListItem
+                key={subtitleIndex}
+                icon={subtitle.subtitleIcon}
+                text={subtitle.subtitle}
+              />
             );
           })}
           {content.startDate && (
-            <ListItem sx={{
-              p: 0
-            }}>
-              <ListItemIcon sx={{
-                display: "flex",
-                justifyContent: "center",
-                minWidth: "3rem"
-              }}>
-                <CalendarMonthIcon sx={{
-                  fontSize: "1.375rem",
-                  color: "#333"
-                }} />
-              </ListItemIcon>
-              {content.endDate ? (
-                <ListItemText primary={content.startDate + " - " + content.endDate} />
-              ) : (
-                <ListItemText primary={content.startDate} />
-              )}
-            </ListItem>
+            <CustomListItem
+              icon=<CalendarMonthIcon/>
+              text={content.endDate ? content.startDate + " - " + content.endDate : content.startDate}
+            />
           )}
           {content.location && (
-            <ListItem sx={{
-              p: 0
-            }}>
-              <ListItemIcon sx={{
-                display: "flex",
-                justifyContent: "center",
-                minWidth: "3rem"
-              }}>
-                <PlaceIcon sx={{
-                  fontSize: "1.375rem",
-                  color: "#333"
-                }} />
-              </ListItemIcon>
-              <ListItemText primary={content.location} />
-            </ListItem>
+            <CustomListItem
+              icon=<PlaceIcon/>
+              text={content.location}
+            />
           )}
         </List>
-        {content.bullets && (
-          <List sx={content.tags ? {
-            flexWrap: "wrap",
-            display: "flex",
-            gap: 1
-          } : {
-          }}>
+        {content.bullets && !content.tags && (
+          <List>
             {content.bullets.map((bullet, bulletIndex) => {
               return (
-                <ListItem key={bulletIndex} sx={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "center",
-                  p: 0,
-                  width: "auto"
-                }} >
-                  {!content.tags && (
-                    <ListItemIcon sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      minWidth: "3rem",
-                      py: "0.625rem"
-                    }} >
-                      <FiberManualRecordIcon sx={{
-                        fontSize: "0.625rem",
-                        color: "#333"
-                      }} />
-                    </ListItemIcon>
-                  )}
-                  <ListItemText primary={bullet} primaryTypographyProps={{
-                    variant: "body2",
-                    border: content.tags ? 1 : 0,
-                    bgcolor: content.tags ? "#f9f9f9" : "inherit",
-                    borderRadius: "0.625rem",
-                    borderColor: "#333",
-                    p: content.tags ? "0.125rem 0.25rem" : "0.25rem 0rem"
-                  }} sx={{
-                    m: 0
-                  }} />
-                </ListItem>
+                <CustomListItem
+                  key={bulletIndex}
+                  icon=<ChevronRightIcon/>
+                  text={bullet}
+                />
               );
             })}
           </List>
