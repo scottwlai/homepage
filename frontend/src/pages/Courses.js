@@ -4,14 +4,12 @@ import React, {
 import Layout from "../components/Layout";
 import {
   Button,
+  FormControl,
   Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
+  InputLabel,
+  MenuItem,
+  Pagination,
+  Select,
   Typography
 } from "@mui/material";
 import {
@@ -20,6 +18,7 @@ import {
 import {
   getCourses
 } from "../api";
+import CourseCard from "../components/CourseCard";
 
 const Courses = () => {
   const [ courses, setCourses ] = useState([]);
@@ -58,7 +57,7 @@ const Courses = () => {
   }, [ currentPage, perPage ]);
 
   const handlePageChange = (event, newPage) => {
-    setCurrentPage(newPage + 1);
+    setCurrentPage(newPage);
   };
 
   const handlePerPageChange = (event) => {
@@ -79,52 +78,56 @@ const Courses = () => {
             Back to Portfolio
           </Typography>
         </Button>
-        <TableContainer>
-          <Table aria-label="simple table" sx={{
-            minWidth: "100%"
-          }}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Number</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Instructor</TableCell>
-                <TableCell>Term</TableCell>
-                <TableCell>Grade</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {courses.map((course, index) => (
-                <TableRow
-                  key={index}
-                  sx={{
-                    "&:last-child td, &:last-child th": {
-                      border: 0
-                    }
-                  }}
-                >
-                  <TableCell component="th" scope="row">
-                    {course.courseNumber.department} {course.courseNumber.number}
-                  </TableCell>
-                  <TableCell>
-                    {course.name}
-                  </TableCell>
-                  <TableCell>{course.instructors.join(" & ")}</TableCell>
-                  <TableCell>{course.term.semester + " " + course.term.year}</TableCell>
-                  <TableCell>{course.grade}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          component="div"
-          count={count}
-          page={currentPage - 1}
-          onPageChange={handlePageChange}
-          rowsPerPage={perPage}
-          onRowsPerPageChange={handlePerPageChange}
-          rowsPerPageOptions={[ 10, 20, 30 ]}
+        <Pagination
+          count={Math.ceil(count / perPage)}
+          onChange={handlePageChange}
+          page={currentPage}
+          showFirstButton
+          showLastButton
+          sx={{
+            display: "flex",
+            justifyContent: "center"
+          }}
         />
+        <FormControl fullWidth>
+          <InputLabel
+            id="per-page-label"
+          >
+            Results per Page
+          </InputLabel>
+          <Select
+            labelId="per-page-label"
+            id="per-page-select"
+            label="Results per Page"
+            defaultValue={10}
+            onChange={handlePerPageChange}
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={25}>25</MenuItem>
+            <MenuItem value={30}>30</MenuItem>
+          </Select>
+        </FormControl>
+        <Grid container spacing={4}>
+          {courses.map((course, index) => {
+            return (
+              <Grid
+                item
+                key={index}
+                xs={12} sm={6} md={4} lg={3}
+              >
+                <CourseCard
+                  name={course.nickname ? course.nickname : course.name}
+                  courseNumber={course.courseNumber}
+                  instructors={course.instructors}
+                  term={course.term}
+                />
+              </Grid>
+            );
+          })}
+        </Grid>
       </Grid>
     </Layout>
   );
