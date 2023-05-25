@@ -1,6 +1,6 @@
 import React from "react"
 import {
-  Box, Grid, Typography
+  Box, Chip, Grid, Stack, Typography
 } from "@mui/material";
 import CustomCard from "./CustomCard";
 
@@ -97,7 +97,17 @@ const Skills = () => {
         {skills.map((skill, index) => {
           return (
             <Grid item key={index} xs={12}>
-              <CustomCard content={skill} flexDirection="column"/>
+              <CustomCard content={skill}>
+                <Stack flexWrap="wrap" direction="row" sx={{
+                  gap: 0.5
+                }}>
+                  {skill.bullets?.map((bullet, j) => {
+                    return (
+                      <Chip key={j} variant="outlined" size="small" label={bullet}/>
+                    )
+                  })}
+                </Stack>
+              </CustomCard>
             </Grid>
           );
         })}
