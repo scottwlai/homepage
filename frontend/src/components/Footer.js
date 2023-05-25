@@ -64,7 +64,8 @@ const Footer = () => {
                     variant="text" component={Link} to={link.to} sx={{
                       px: 3,
                       py: 0,
-                      borderRadius: "1.5rem"
+                      borderRadius: "1.5rem",
+                      color: "#fafafa"
                     }}>
                     {link.icon}
                     <Typography fontSize="1rem" variant="button" textTransform="none">

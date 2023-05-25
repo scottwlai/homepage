@@ -17,7 +17,7 @@ const Layout = ({
         width: "min(1000px, 90%)"
       }}>
         <Typography variant="h1" align="center" gutterBottom>{title}</Typography>
-        <Grid container spacing={"4rem"} sx={{
+        <Grid container spacing={"2rem"} sx={{
         }}>
           {children}
         </Grid>

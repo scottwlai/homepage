@@ -18,41 +18,51 @@ const theme = createTheme({
     },
     secondary: {
       main: "#9c27b0"
-    }
+    },
+    mode: "light"
   },
   typography: {
     h1: {
-      color: "#222"
+      color: "#333"
     },
     h2: {
-      color: "#222"
+      color: "#333",
+      fontSize: "3rem"
     },
     h3: {
-      color: "#222"
+      color: "#333",
+      fontSize: "1.75rem"
     },
     h4: {
-      color: "#222"
+      color: "#333",
+      fontSize: "1.5rem"
     },
     h5: {
-      color: "#222"
+      color: "#333",
+      fontSize: "1.25rem",
+      letterSpacing: -1
     },
     h6: {
-      color: "#222"
+      color: "#333",
+      fontSize: "1.125rem"
     },
     body1: {
-      color: "#222"
+      color: "#333"
     },
     body2: {
-      color: "#222"
+      color: "#333"
     },
     subtitle1: {
-      color: "#222"
+      color: "#333",
+      letterSpacing: -1.25
     },
     subtitle2: {
-      color: "#222"
+      color: "#333",
+      fontSize: "0.875rem",
+      letterSpacing: -0.5
     },
     caption: {
-      color: "#222"
+      color: "#333"
     }
   }
 });
@@ -66,10 +76,51 @@ theme.components = {
       }
     }
   },
-  MuiButton: {
+  MuiDivider: {
     styleOverrides: {
       root: {
-        color: theme.palette.primary.contrastText
+        marginLeft: 28
+      }
+    }
+  },
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        borderRadius: "1.5rem"
+      }
+    }
+  },
+  MuiCardContent: {
+    styleOverrides: {
+      root: {
+        padding: 32,
+        width: "100%"
+      }
+    }
+  },
+  MuiList: {
+    styleOverrides: {
+      root: {
+        display: "flex",
+        flexDirection: "column"
+      }
+    }
+  },
+  MuiListItem: {
+    styleOverrides: {
+      root: {
+        padding: 0,
+        alignItems: "flex-start"
+      }
+    }
+  },
+  MuiListItemIcon: {
+    styleOverrides: {
+      root: {
+        fontSize: "1.375rem",
+        color: "#333",
+        minWidth: "fit-content",
+        margin: "0.25rem 0.5rem 0 0"
       }
     }
   }

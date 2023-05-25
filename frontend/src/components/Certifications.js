@@ -9,67 +9,101 @@ const certifications = [
   {
     "image": "../logo192.png",
     "title": "HTML Essential Training",
-    "subtitle": "LinkedIn Learning",
-    "subtitleIcon": <MilitaryTechIcon sx={{
-      fontSize: "1.375rem",
-      color: "#333"
-    }} />,
+    "subtitles": [
+      {
+        "subtitle": "LinkedIn Learning",
+        "subtitleIcon": <MilitaryTechIcon/>
+      }
+    ],
     "startDate": "May 2022",
     "endDate": null,
     "location": null,
-    "bullets": null
+    "bullets": null,
+    "columns": 1,
+    "tags": false
   },
   {
     "image": "../logo192.png",
     "title": "CSS Essential Training",
-    "subtitle": "LinkedIn Learning",
-    "subtitleIcon": <MilitaryTechIcon sx={{
-      fontSize: "1.375rem",
-      color: "#333"
-    }} />,
+    "subtitles": [
+      {
+        "subtitle": "LinkedIn Learning",
+        "subtitleIcon": <MilitaryTechIcon/>
+      }
+    ],
     "startDate": "Jun 2022",
     "endDate": null,
     "location": null,
-    "bullets": null
+    "bullets": null,
+    "columns": 1,
+    "tags": false
   },
   {
     "image": "../logo192.png",
     "title": "JavaScript Essential Training",
-    "subtitle": "LinkedIn Learning",
-    "subtitleIcon": <MilitaryTechIcon sx={{
-      fontSize: "1.375rem",
-      color: "#333"
-    }} />,
+    "subtitles": [
+      {
+        "subtitle": "LinkedIn Learning",
+        "subtitleIcon": <MilitaryTechIcon/>
+      }
+    ],
     "startDate": "Jun 2022",
     "endDate": null,
     "location": null,
-    "bullets": null
+    "bullets": null,
+    "columns": 1,
+    "tags": false
   },
   {
     "image": "../logo192.png",
-    "title": "Git Essential Training: The Basics",
-    "subtitle": "LinkedIn Learning",
-    "subtitleIcon": <MilitaryTechIcon sx={{
-      fontSize: "1.375rem",
-      color: "#333"
-    }} />,
+    "title": "Git Essential Training",
+    "subtitles": [
+      {
+        "subtitle": "LinkedIn Learning",
+        "subtitleIcon": <MilitaryTechIcon/>
+      }
+    ],
     "startDate": "Jun 2022",
     "endDate": null,
     "location": null,
-    "bullets": null
+    "bullets": null,
+    "columns": 1,
+    "tags": false
   },
   {
     "image": "../logo192.png",
     "title": "Responsive Layout",
-    "subtitle": "LinkedIn Learning",
-    "subtitleIcon": <MilitaryTechIcon sx={{
-      fontSize: "1.375rem",
-      color: "#333"
-    }} />,
+    "subtitles": [
+      {
+        "subtitle": "LinkedIn Learning",
+        "subtitleIcon": <MilitaryTechIcon/>
+      }
+    ],
     "startDate": "Jul 2022",
     "endDate": null,
     "location": null,
-    "bullets": null
+    "bullets": null,
+    "columns": 1,
+    "tags": false
+  },
+  {
+    "image": "../logo192.png",
+    "title": "React.js Essential Training",
+    "subtitles": [
+      {
+        "subtitle": "LinkedIn Learning",
+        "subtitleIcon": <MilitaryTechIcon sx={{
+          fontSize: "1.375rem",
+          color: "#333"
+        }} />
+      }
+    ],
+    "startDate": "May 2023",
+    "endDate": null,
+    "location": null,
+    "bullets": null,
+    "columns": 1,
+    "tags": false
   }
 ];
 

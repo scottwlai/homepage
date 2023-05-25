@@ -1,19 +1,23 @@
 import React from "react"
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
-  Card, CardMedia, CardContent, Typography, List, ListItem, ListItemIcon, ListItemText
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  List
 } from "@mui/material";
+import CustomListItem from "./CustomListItem";
 
 const CustomCard = ({
-  content, flexDirection
+  content, flexDirection, children
 }) => {
   return (
     <Card component="section" sx={{
       display: "flex",
-      flexDirection: flexDirection,
-      borderRadius: "1.5rem"
+      flexDirection: flexDirection
     }}>
       {content.image && (
         <CardMedia
@@ -25,89 +29,47 @@ const CustomCard = ({
           }}
         />
       )}
-      <CardContent sx={{
-        p: 6
-      }}>
+      <CardContent>
         <Typography variant="h3">
           {content.title}
         </Typography>
         <List>
-          <ListItem sx={{
-            p: 0
-          }}>
-            <ListItemIcon sx={{
-              display: "flex",
-              justifyContent: "center",
-              minWidth: "3rem"
-            }}>
-              {content.subtitleIcon}
-            </ListItemIcon>
-            <ListItemText primary={content.subtitle} />
-          </ListItem>
-          <ListItem sx={{
-            p: 0
-          }}>
-            <ListItemIcon sx={{
-              display: "flex",
-              justifyContent: "center",
-              minWidth: "3rem"
-            }}>
-              <CalendarMonthIcon sx={{
-                fontSize: "1.375rem",
-                color: "#333"
-              }} />
-            </ListItemIcon>
-            {content.endDate ? (
-              <ListItemText primary={content.startDate + " - " + content.endDate} />
-            ) : (
-              <ListItemText primary={content.startDate} />
-            )}
-          </ListItem>
+          {content.subtitles && content.subtitles.map((subtitle, subtitleIndex) => {
+            return (
+              <CustomListItem
+                key={subtitleIndex}
+                icon={subtitle.subtitleIcon}
+                text={subtitle.subtitle}
+              />
+            );
+          })}
+          {content.startDate && (
+            <CustomListItem
+              icon=<CalendarMonthIcon/>
+              text={content.endDate ? content.startDate + " - " + content.endDate : content.startDate}
+            />
+          )}
           {content.location && (
-            <ListItem sx={{
-              p: 0
-            }}>
-              <ListItemIcon sx={{
-                display: "flex",
-                justifyContent: "center",
-                minWidth: "3rem"
-              }}>
-                <PlaceIcon sx={{
-                  fontSize: "1.375rem",
-                  color: "#333"
-                }} />
-              </ListItemIcon>
-              <ListItemText primary={content.location} />
-            </ListItem>
+            <CustomListItem
+              icon=<PlaceIcon/>
+              text={content.location}
+            />
           )}
         </List>
-        {content.bullets && (
+        {content.bullets && !content.tags && (
           <List>
-            {content.bullets.map((bullet, index) => {
+            {content.bullets.map((bullet, bulletIndex) => {
               return (
-                <ListItem key={index} sx={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  justifyContent: "center",
-                  p: 0
-                }}>
-                  <ListItemIcon sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    minWidth: "3rem",
-                    p: "0.625rem"
-                  }}>
-                    <FiberManualRecordIcon sx={{
-                      fontSize: "0.625rem",
-                      color: "#333"
-                    }} />
-                  </ListItemIcon>
-                  <ListItemText primary={bullet} />
-                </ListItem>
+                <CustomListItem
+                  key={bulletIndex}
+                  icon=<ChevronRightIcon/>
+                  text={bullet}
+                />
               );
             })}
           </List>
         )}
+        {children}
       </CardContent>
     </Card>
   );

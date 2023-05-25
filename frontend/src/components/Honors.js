@@ -9,28 +9,34 @@ const honors = [
   {
     "image": null,
     "title": "University Honors",
-    "subtitle": "UT Austin",
-    "subtitleIcon": <MilitaryTechIcon sx={{
-      fontSize: "1.375rem",
-      color: "#333"
-    }} />,
+    "subtitles": [
+      {
+        "subtitle": "UT Austin",
+        "subtitleIcon": <MilitaryTechIcon/>
+      }
+    ],
     "startDate": "2020",
     "endDate": "2022",
     "location": null,
-    "bullets": null
+    "bullets": null,
+    "columns": 1,
+    "tags": false
   },
   {
     "image": null,
     "title": "Houston Rodeo Scholar",
-    "subtitle": "Houston Livestock Show and Rodeo",
-    "subtitleIcon": <MilitaryTechIcon sx={{
-      fontSize: "1.375rem",
-      color: "#333"
-    }} />,
+    "subtitles": [
+      {
+        "subtitle": "Houston Livestock Show and Rodeo",
+        "subtitleIcon": <MilitaryTechIcon/>
+      }
+    ],
     "startDate": "2020",
     "endDate": null,
     "location": null,
-    "bullets": null
+    "bullets": null,
+    "columns": 1,
+    "tags": false
   }
 ];
 
