@@ -12,10 +12,7 @@ const projects = [
     "subtitles": [
       {
         "subtitle": "Full Stack",
-        "subtitleIcon": <PersonIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <PersonIcon/>
       }
     ],
     "startDate": "Sep 2022",
@@ -34,10 +31,7 @@ const projects = [
     "subtitles": [
       {
         "subtitle": "Front End",
-        "subtitleIcon": <PersonIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <PersonIcon/>
       }
     ],
     "startDate": "May 2022",
@@ -56,10 +50,7 @@ const projects = [
     "subtitles": [
       {
         "subtitle": "Programming & Logistics",
-        "subtitleIcon": <PersonIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <PersonIcon/>
       }
     ],
     "startDate": "Apr 2022",
@@ -78,10 +69,7 @@ const projects = [
     "subtitles": [
       {
         "subtitle": "Freshman Research Student",
-        "subtitleIcon": <PersonIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <PersonIcon/>
       }
     ],
     "startDate": "Apr 2021",

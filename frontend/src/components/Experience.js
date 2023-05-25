@@ -12,10 +12,7 @@ const jobs = [
     "subtitles": [
       {
         "subtitle": "UT Austin School of Nursing, Simulation and Skills Center",
-        "subtitleIcon": <WorkIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <WorkIcon/>
       }
     ],
     "startDate": "Sep 2020",

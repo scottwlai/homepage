@@ -12,10 +12,7 @@ const honors = [
     "subtitles": [
       {
         "subtitle": "UT Austin",
-        "subtitleIcon": <MilitaryTechIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <MilitaryTechIcon/>
       }
     ],
     "startDate": "2020",
@@ -31,10 +28,7 @@ const honors = [
     "subtitles": [
       {
         "subtitle": "Houston Livestock Show and Rodeo",
-        "subtitleIcon": <MilitaryTechIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <MilitaryTechIcon/>
       }
     ],
     "startDate": "2020",

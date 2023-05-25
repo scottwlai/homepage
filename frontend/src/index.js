@@ -39,7 +39,8 @@ const theme = createTheme({
     },
     h5: {
       color: "#333",
-      fontSize: "1.25rem"
+      fontSize: "1.25rem",
+      letterSpacing: -1
     },
     h6: {
       color: "#333",
@@ -52,10 +53,13 @@ const theme = createTheme({
       color: "#333"
     },
     subtitle1: {
-      color: "#333"
+      color: "#333",
+      letterSpacing: -1.25
     },
     subtitle2: {
-      color: "#333"
+      color: "#333",
+      fontSize: "0.875rem",
+      letterSpacing: -0.5
     },
     caption: {
       color: "#333"
@@ -72,11 +76,51 @@ theme.components = {
       }
     }
   },
+  MuiDivider: {
+    styleOverrides: {
+      root: {
+        marginLeft: 28
+      }
+    }
+  },
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        borderRadius: "1.5rem"
+      }
+    }
+  },
   MuiCardContent: {
     styleOverrides: {
       root: {
         padding: 32,
         width: "100%"
+      }
+    }
+  },
+  MuiList: {
+    styleOverrides: {
+      root: {
+        display: "flex",
+        flexDirection: "column"
+      }
+    }
+  },
+  MuiListItem: {
+    styleOverrides: {
+      root: {
+        padding: 0,
+        alignItems: "flex-start"
+      }
+    }
+  },
+  MuiListItemIcon: {
+    styleOverrides: {
+      root: {
+        fontSize: "1.375rem",
+        color: "#333",
+        minWidth: "fit-content",
+        margin: "0.25rem 0.5rem 0 0"
       }
     }
   }

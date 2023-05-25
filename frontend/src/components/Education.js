@@ -29,24 +29,15 @@ const ut = {
   "subtitles": [
     {
       "subtitle": "B.S. Computer Science",
-      "subtitleIcon": <SchoolIcon sx={{
-        fontSize: "1.375rem",
-        color: "#333"
-      }} />
+      "subtitleIcon": <SchoolIcon/>
     },
     {
       "subtitle": "Business Minor",
-      "subtitleIcon": <SchoolIcon sx={{
-        fontSize: "1.375rem",
-        color: "#333"
-      }} />
+      "subtitleIcon": <SchoolIcon/>
     },
     {
       "subtitle": "GPA: 3.6542",
-      "subtitleIcon": <MilitaryTechIcon sx={{
-        fontSize: "1.375rem",
-        color: "#333"
-      }} />
+      "subtitleIcon": <MilitaryTechIcon/>
     }
   ],
   "startDate": "Aug 2020",

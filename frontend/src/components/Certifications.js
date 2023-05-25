@@ -12,10 +12,7 @@ const certifications = [
     "subtitles": [
       {
         "subtitle": "LinkedIn Learning",
-        "subtitleIcon": <MilitaryTechIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <MilitaryTechIcon/>
       }
     ],
     "startDate": "May 2022",
@@ -31,10 +28,7 @@ const certifications = [
     "subtitles": [
       {
         "subtitle": "LinkedIn Learning",
-        "subtitleIcon": <MilitaryTechIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <MilitaryTechIcon/>
       }
     ],
     "startDate": "Jun 2022",
@@ -50,10 +44,7 @@ const certifications = [
     "subtitles": [
       {
         "subtitle": "LinkedIn Learning",
-        "subtitleIcon": <MilitaryTechIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <MilitaryTechIcon/>
       }
     ],
     "startDate": "Jun 2022",
@@ -69,10 +60,7 @@ const certifications = [
     "subtitles": [
       {
         "subtitle": "LinkedIn Learning",
-        "subtitleIcon": <MilitaryTechIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <MilitaryTechIcon/>
       }
     ],
     "startDate": "Jun 2022",
@@ -88,10 +76,7 @@ const certifications = [
     "subtitles": [
       {
         "subtitle": "LinkedIn Learning",
-        "subtitleIcon": <MilitaryTechIcon sx={{
-          fontSize: "1.375rem",
-          color: "#333"
-        }} />
+        "subtitleIcon": <MilitaryTechIcon/>
       }
     ],
     "startDate": "Jul 2022",
