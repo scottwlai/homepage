@@ -29,17 +29,17 @@ The frontend uses the backend's API to query data from the database.
 It features the following endpoints, each with some options/query parameters to narrow down results. Separate multiple options with an ampersand (`&`).
 
 #### Courses: `/courses?[OPTIONS]` - classes I've taken at UT
-* `page=[PAGE_NUMBER]`
+* `page=PAGE_NUMBER`
     * the API is paginated based on the page size
     * default: `1`
-* `perPage=[PAGE_SIZE]`
+* `perPage=PAGE_SIZE`
     * the number of courses to show per page
     * default: `5`
-* `department=[DEPARTMENT_1,DEPARTMENT_2,...]`
+* `department=DEPARTMENT_1,DEPARTMENT_2,...`
     * filter the courses by the departments they belong to
     * separate multiple departments with a comma (`,`)
     * options:
-        Abbreviation | Department
+        Value        | Equivalent Department
         -------------|-------------------------------
         `ACC`        | Accounting
         `ANS`        | Asian Studies
@@ -55,12 +55,12 @@ It features the following endpoints, each with some options/query parameters to 
         `SDS`        | Statistics and Data Sciences
         `UGS`        | Undergraduate Studies
     * default: all
-* `term=[TERM1,TERM2,...]`
+* `term=TERM1,TERM2,...`
     * filter the courses by the semesters I took them in
     * separate multiple terms with a comma (`,`)
     * options:
-        Abbreviation | Term
-        -------------|------------
+        Value        | Equivalent Term
+        -------------|----------------
         `f20`        | Fall 2020
         `s21`        | Spring 2021
         `f21`        | Fall 2021
@@ -68,6 +68,30 @@ It features the following endpoints, each with some options/query parameters to 
         `f22`        | Fall 2022
         `s23`        | Spring 2023
     * default: all
+* `minGrade=MIN_GRADE`
+    * filter the courses by the grades I got in them
+    * sets the lower bound of the grade range to query for
+    * options:
+        Value    | Equivalent Grade
+        ---------|-----------------
+        `Bminus` | B-
+        `B`      | B
+        `Bplus`  | B+
+        `Aminus` | A-
+        `A`      | A
+    * default: Bminus
+* `maxGrade=MAX_GRADE`
+    * filter the courses by the grades I got in them
+    * sets the upper bound of the grade range to query for
+    * options:
+        Value    | Equivalent Grade
+        ---------|-----------------
+        `Bminus` | B-
+        `B`      | B
+        `Bplus`  | B+
+        `Aminus` | A-
+        `A`      | A
+    * default: A
 
 ## Database
 The data used in this project is stored across several collections of a MongoDB instance.
