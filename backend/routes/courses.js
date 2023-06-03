@@ -18,7 +18,7 @@ const whitelist = [
   'http://localhost:3000'
 ];
 
-const departments = {
+const departmentTranslator = {
   "CS": "C S",
   "MAN": "MAN",
   "MIS": "MIS",
@@ -34,7 +34,7 @@ const departments = {
   "UGS": "UGS"
 };
 
-const terms = {
+const termTranslator = {
   "f20": {
     "semester": "Fall",
     "year": 2020
@@ -61,14 +61,24 @@ const terms = {
   }
 };
 
+const gradeArray = ["B-", "B", "B+", "A-", "A"];
+
+const gradeTranslator = {
+  "Bminus": "B-",
+  "B": "B",
+  "Bplus": "B+",
+  "Aminus": "A-",
+  "A": "A"
+};
+
 // allows the server to serve origins in the whitelist only
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error(origin + ' not allowed by CORS'));
-      // callback(null, true);
+      // callback(new Error(origin + ' not allowed by CORS'));
+      callback(null, true);
     }
   }
 };
@@ -83,12 +93,35 @@ const corsOptions = {
 const updateQuery = (select, parameter, translator, field) => {
   if (parameter) {
     parameter = parameter.split(',');
-    for (let i = 0; i < parameter.length; i++) {
-      parameter[i] = translator[parameter[i]];
+    if (!translator) {
+      for (let i = 0; i < parameter.length; i++) {
+        parameter[i] = translator[parameter[i]];
+      }
     }
     select.set(field, {$in: parameter});
   }
-}
+};
+
+/**
+ * 
+ * @param select - inital selection
+ * @param min - min query parameter
+ * @param max - max query parameter
+ * @param order - array of ordering
+ * @param translator - map of equivalences
+ * @param field - field name in the database
+ */
+const updateRange = (select, min, max, order, translator, field) => {
+  if (min || max) {
+    const minIndex = min ? order.indexOf(translator[min]) : 0;
+    const maxIndex = max ? order.indexOf(translator[max]) : order.length;
+    let range = [];
+    for (let i = minIndex; i <= maxIndex; i++) {
+      range.push(order[i]);
+    }
+    select.set(field, {$in: range});
+  }
+};
 
 /**
  * Route handler for the GET method on the /courses endpoint
@@ -104,8 +137,9 @@ router.get('/', cors(corsOptions), async(req, res, next) => {
   // parses URL query parameters, setting default values if null
   const query = req.query;
   let select = new Map();
-  updateQuery(select, query.department, departments, "courseNumber.department");
-  updateQuery(select, query.term, terms, "term");
+  updateQuery(select, query.department, departmentTranslator, "courseNumber.department");
+  updateQuery(select, query.term, termTranslator, "term");
+  updateRange(select, query.minGrade, query.maxGrade, gradeArray, gradeTranslator, "grade");
   const page = parseInt(query.page) || 1;
   const perPage = parseInt(query.perPage) || 5;
   // calculates the number of entries that match the query
