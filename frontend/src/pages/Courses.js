@@ -99,6 +99,22 @@ const semesters = [
   "Spring 2023"
 ]
 
+const gradeToNum = {
+  "Bminus": 0,
+  "B": 1,
+  "Bplus": 2,
+  "Aminus": 3,
+  "A": 4
+}
+
+const numToGrade = {
+  0: "Bminus",
+  1: "B",
+  2: "Bplus",
+  3: "Aminus",
+  4: "A"
+}
+
 const grades = [
   {
     value: 0,
@@ -137,10 +153,17 @@ const Courses = () => {
   useEffect(() => {
     let cachedData = JSON.parse(localStorage.getItem(getCacheKey()));
 
+    /*
+    33 classes
+    8: 2 rows
+    16: 4 rows
+    32: 8 rows
+    64: 16 rows
+    */
     async function getCoursesData() {
-      console.log(searchParams.toString());
+      // console.log(searchParams.toString());
       try {
-        const response = await getCourses(currentPage, perPage, searchParams.get("term"), searchParams.get("department"), grade);
+        const response = await getCourses(currentPage, perPage, searchParams.get("term"), searchParams.get("department"), searchParams.get("minGrade"), searchParams.get("maxGrade"));
         let data = response.data;
         localStorage.setItem(getCacheKey(), JSON.stringify(data));
         setCourses(data["courses"]);
@@ -172,6 +195,8 @@ const Courses = () => {
     // either null or a string of comma-separated abbreviations
     const depts = searchParams.get("department");
     const sems = searchParams.get("term");
+    const minGrade = searchParams.get("minGrade");
+    const maxGrade = searchParams.get("maxGrade");
     // if null, do nothing, since the state variable is already set to []
     if (depts != null) {
       // transform into array of full department names
@@ -179,6 +204,9 @@ const Courses = () => {
     }
     if (sems != null) {
       setSemester(sems.split(",").map((sem) => abbrToSem[sem]));
+    }
+    if (minGrade != null && maxGrade != null) {
+      setGrade([ gradeToNum[minGrade], gradeToNum[maxGrade] ]);
     }
   }, []);
 
@@ -193,13 +221,35 @@ const Courses = () => {
   };
 
   const getCacheKey = () => {
-    return `page:${currentPage}_perPage:${perPage}_semester:${semester}_department:${department}_grade:${grade}`;
+    return `page:${currentPage}_perPage:${perPage}_semester:${semester}_department:${department}_minGrade:${grade[0]}_maxGrade:${grade[1]}`;
   };
 
   const handleGradeChange = (event, newGrade) => {
+    // update the state variable
     setGrade(newGrade);
-    // console.log(grade);
-  }
+    // turn numbers into grades
+    let minGrade = numToGrade[newGrade[0]]
+    let maxGrade = numToGrade[newGrade[1]]
+    // update the search parameter
+    setSearchParams((prevSearchParams) => {
+      // remove the old search paramter, since it will be updated
+      prevSearchParams.delete("minGrade");
+      prevSearchParams.delete("maxGrade");
+      // build the new searchParam
+      let params = {
+        ...Object.fromEntries(prevSearchParams.entries()),
+        "minGrade": minGrade,
+        "maxGrade": maxGrade
+      };
+      // if the search parameter no longer holds anything,
+      // remove it from searchParams
+      if (minGrade == null || maxGrade == null) {
+        delete params["minGrade"];
+        delete params["maxGrade"];
+      }
+      return new URLSearchParams(params)
+    });
+  };
 
   const handleSemesterChange = (event) => {
     // array of selected semesters

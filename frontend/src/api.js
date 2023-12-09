@@ -2,15 +2,7 @@ import Axios from "axios";
 
 const API = "https://api.scottlai.tech/courses?";
 
-const gradeTranslator = {
-  0: "Bminus",
-  1: "B",
-  2: "Bplus",
-  3: "Aminus",
-  4: "A"
-};
-
-export const getCourses = (currentPage, perPage, semester, department, grade) => {
+export const getCourses = (currentPage, perPage, semester, department, minGrade, maxGrade) => {
   let params = [];
   if (currentPage != null) {
     params.push(`page=${currentPage}`);
@@ -24,9 +16,11 @@ export const getCourses = (currentPage, perPage, semester, department, grade) =>
   if (semester != null) {
     params.push(`term=${semester}`);
   }
-  if (grade.length != 0) {
-    params.push(`minGrade=${gradeTranslator[grade[0]]}`)
-    params.push(`maxGrade=${gradeTranslator[grade[1]]}`)
+  if (minGrade != null) {
+    params.push(`minGrade=${minGrade}`)
+  }
+  if (maxGrade != null) {
+    params.push(`maxGrade=${maxGrade}`)
   }
   const final = API + params.join("&");
   console.log(final);
