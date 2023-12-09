@@ -161,9 +161,9 @@ const Courses = () => {
     64: 16 rows
     */
     async function getCoursesData() {
-      // console.log(searchParams.toString());
+      console.log(searchParams.toString());
       try {
-        const response = await getCourses(currentPage, perPage, searchParams.get("term"), searchParams.get("department"), searchParams.get("minGrade"), searchParams.get("maxGrade"));
+        const response = await getCourses(searchParams);
         let data = response.data;
         localStorage.setItem(getCacheKey(), JSON.stringify(data));
         setCourses(data["courses"]);
@@ -197,6 +197,8 @@ const Courses = () => {
     const sems = searchParams.get("term");
     const minGrade = searchParams.get("minGrade");
     const maxGrade = searchParams.get("maxGrade");
+    const page = searchParams.get("page");
+    const perPage = searchParams.get("perPage");
     // if null, do nothing, since the state variable is already set to []
     if (depts != null) {
       // transform into array of full department names
@@ -208,16 +210,45 @@ const Courses = () => {
     if (minGrade != null && maxGrade != null) {
       setGrade([ gradeToNum[minGrade], gradeToNum[maxGrade] ]);
     }
+    if (page != null) {
+      setCurrentPage(page);
+    }
+    if (perPage != null) {
+      setPerPage(perPage);
+    }
   }, []);
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
+    setSearchParams((prevSearchParams) => {
+      prevSearchParams.delete("page")
+      let params = {
+        ...Object.fromEntries(prevSearchParams.entries()),
+        "page": newPage
+      };
+      if (newPage == null) {
+        delete params["page"];
+      }
+      return new URLSearchParams(params);
+    });
   };
 
   const handlePerPageChange = (event) => {
     const newPerPage = parseInt(event.target.value);
     setPerPage(newPerPage);
     setCurrentPage(1);
+    setSearchParams((prevSearchParams) => {
+      prevSearchParams.delete("perPage")
+      let params = {
+        ...Object.fromEntries(prevSearchParams.entries()),
+        "page": 1,
+        "perPage": newPerPage
+      };
+      if (newPerPage == null) {
+        delete params["perPage"];
+      }
+      return new URLSearchParams(params);
+    });
   };
 
   const getCacheKey = () => {
@@ -247,7 +278,7 @@ const Courses = () => {
         delete params["minGrade"];
         delete params["maxGrade"];
       }
-      return new URLSearchParams(params)
+      return new URLSearchParams(params);
     });
   };
 
@@ -274,7 +305,7 @@ const Courses = () => {
       if (params["term"].length === 0) {
         delete params["term"];
       }
-      return new URLSearchParams(params)
+      return new URLSearchParams(params);
     });
   };
 
@@ -305,7 +336,7 @@ const Courses = () => {
       if (params["department"].length === 0) {
         delete params["department"];
       }
-      return new URLSearchParams(params)
+      return new URLSearchParams(params);
     });
   };
 
