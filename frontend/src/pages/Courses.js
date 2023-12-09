@@ -66,10 +66,28 @@ const abbrToDept = {
   "CH": "Chemistry",
   "M": "Mathematics",
   "HIS": "History",
-  "SDS": "Statistics and Data Sceinces",
+  "SDS": "Statistics and Data Sciences",
   "MUS": "Music",
   "GOV": "Government",
   "UGS": "Undergraduate Studies"
+};
+
+const semToAbbr = {
+  "Fall 2020": "f20",
+  "Spring 2021": "s21",
+  "Fall 2021": "f21",
+  "Spring 2022": "s22",
+  "Fall 2022": "f22",
+  "Spring 2023": "s23"
+};
+
+const abbrToSem = {
+  "f20": "Fall 2020",
+  "s21": "Spring 2021",
+  "f21": "Fall 2021",
+  "s22": "Spring 2022",
+  "f22": "Fall 2022",
+  "s23": "Spring 2023"
 };
 
 const semesters = [
@@ -122,7 +140,7 @@ const Courses = () => {
     async function getCoursesData() {
       console.log(searchParams.toString());
       try {
-        const response = await getCourses(currentPage, perPage, semester, searchParams.get("department"), grade);
+        const response = await getCourses(currentPage, perPage, searchParams.get("term"), searchParams.get("department"), grade);
         let data = response.data;
         localStorage.setItem(getCacheKey(), JSON.stringify(data));
         setCourses(data["courses"]);
@@ -153,10 +171,14 @@ const Courses = () => {
   useEffect(() => {
     // either null or a string of comma-separated abbreviations
     const depts = searchParams.get("department");
+    const sems = searchParams.get("term");
     // if null, do nothing, since the state variable is already set to []
     if (depts != null) {
       // transform into array of full department names
       setDepartment(depts.split(",").map((dept) => abbrToDept[dept]));
+    }
+    if (sems != null) {
+      setSemester(sems.split(",").map((sem) => abbrToSem[sem]));
     }
   }, []);
 
@@ -176,14 +198,34 @@ const Courses = () => {
 
   const handleGradeChange = (event, newGrade) => {
     setGrade(newGrade);
-    console.log(grade);
+    // console.log(grade);
   }
 
   const handleSemesterChange = (event) => {
+    // array of selected semesters
     const {
       value
     } = event.target;
+    // update the state variable
     setSemester(value);
+    // turn semesters into abbreviations
+    let abbreviations = value.map(sem => semToAbbr[sem]);
+    // update the search parameter
+    setSearchParams((prevSearchParams) => {
+      // remove the old search paramter, since it will be updated
+      prevSearchParams.delete("term");
+      // build the new searchParam
+      let params = {
+        ...Object.fromEntries(prevSearchParams.entries()),
+        "term": abbreviations.join(",")
+      };
+      // if the search parameter no longer holds at least one abbreviation,
+      // remove it from searchParams
+      if (params["term"].length === 0) {
+        delete params["term"];
+      }
+      return new URLSearchParams(params)
+    });
   };
 
   /**
@@ -198,14 +240,14 @@ const Courses = () => {
     // update the state variable
     setDepartment(value);
     // turn names into abbreviations
-    let abbreviations = value.map(name => deptToAbbr[name]);
+    let abbreviations = value.map(dept => deptToAbbr[dept]);
     // update the search parameter
     setSearchParams((prevSearchParams) => {
       // remove the old search parameter, since it will be updated
       prevSearchParams.delete("department");
       // build the new searchParam
       let params = {
-        ...prevSearchParams,
+        ...Object.fromEntries(prevSearchParams.entries()),
         "department": abbreviations.join(",")
       };
       // if the search parameter no longer holds at least one abbreviation,
@@ -213,8 +255,7 @@ const Courses = () => {
       if (params["department"].length === 0) {
         delete params["department"];
       }
-      console.log(params)
-      return params
+      return new URLSearchParams(params)
     });
   };
 
