@@ -3,36 +3,126 @@ import React, {
 } from "react"
 import Layout from "../components/Layout";
 import {
+  Box,
   Button,
+  Chip,
   FormControl,
   Grid,
   InputLabel,
   MenuItem,
+  OutlinedInput,
   Pagination,
   Select,
+  Slider,
   Typography
 } from "@mui/material";
 import {
-  Link
+  Link, useSearchParams
 } from "react-router-dom";
 import {
   getCourses
 } from "../api";
 import CourseCard from "../components/CourseCard";
 
+const departments = [
+  "Accounting",
+  "Asian Studies",
+  "Chemistry",
+  "Computer Science",
+  "Government",
+  "History",
+  "Legal Environment of Business",
+  "Mathematics",
+  "Management",
+  "Management Information Systems",
+  "Music",
+  "Statistics and Data Sciences",
+  "Undergraduate Studies"
+];
+
+const deptToAbbr = {
+  "Accounting": "ACC",
+  "Asian Studies": "ANS",
+  "Chemistry": "CH",
+  "Computer Science": "CS",
+  "Government": "GOV",
+  "History": "HIS",
+  "Legal Environment of Business": "LEB",
+  "Mathematics": "M",
+  "Management": "MAN",
+  "Management Information Systems": "MIS",
+  "Music": "MUS",
+  "Statistics and Data Sciences": "SDS",
+  "Undergraduate Studies": "UGS"
+};
+
+const abbrToDept = {
+  "CS": "Computer Science",
+  "MAN": "Management",
+  "MIS": "Management Information Systems",
+  "ACC": "Accounting",
+  "ANS": "Asian Studies",
+  "LEB": "Legal Environment of Business",
+  "CH": "Chemistry",
+  "M": "Mathematics",
+  "HIS": "History",
+  "SDS": "Statistics and Data Sceinces",
+  "MUS": "Music",
+  "GOV": "Government",
+  "UGS": "Undergraduate Studies"
+};
+
+const semesters = [
+  "Fall 2020",
+  "Spring 2021",
+  "Fall 2021",
+  "Spring 2022",
+  "Fall 2022",
+  "Spring 2023"
+]
+
+const grades = [
+  {
+    value: 0,
+    label: "B-"
+  },
+  {
+    value: 1,
+    label: "B"
+  },
+  {
+    value: 2,
+    label: "B+"
+  },
+  {
+    value: 3,
+    label: "A-"
+  },
+  {
+    value: 4,
+    label: "A"
+  }
+];
+
 const Courses = () => {
   const [ courses, setCourses ] = useState([]);
   const [ currentPage, setCurrentPage ] = useState(1);
   const [ perPage, setPerPage ] = useState(10);
   const [ count, setCount ] = useState(0);
+  const [ grade, setGrade ] = useState([ 0, 4 ]);
+  const [ semester, setSemester ] = useState([]);
+  const [ department, setDepartment ] = useState([]);
+
+  // Get the current search parameters and the function to update them
+  const [ searchParams, setSearchParams ] = useSearchParams();
 
   useEffect(() => {
     let cachedData = JSON.parse(localStorage.getItem(getCacheKey()));
 
     async function getCoursesData() {
+      console.log(searchParams.toString());
       try {
-        const response = await getCourses(currentPage, perPage);
-        console.log("made API call for page:", currentPage, "perPage:", perPage);
+        const response = await getCourses(currentPage, perPage, semester, searchParams.get("department"), grade);
         let data = response.data;
         localStorage.setItem(getCacheKey(), JSON.stringify(data));
         setCourses(data["courses"]);
@@ -43,7 +133,7 @@ const Courses = () => {
         console.error(error);
       }
     }
-    // cachedData = null;
+    cachedData = null;
     if (cachedData) {
       console.log("cache HIT! :D");
       setCourses(cachedData["courses"]);
@@ -54,7 +144,21 @@ const Courses = () => {
       console.log("cache miss :(");
       getCoursesData();
     }
-  }, [ currentPage, perPage ]);
+  }, [ currentPage, perPage, semester, searchParams, grade ]);
+
+  /**
+   * when the page loads, read the relevant search parameters
+   * and update their corresponding state variables if necessary
+   */
+  useEffect(() => {
+    // either null or a string of comma-separated abbreviations
+    const depts = searchParams.get("department");
+    // if null, do nothing, since the state variable is already set to []
+    if (depts != null) {
+      // transform into array of full department names
+      setDepartment(depts.split(",").map((dept) => abbrToDept[dept]));
+    }
+  }, []);
 
   const handlePageChange = (event, newPage) => {
     setCurrentPage(newPage);
@@ -67,7 +171,51 @@ const Courses = () => {
   };
 
   const getCacheKey = () => {
-    return `page:${currentPage}_perPage:${perPage}`;
+    return `page:${currentPage}_perPage:${perPage}_semester:${semester}_department:${department}_grade:${grade}`;
+  };
+
+  const handleGradeChange = (event, newGrade) => {
+    setGrade(newGrade);
+    console.log(grade);
+  }
+
+  const handleSemesterChange = (event) => {
+    const {
+      value
+    } = event.target;
+    setSemester(value);
+  };
+
+  /**
+   * when the department filter is updated,
+   * update the department search parameter and state variable
+   */
+  const handleDepartmentChange = (event) => {
+    // array of selected department names
+    const {
+      value
+    } = event.target;
+    // update the state variable
+    setDepartment(value);
+    // turn names into abbreviations
+    let abbreviations = value.map(name => deptToAbbr[name]);
+    // update the search parameter
+    setSearchParams((prevSearchParams) => {
+      // remove the old search parameter, since it will be updated
+      prevSearchParams.delete("department");
+      // build the new searchParam
+      let params = {
+        ...prevSearchParams,
+        "department": abbreviations.join(",")
+      };
+      // if the search parameter no longer holds at least one abbreviation,
+      // remove it from searchParams
+      if (params["department"].length === 0) {
+        delete params["department"];
+      }
+      console.log(params)
+      return params
+    });
   };
 
   return (
@@ -110,6 +258,102 @@ const Courses = () => {
             <MenuItem value={30}>30</MenuItem>
           </Select>
         </FormControl>
+        <FormControl fullWidth>
+          <InputLabel id="select-semester-label">
+            Semester
+          </InputLabel>
+          <Select
+            labelId="select-semester-label"
+            id="select-semester"
+            multiple
+            value={semester}
+            onChange={handleSemesterChange}
+            input={
+              <OutlinedInput
+                id="select-semester-chip"
+                label="Semester"
+              />
+            }
+            renderValue={(selected) => (
+              <Box sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 0.5
+              }}>
+                {selected.map((value) => {
+                  return (
+                    <Chip
+                      key={value}
+                      label={value}
+                    />
+                  );
+                })}
+              </Box>
+            )}
+          >
+            {semesters.map((name) => (
+              <MenuItem
+                key={name}
+                value={name}
+              >
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl fullWidth>
+          <InputLabel id="select-department-label">
+            Department
+          </InputLabel>
+          <Select
+            labelId="select-department-label"
+            id="select-department"
+            multiple
+            value={department}
+            onChange={handleDepartmentChange}
+            input={
+              <OutlinedInput
+                id="select-department-chip"
+                label="Department"
+              />
+            }
+            renderValue={(selected) => (
+              <Box sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 0.5
+              }}>
+                {selected.map((value) => {
+                  return (
+                    <Chip
+                      key={value}
+                      label={value}
+                    />
+                  );
+                })}
+              </Box>
+            )}
+          >
+            {departments.map((name) => (
+              <MenuItem
+                key={name}
+                value={name}
+              >
+                {name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <Slider
+          getAriaValueText={(grade) => {
+            return `${grade[0]} to ${grade[1]}`;
+          }}
+          value={grade}
+          onChange={handleGradeChange}
+          marks={grades}
+          step={null}
+          max={4}
+        />
         <Grid container spacing={4}>
           {courses.map((course, index) => {
             return (

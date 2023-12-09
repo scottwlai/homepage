@@ -93,7 +93,7 @@ const corsOptions = {
 const updateQuery = (select, parameter, translator, field) => {
   if (parameter) {
     parameter = parameter.split(',');
-    if (!translator) {
+    if (translator) {
       for (let i = 0; i < parameter.length; i++) {
         parameter[i] = translator[parameter[i]];
       }

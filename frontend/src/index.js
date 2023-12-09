@@ -125,7 +125,7 @@ theme.components = {
     }
   }
 };
-
+localStorage.clear();
 console.log(theme);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
