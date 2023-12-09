@@ -174,7 +174,7 @@ const Courses = () => {
         console.error(error);
       }
     }
-    cachedData = null;
+    // cachedData = null;
     if (cachedData) {
       console.log("cache HIT! :D");
       setCourses(cachedData["courses"]);
@@ -185,7 +185,7 @@ const Courses = () => {
       console.log("cache miss :(");
       getCoursesData();
     }
-  }, [ currentPage, perPage, semester, searchParams, grade ]);
+  }, [ searchParams ]);
 
   /**
    * when the page loads, read the relevant search parameters
@@ -238,6 +238,7 @@ const Courses = () => {
     setPerPage(newPerPage);
     setCurrentPage(1);
     setSearchParams((prevSearchParams) => {
+      prevSearchParams.delete("page")
       prevSearchParams.delete("perPage")
       let params = {
         ...Object.fromEntries(prevSearchParams.entries()),
@@ -252,12 +253,13 @@ const Courses = () => {
   };
 
   const getCacheKey = () => {
-    return `page:${currentPage}_perPage:${perPage}_semester:${semester}_department:${department}_minGrade:${grade[0]}_maxGrade:${grade[1]}`;
+    return `page:${currentPage}_perPage:${perPage}_semester:${semester.sort()}_department:${department.sort()}_minGrade:${grade[0]}_maxGrade:${grade[1]}`;
   };
 
   const handleGradeChange = (event, newGrade) => {
     // update the state variable
     setGrade(newGrade);
+    setCurrentPage(1)
     // turn numbers into grades
     let minGrade = numToGrade[newGrade[0]]
     let maxGrade = numToGrade[newGrade[1]]
@@ -266,9 +268,11 @@ const Courses = () => {
       // remove the old search paramter, since it will be updated
       prevSearchParams.delete("minGrade");
       prevSearchParams.delete("maxGrade");
+      prevSearchParams.delete("page");
       // build the new searchParam
       let params = {
         ...Object.fromEntries(prevSearchParams.entries()),
+        "page": 1,
         "minGrade": minGrade,
         "maxGrade": maxGrade
       };
@@ -289,15 +293,18 @@ const Courses = () => {
     } = event.target;
     // update the state variable
     setSemester(value);
+    setCurrentPage(1);
     // turn semesters into abbreviations
     let abbreviations = value.map(sem => semToAbbr[sem]);
     // update the search parameter
     setSearchParams((prevSearchParams) => {
       // remove the old search paramter, since it will be updated
       prevSearchParams.delete("term");
+      prevSearchParams.delete("page");
       // build the new searchParam
       let params = {
         ...Object.fromEntries(prevSearchParams.entries()),
+        "page": 1,
         "term": abbreviations.join(",")
       };
       // if the search parameter no longer holds at least one abbreviation,
@@ -320,15 +327,18 @@ const Courses = () => {
     } = event.target;
     // update the state variable
     setDepartment(value);
+    setCurrentPage(1);
     // turn names into abbreviations
     let abbreviations = value.map(dept => deptToAbbr[dept]);
     // update the search parameter
     setSearchParams((prevSearchParams) => {
       // remove the old search parameter, since it will be updated
       prevSearchParams.delete("department");
+      prevSearchParams.delete("page");
       // build the new searchParam
       let params = {
         ...Object.fromEntries(prevSearchParams.entries()),
+        "page": 1,
         "department": abbreviations.join(",")
       };
       // if the search parameter no longer holds at least one abbreviation,
