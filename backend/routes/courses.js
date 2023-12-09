@@ -141,7 +141,7 @@ router.get('/', cors(corsOptions), async(req, res, next) => {
   updateQuery(select, query.term, termTranslator, "term");
   updateRange(select, query.minGrade, query.maxGrade, gradeArray, gradeTranslator, "grade");
   const page = parseInt(query.page) || 1;
-  const perPage = parseInt(query.perPage) || 5;
+  const perPage = parseInt(query.perPage) || 10;
   // calculates the number of entries that match the query
   const total = await courses.countDocuments(select);
   // calculates the number of entries to skip ahead to simulate pages
