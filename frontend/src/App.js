@@ -2,12 +2,12 @@ import React from "react";
 import {
   Routes, Route
 } from "react-router-dom";
-import Home from "./pages/Home";
-import Portfolio from "./pages/Portfolio";
-import Courses from "./pages/Courses";
-import Interests from "./pages/Interests";
-import Demo from "./pages/Demo";
-import NoMatch from "./pages/NoMatch";
+import Home from "./components/Home";
+import Portfolio from "./components/Portfolio";
+import Courses from "./components/Courses";
+import Interests from "./components/Interests";
+import Demo from "./components/Demo";
+import NoMatch from "./components/NoMatch";
 
 const App = () => {
   return (

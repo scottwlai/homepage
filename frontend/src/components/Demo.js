@@ -10,7 +10,7 @@ import {
 import {
   Button
 } from "@mui/material";
-import Layout from "../components/Layout";
+import Layout from "./Layout";
 // import { PerspectiveCamera, OrbitControls, Sky, Stars } from "@react-three/drei"
 // import { Physics, useBox, usePlane } from "@react-three/cannon";
 
