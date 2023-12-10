@@ -14,6 +14,7 @@ import {
   Pagination,
   Select,
   Slider,
+  Stack,
   Typography
 } from "@mui/material";
 import {
@@ -272,7 +273,6 @@ const Courses = () => {
       // build the new searchParam
       let params = {
         ...Object.fromEntries(prevSearchParams.entries()),
-        "page": 1,
         "minGrade": minGrade,
         "maxGrade": maxGrade
       };
@@ -304,7 +304,6 @@ const Courses = () => {
       // build the new searchParam
       let params = {
         ...Object.fromEntries(prevSearchParams.entries()),
-        "page": 1,
         "term": abbreviations.join(",")
       };
       // if the search parameter no longer holds at least one abbreviation,
@@ -338,7 +337,6 @@ const Courses = () => {
       // build the new searchParam
       let params = {
         ...Object.fromEntries(prevSearchParams.entries()),
-        "page": 1,
         "department": abbreviations.join(",")
       };
       // if the search parameter no longer holds at least one abbreviation,
@@ -352,130 +350,105 @@ const Courses = () => {
 
   return (
     <Layout title="Courses">
-      <Grid item xs={12}>
+      <Grid item xs={12} sx={{
+        display: "grid"
+      }}>
         <Button component={Link} to={"/portfolio"}>
           <Typography variant="button" textTransform="none">
             Back to Portfolio
           </Typography>
         </Button>
-        <Pagination
-          count={Math.ceil(count / perPage)}
-          onChange={handlePageChange}
-          page={currentPage}
-          showFirstButton
-          showLastButton
-          sx={{
-            display: "flex",
-            justifyContent: "center"
-          }}
-        />
-        <FormControl fullWidth>
-          <InputLabel
-            id="per-page-label"
-          >
-            Results per Page
-          </InputLabel>
-          <Select
-            labelId="per-page-label"
-            id="per-page-select"
-            label="Results per Page"
-            defaultValue={10}
-            onChange={handlePerPageChange}
-          >
-            <MenuItem value={5}>5</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-            <MenuItem value={15}>15</MenuItem>
-            <MenuItem value={20}>20</MenuItem>
-            <MenuItem value={25}>25</MenuItem>
-            <MenuItem value={30}>30</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="select-semester-label">
-            Semester
-          </InputLabel>
-          <Select
-            labelId="select-semester-label"
-            id="select-semester"
-            multiple
-            value={semester}
-            onChange={handleSemesterChange}
-            input={
-              <OutlinedInput
-                id="select-semester-chip"
-                label="Semester"
-              />
-            }
-            renderValue={(selected) => (
-              <Box sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 0.5
-              }}>
-                {selected.map((value) => {
-                  return (
-                    <Chip
-                      key={value}
-                      label={value}
-                    />
-                  );
-                })}
-              </Box>
-            )}
-          >
-            {semesters.map((name) => (
-              <MenuItem
-                key={name}
-                value={name}
-              >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <FormControl fullWidth>
-          <InputLabel id="select-department-label">
-            Department
-          </InputLabel>
-          <Select
-            labelId="select-department-label"
-            id="select-department"
-            multiple
-            value={department}
-            onChange={handleDepartmentChange}
-            input={
-              <OutlinedInput
-                id="select-department-chip"
-                label="Department"
-              />
-            }
-            renderValue={(selected) => (
-              <Box sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: 0.5
-              }}>
-                {selected.map((value) => {
-                  return (
-                    <Chip
-                      key={value}
-                      label={value}
-                    />
-                  );
-                })}
-              </Box>
-            )}
-          >
-            {departments.map((name) => (
-              <MenuItem
-                key={name}
-                value={name}
-              >
-                {name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <Stack direction="row" spacing={2} my={2}>
+          <FormControl fullWidth>
+            <InputLabel id="select-semester-label">
+              Semester
+            </InputLabel>
+            <Select
+              labelId="select-semester-label"
+              id="select-semester"
+              multiple
+              value={semester}
+              onChange={handleSemesterChange}
+              input={
+                <OutlinedInput
+                  id="select-semester-chip"
+                  label="Semester"
+                />
+              }
+              renderValue={(selected) => (
+                <Box sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 0.5
+                }}>
+                  {selected.map((value) => {
+                    return (
+                      <Chip
+                        key={value}
+                        label={value}
+                      />
+                    );
+                  })}
+                </Box>
+              )}
+            >
+              {semesters.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel id="select-department-label">
+              Department
+            </InputLabel>
+            <Select
+              labelId="select-department-label"
+              id="select-department"
+              multiple
+              value={department}
+              onChange={handleDepartmentChange}
+              input={
+                <OutlinedInput
+                  id="select-department-chip"
+                  label="Department"
+                />
+              }
+              renderValue={(selected) => (
+                <Box sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 0.5
+                }}>
+                  {selected.map((value) => {
+                    return (
+                      <Chip
+                        key={value}
+                        label={value}
+                      />
+                    );
+                  })}
+                </Box>
+              )}
+            >
+              {departments.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Stack>
+        <Typography>
+          Grade
+        </Typography>
         <Slider
           getAriaValueText={(grade) => {
             return `${grade[0]} to ${grade[1]}`;
@@ -485,6 +458,9 @@ const Courses = () => {
           marks={grades}
           step={null}
           max={4}
+          sx={{
+            marginBottom: 8
+          }}
         />
         <Grid container spacing={4}>
           {courses.map((course, index) => {
@@ -504,6 +480,43 @@ const Courses = () => {
             );
           })}
         </Grid>
+        <Pagination
+          count={Math.ceil(count / perPage)}
+          onChange={handlePageChange}
+          page={currentPage}
+          showFirstButton
+          showLastButton
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginY: 2
+          }}
+        />
+        <FormControl sx={{
+          width: 100,
+          justifySelf: "center",
+          textAlign: "center"
+        }}>
+          <InputLabel
+            id="per-page-label"
+          >
+            Page Size
+          </InputLabel>
+          <Select
+            labelId="per-page-label"
+            id="per-page-select"
+            label="Page Size"
+            defaultValue={10}
+            onChange={handlePerPageChange}
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={25}>25</MenuItem>
+            <MenuItem value={30}>30</MenuItem>
+          </Select>
+        </FormControl>
       </Grid>
     </Layout>
   );

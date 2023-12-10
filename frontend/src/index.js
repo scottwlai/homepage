@@ -93,7 +93,7 @@ theme.components = {
   MuiCardContent: {
     styleOverrides: {
       root: {
-        padding: 32,
+        padding: "0 32px",
         width: "100%"
       }
     }
