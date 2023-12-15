@@ -1,7 +1,7 @@
 import React, {
   useState, useEffect
 } from "react"
-import Layout from "./Layout";
+import Wrapper from "./Wrapper";
 import {
   Box,
   Button,
@@ -349,7 +349,7 @@ const Courses = () => {
   };
 
   return (
-    <Layout title="Courses">
+    <Wrapper title="Courses">
       <Grid item xs={12} sx={{
         display: "grid"
       }}>
@@ -518,7 +518,7 @@ const Courses = () => {
           </Select>
         </FormControl>
       </Grid>
-    </Layout>
+    </Wrapper>
   );
 }
 

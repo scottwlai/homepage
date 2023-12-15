@@ -1,24 +1,47 @@
-import React from "react";
+import React, {
+  useState
+} from "react";
 import {
-  Routes, Route
+  BrowserRouter as Router, Route, Routes
 } from "react-router-dom";
 import Home from "./components/Home";
-import Portfolio from "./components/Portfolio";
+import Portfolio from "./components/portfolio/Portfolio";
 import Courses from "./components/Courses";
 import Interests from "./components/Interests";
-import Demo from "./components/Demo";
 import NoMatch from "./components/NoMatch";
+import {
+  CssBaseline,
+  ThemeProvider
+} from "@mui/material";
+import {
+  lightTheme,
+  darkTheme
+} from "./components/common/themeUtils";
+import Header from "./components/header/Header.js";
+import Footer from "./components/footer/Footer.js";
 
 const App = () => {
+  const [ darkMode, setDarkMode ] = useState(false);
+
+  const handleThemeToggle = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/portfolio" element={<Portfolio />} />
-      <Route path="/portfolio/courses" element={<Courses />} />
-      <Route path="/interests" element={<Interests />} />
-      <Route path="/demo" element={<Demo />} />
-      <Route path="/*" element={<NoMatch />} />
-    </Routes>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <Router>
+        <Header handleThemeToggle={handleThemeToggle} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/portfolio/courses" element={<Courses />} />
+          <Route path="/interests" element={<Interests />} />
+          <Route path="/*" element={<NoMatch />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </ThemeProvider>
   );
 }
 

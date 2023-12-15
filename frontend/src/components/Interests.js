@@ -1,11 +1,28 @@
 import React from "react";
-import Layout from "./Layout";
+import Wrapper from "./Wrapper";
+import {
+  Typography
+} from "@mui/material";
+import Section from "./common/Section";
 
 const Interests = () => {
   return (
-    <Layout title="Interests">
-      <p>Welcome to the interests page!</p>
-    </Layout>
+    <main>
+      <Section>
+        <Wrapper>
+          <Typography
+            variant="h1"
+            align="center"
+            sx={{
+              my: "6rem"
+            }}
+          >
+            Interests
+          </Typography>
+          <Typography>I have none lol</Typography>
+        </Wrapper>
+      </Section>
+    </main>
   );
 }
 
