@@ -12,6 +12,15 @@ const baseTheme = createTheme({
     ].join(","),
     h1: {
       fontSize: "clamp(1rem, 8vw, 4rem)"
+    },
+    h2: {
+      fontSize: "clamp(1.25rem, 5vw, 2rem)"
+    },
+    h3: {
+      fontSize: "clamp(1.125rem, 3.125vw, 1.25rem)"
+    },
+    body1: {
+      fontSize: "clamp(1rem, 3.125vw, 1.125rem)"
     }
   },
   components: {
@@ -35,6 +44,41 @@ const baseTheme = createTheme({
     MuiContainer: {
       defaultProps: {
         maxWidth: "md"
+      }
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
+      }
+    },
+    MuiListItemIcon: {
+      styleOverrides: {
+        root: {
+          minWidth: "2.5rem"
+        }
+      }
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          padding: "1rem"
+        }
+      }
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
+      }
+    },
+    MuiCardActions: {
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
       }
     }
   }

@@ -6,14 +6,12 @@ import {
   Typography
 } from "@mui/material";
 import Section from "../common/Section";
+import SkillsSection from "./SkillsSection";
 // import Projects from "../Projects";
 // import Experience from "../Experience";
 // import Certifications from "../Certifications";
 // import Honors from "../Honors";
 // import Skills from "../Skills";
-// import {
-//   Grid
-// } from "@mui/material";
 
 const Portfolio = () => {
   return (
@@ -29,7 +27,21 @@ const Portfolio = () => {
           >
             Portfolio
           </Typography>
-          <EducationSection />
+          <Grid
+            container
+            spacing={{
+              xs: 4,
+              sm: 2,
+              md: 4
+            }}
+          >
+            <Grid item xs={12} sm={8}>
+              <EducationSection />
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              <SkillsSection />
+            </Grid>
+          </Grid>
           {/*
           <Grid item xs={4}>
             <Skills />

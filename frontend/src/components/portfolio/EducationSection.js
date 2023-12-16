@@ -6,6 +6,7 @@ import EducationCard from "./EducationCard";
 import {
   getEducation
 } from "../../api";
+import { Typography } from "@mui/material";
 
 const Education = () => {
   const [ education, setEducation ] = useState([]);
@@ -35,6 +36,9 @@ const Education = () => {
 
   return (
     <>
+      <Typography variant="h2">
+        Education
+      </Typography>
       {education.map((school, index) => {
         return (
           <EducationCard school={school} key={index} />

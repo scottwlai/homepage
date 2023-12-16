@@ -4,6 +4,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardMedia,
   List,
   ListItem,
   ListItemIcon,
@@ -21,10 +22,18 @@ const GenericCard = ({
 }) => {
   return (
     <Card>
+      {data.image && (
+        <CardMedia
+          component="img"
+          src={data.image}
+        />
+      )}
       <CardContent>
-        <Typography>
-          {data.title}
-        </Typography>
+        {data.title && (
+          <Typography variant="h2">
+            {data.title}
+          </Typography>
+        )}
         <List>
           {data.subtitles.map((entry, index) => {
             return (
