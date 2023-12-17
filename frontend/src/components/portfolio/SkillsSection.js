@@ -9,7 +9,12 @@ import {
   ListItemText,
   Typography
 } from "@mui/material";
-import FolderIcon from '@mui/icons-material/Folder';
+import CodeIcon from '@mui/icons-material/Code';
+import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
+import SourceIcon from '@mui/icons-material/Source';
+import StorageIcon from '@mui/icons-material/Storage';
+import CloudIcon from '@mui/icons-material/Cloud';
+import TerminalIcon from '@mui/icons-material/Terminal';
 import React from "react";
 import {
   Link
@@ -21,15 +26,58 @@ const action = {
 }
 
 const skills = [
-  "Java",
-  "Python",
-  "Swift",
-  "TypeScript",
-  "React",
-  "SQL",
-  "AWS",
-  "Git"
+  {
+    "name": "Java",
+    "icon": "code"
+  },
+  {
+    "name": "Python",
+    "icon": "code"
+  },
+  {
+    "name": "TypeScript",
+    "icon": "code"
+  },
+  {
+    "name": "Swift",
+    "icon": "developerMode"
+  },
+  {
+    "name": "React",
+    "icon": "source"
+  },
+  {
+    "name": "SQL",
+    "icon": "storage"
+  },
+  {
+    "name": "AWS",
+    "icon": "cloud"
+  },
+  {
+    "name": "Git",
+    "icon": "terminal"
+  }
 ];
+
+const getIcon = (name) => {
+  switch (name) {
+    case "code":
+      return <CodeIcon />;
+    case "developerMode":
+      return <DeveloperModeIcon />
+    case "source":
+      return <SourceIcon />
+    case "storage":
+      return <StorageIcon />
+    case "cloud":
+      return <CloudIcon />
+    case "terminal":
+      return <TerminalIcon />
+    default:
+      return null;
+  }
+};
 
 const SkillsSection = () => {
   return (
@@ -44,10 +92,10 @@ const SkillsSection = () => {
               return (
                 <ListItem key={index}>
                   <ListItemIcon>
-                    <FolderIcon />
+                    {getIcon(skill.icon)}
                   </ListItemIcon>
                   <ListItemText>
-                    {skill}
+                    {skill.name}
                   </ListItemText>
                 </ListItem>
               );
