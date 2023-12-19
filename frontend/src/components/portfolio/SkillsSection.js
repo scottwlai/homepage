@@ -19,10 +19,12 @@ import React from "react";
 import {
   Link
 } from "react-router-dom";
+import Section from "./Section";
+import MilitaryTech from "@mui/icons-material/MilitaryTech";
 
 const action = {
   "to": "/portfolio",
-  "text": "See More"
+  "text": "View More"
 }
 
 const skills = [
@@ -81,10 +83,10 @@ const getIcon = (name) => {
 
 const SkillsSection = () => {
   return (
-    <>
-      <Typography variant="h2">
-        Skills
-      </Typography>
+    <Section
+      title="Skills"
+      icon={<MilitaryTech />}
+    >
       <Card>
         <CardContent>
           <List>
@@ -103,14 +105,14 @@ const SkillsSection = () => {
           </List>
         </CardContent>
         <CardActions>
-          <Button component={Link} to={action.to}>
+          <Button variant="outlined" component={Link} to={action.to}>
             <Typography variant="button">
               {action.text}
             </Typography>
           </Button>
         </CardActions>
       </Card>
-    </>
+    </Section>
   );
 };
 

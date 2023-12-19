@@ -6,7 +6,12 @@ import EducationCard from "./EducationCard";
 import {
   getEducation
 } from "../../api";
-import { Typography } from "@mui/material";
+import {
+  CardContent,
+  CardHeader
+} from "@mui/material";
+import Section from "./Section";
+import School from '@mui/icons-material/School';
 
 const Education = () => {
   const [ education, setEducation ] = useState([]);
@@ -35,17 +40,17 @@ const Education = () => {
   }, []);
 
   return (
-    <>
-      <Typography variant="h2">
-        Education
-      </Typography>
+    <Section
+      title="Education"
+      icon={<School />}
+    >
       {education.map((school, index) => {
         return (
           <EducationCard school={school} key={index} />
-        )
+        );
       })}
-    </>
+    </Section>
   );
-}
+};
 
 export default Education;

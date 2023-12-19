@@ -17,8 +17,7 @@ import {
 
 const GenericCard = ({
   data,
-  action,
-  children
+  action
 }) => {
   return (
     <Card>
@@ -30,7 +29,7 @@ const GenericCard = ({
       )}
       <CardContent>
         {data.title && (
-          <Typography variant="h2">
+          <Typography variant="h3">
             {data.title}
           </Typography>
         )}
@@ -48,10 +47,9 @@ const GenericCard = ({
             )
           })}
         </List>
-        {children}
       </CardContent>
       <CardActions>
-        <Button component={Link} to={action.to}>
+        <Button variant="outlined" component={Link} to={action.to}>
           <Typography variant="button">
             {action.text}
           </Typography>

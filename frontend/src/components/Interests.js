@@ -1,27 +1,24 @@
 import React from "react";
-import Wrapper from "./Wrapper";
+import Wrapper from "./common/Wrapper";
 import {
   Typography
 } from "@mui/material";
-import Section from "./common/Section";
 
 const Interests = () => {
   return (
     <main>
-      <Section>
-        <Wrapper>
-          <Typography
-            variant="h1"
-            align="center"
-            sx={{
-              my: "6rem"
-            }}
-          >
-            Interests
-          </Typography>
-          <Typography>I have none lol</Typography>
-        </Wrapper>
-      </Section>
+      <Wrapper>
+        <Typography
+          variant="h1"
+          align="center"
+          sx={{
+            my: "6rem"
+          }}
+        >
+          Interests
+        </Typography>
+        <Typography>I have none lol</Typography>
+      </Wrapper>
     </main>
   );
 }

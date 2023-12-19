@@ -6,7 +6,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-.MuiCardContent-root:last-child {
-  padding-bottom: 8px !important;
-}

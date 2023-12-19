@@ -1,16 +1,12 @@
 import React from "react";
-import SchoolIcon from '@mui/icons-material/School';
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import GradeIcon from '@mui/icons-material/Grade';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
 import GenericCard from "../common/GenericCard";
 import {
-  Typography
-} from "@mui/material";
-import {
   formatDate
 } from "../common/timeUtils"
-import Chips from "../common/Chips";
 
 const action = {
   "to": "/portfolio/courses",
@@ -32,13 +28,13 @@ const EducationCard = ({
     school.degrees.map((degree) => {
       newSchool.subtitles.push({
         "subtitle": degree,
-        "icon": <SchoolIcon/>
+        "icon": <HistoryEduIcon/>
       })
     });
     newSchool.subtitles.push(
       {
         "subtitle": `GPA: ${school.gpa}`,
-        "icon": <MilitaryTechIcon/>
+        "icon": <GradeIcon/>
       }, {
         "subtitle": `${formatDate(school.startDate)} - ${formatDate(school.endDate)}`,
         "icon": <CalendarMonthIcon/>
@@ -51,14 +47,7 @@ const EducationCard = ({
   });
 
   return (
-    <>
-      <GenericCard data={prepEducation(school)} action={action}>
-        {/* <Typography variant="h3">
-          Relevant Coursework:
-        </Typography>
-        <Chips data={school.coursework}/> */}
-      </GenericCard>
-    </>
+    <GenericCard data={prepEducation(school)} action={action} />
   );
 }
 

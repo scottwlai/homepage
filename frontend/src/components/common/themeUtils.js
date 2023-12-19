@@ -46,6 +46,13 @@ const baseTheme = createTheme({
         maxWidth: "md"
       }
     },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          padding: 0
+        }
+      }
+    },
     MuiListItem: {
       styleOverrides: {
         root: {
@@ -63,21 +70,32 @@ const baseTheme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          padding: "1rem"
+          padding: "1rem",
+          marginBottom: 20
         }
       }
     },
     MuiCardContent: {
       styleOverrides: {
         root: {
-          padding: 0
+          padding: 0,
+          "&:last-child": {
+            paddingBottom: 0
+          }
         }
       }
     },
     MuiCardActions: {
       styleOverrides: {
         root: {
-          padding: 0
+          padding: "8px 0 0 0"
+        }
+      }
+    },
+    MuiCardHeader: {
+      styleOverrides: {
+        avatar: {
+          marginRight: 0
         }
       }
     }
