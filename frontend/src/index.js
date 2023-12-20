@@ -93,7 +93,7 @@ theme.components = {
   MuiCardContent: {
     styleOverrides: {
       root: {
-        padding: 32,
+        padding: "0 32px",
         width: "100%"
       }
     }
@@ -125,19 +125,14 @@ theme.components = {
     }
   }
 };
-
+localStorage.clear();
 console.log(theme);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <CssBaseline />
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <App />
   </React.StrictMode>
 );
 

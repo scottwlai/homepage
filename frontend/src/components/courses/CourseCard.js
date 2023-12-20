@@ -57,6 +57,10 @@ const CourseCard = ({
       <CardMedia
         component="img"
         src="../logo192.png"
+        sx={{
+          width: "50%",
+          margin: "8px auto"
+        }}
       />
       <CardContent>
         <Typography variant="h5" align="center">
