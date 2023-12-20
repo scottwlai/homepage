@@ -53,20 +53,13 @@ const skills = [
 
 const getIcon = (name) => {
   switch (name) {
-    case "code":
-      return <CodeIcon />;
-    case "developerMode":
-      return <DeveloperModeIcon />
-    case "source":
-      return <SourceIcon />
-    case "storage":
-      return <StorageIcon />
-    case "cloud":
-      return <CloudIcon />
-    case "terminal":
-      return <TerminalIcon />
-    default:
-      return null;
+  case "code": return <CodeIcon />;
+  case "developerMode": return <DeveloperModeIcon />
+  case "source": return <SourceIcon />
+  case "storage": return <StorageIcon />
+  case "cloud": return <CloudIcon />
+  case "terminal": return <TerminalIcon />
+  default: return null;
   }
 };
 
@@ -80,7 +73,9 @@ const SkillsSection = () => {
         "link": "/portfolio"
       }}
     >
-      <Card sx={{boxShadow: "none"}}>
+      <Card sx={{
+        boxShadow: "none"
+      }}>
         <CardContent>
           <List sx={{
             columnCount: {

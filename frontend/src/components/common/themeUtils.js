@@ -63,7 +63,7 @@ const baseTheme = createTheme({
     MuiListItemIcon: {
       styleOverrides: {
         root: {
-          minWidth: "2rem",
+          minWidth: "2rem"
         }
       }
     },

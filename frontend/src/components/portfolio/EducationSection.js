@@ -5,7 +5,7 @@ import React, {
 import EducationCard from "./EducationCard";
 import {
   getEducation
-} from "../../api";
+} from "../common/api";
 import Section from "./Section";
 import School from '@mui/icons-material/School';
 
@@ -51,7 +51,7 @@ const Education = () => {
           <EducationCard
             school={school}
             sx={sx}
-            key={index}  
+            key={index}
           />
         );
       })}

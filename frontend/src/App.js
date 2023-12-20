@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home";
 import Portfolio from "./components/portfolio/Portfolio";
-import Courses from "./components/Courses";
+import Courses from "./components/courses/Courses";
 import Interests from "./components/Interests";
 import NoMatch from "./components/NoMatch";
 import {

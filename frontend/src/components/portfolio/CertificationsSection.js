@@ -21,7 +21,7 @@ const certifications = [
     "title": "Git Essential Training: The Basics",
     "issuer": "LinkedIn Learning",
     "date": "Jun 2022"
-  },
+  }
 ]
 
 const CertificationsSection = () => {

@@ -42,7 +42,9 @@ const GenericCard = ({
       {data.title && (
         <CardHeader
           title={data.title}
-          titleTypographyProps={{variant: "h3"}}
+          titleTypographyProps={{
+            variant: "h3"
+          }}
         />
       )}
       <CardContent>
@@ -72,15 +74,14 @@ const GenericCard = ({
           alignItems: "flex-start"
         }}>
           {data.actions.map((action, index) => {
-              return (
-                <Button variant={index ? "outlined" : "contained"} component={Link} to={action.link} key={index}>
-                  <Typography variant="button">
-                    {action.text}
-                  </Typography>
-                </Button>
-              );
-            })
-          }
+            return (
+              <Button variant={index ? "outlined" : "contained"} component={Link} to={action.link} key={index}>
+                <Typography variant="button">
+                  {action.text}
+                </Typography>
+              </Button>
+            );
+          })}
         </CardActions>
       )}
     </Card>
