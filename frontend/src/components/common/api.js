@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-const API = "https://api.scottlai.tech/courses?";
+const API = "https://api.scottlai.tech";
 
 export const getCourses = (searchParams) => {
   const currentPage = searchParams.get("page");
@@ -28,7 +28,12 @@ export const getCourses = (searchParams) => {
   if (maxGrade != null) {
     params.push(`maxGrade=${maxGrade}`)
   }
-  const final = API + params.join("&");
+  const final = `${API}/courses?${params.join("&")}`;
   console.log(final);
   return Axios.get(final);
 };
+
+export const getEducation = () => {
+  const url = `${API}/education`;
+  return Axios.get(url);
+}

@@ -1,7 +1,7 @@
 import React, {
   useState, useEffect
 } from "react"
-import Layout from "./Layout";
+import Wrapper from "../common/Wrapper";
 import {
   Box,
   Button,
@@ -22,7 +22,7 @@ import {
 } from "react-router-dom";
 import {
   getCourses
-} from "../api";
+} from "../common/api";
 import CourseCard from "./CourseCard";
 
 const departments = [
@@ -349,7 +349,16 @@ const Courses = () => {
   };
 
   return (
-    <Layout title="Courses">
+    <Wrapper>
+      <Typography
+        variant="h1"
+        align="center"
+        sx={{
+          my: "6rem"
+        }}
+      >
+        Courses
+      </Typography>
       <Grid item xs={12} sx={{
         display: "grid"
       }}>
@@ -518,7 +527,7 @@ const Courses = () => {
           </Select>
         </FormControl>
       </Grid>
-    </Layout>
+    </Wrapper>
   );
 }
 
