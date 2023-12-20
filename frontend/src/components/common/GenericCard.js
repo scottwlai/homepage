@@ -33,7 +33,9 @@ const GenericCard = ({
           component="img"
           src={data.image}
           sx={{
-            borderRadius: "4px"
+            borderRadius: "4px",
+            gridArea: "img",
+            alignSelf: "center"
           }}
         />
       )}
@@ -65,18 +67,22 @@ const GenericCard = ({
           })}
         </List>
       </CardContent>
-      <CardActions>
-        {data.actions.map((action, index) => {
-            return (
-              <Button variant={index ? "outlined" : "contained"} component={Link} to={action.link} key={index}>
-                <Typography variant="button">
-                  {action.text}
-                </Typography>
-              </Button>
-            );
-          })
-        }
-      </CardActions>
+      {data.actions && (
+        <CardActions sx={{
+          alignItems: "flex-start"
+        }}>
+          {data.actions.map((action, index) => {
+              return (
+                <Button variant={index ? "outlined" : "contained"} component={Link} to={action.link} key={index}>
+                  <Typography variant="button">
+                    {action.text}
+                  </Typography>
+                </Button>
+              );
+            })
+          }
+        </CardActions>
+      )}
     </Card>
   );
 }

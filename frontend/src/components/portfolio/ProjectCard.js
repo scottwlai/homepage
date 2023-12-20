@@ -2,6 +2,7 @@ import React from "react";
 import GenericCard from "../common/GenericCard";
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 const ProjectCard = ({
   project
@@ -26,6 +27,10 @@ const ProjectCard = ({
       {
         "subtitle": `${project.startDate} - ${project.endDate}`,
         "icon": <CalendarMonthIcon />
+      },
+      {
+        "subtitle": project.summary,
+        "icon": <ArrowRightIcon />
       }
     );
     if (project.repo) {
@@ -40,12 +45,6 @@ const ProjectCard = ({
   return (
     <GenericCard
       data={prepProject(project)}
-      sx={{
-        display: "grid",
-        gridTemplateColumns: {
-          xs: "1fr",
-        }
-      }}
     />
   );
 };
