@@ -17,10 +17,10 @@ const baseTheme = createTheme({
       fontSize: "clamp(1.25rem, 5vw, 2rem)"
     },
     h3: {
-      fontSize: "clamp(1.125rem, 3.125vw, 1.25rem)"
+      fontSize: "clamp(1rem, 3.5vw, 1.125rem)"
     },
     body1: {
-      fontSize: "clamp(1rem, 3.125vw, 1.125rem)"
+      fontSize: "clamp(0.75rem, 3.125vw, 1rem)"
     }
   },
   components: {
@@ -63,15 +63,14 @@ const baseTheme = createTheme({
     MuiListItemIcon: {
       styleOverrides: {
         root: {
-          minWidth: "2.5rem"
+          minWidth: "2rem",
         }
       }
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          padding: "1rem",
-          marginBottom: 20
+          padding: "1rem"
         }
       }
     },
@@ -94,6 +93,9 @@ const baseTheme = createTheme({
     },
     MuiCardHeader: {
       styleOverrides: {
+        root: {
+          padding: "0.5rem 0"
+        },
         avatar: {
           marginRight: 0
         }

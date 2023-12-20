@@ -8,17 +8,19 @@ import {
   formatDate
 } from "../common/timeUtils"
 
-const action = {
-  "to": "/portfolio/courses",
-  "text": "View Coursework"
-}
-
 const EducationCard = ({
-  school
+  school,
+  sx
 }) => {
   const prepEducation = ((school) => {
     let newSchool = {
-      "subtitles": []
+      "subtitles": [],
+      "actions": [
+        {
+          "text": "Coursework",
+          "link": "/portfolio/courses"
+        }
+      ]
     };
     if (school.emblem != null) {
       newSchool["image"] = school.emblem;
@@ -43,11 +45,19 @@ const EducationCard = ({
         "icon": <PlaceIcon/>
       }
     );
+    if (school.summary) {
+      newSchool.actions.push(
+        {
+          "text": "Records",
+          "link": school.summary
+        }
+      );
+    }
     return newSchool;
   });
 
   return (
-    <GenericCard data={prepEducation(school)} action={action} />
+    <GenericCard data={prepEducation(school)} sx={sx} />
   );
 }
 

@@ -4,6 +4,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  CardHeader,
   CardMedia,
   List,
   ListItem,
@@ -17,26 +18,42 @@ import {
 
 const GenericCard = ({
   data,
-  action
+  sx
 }) => {
   return (
-    <Card>
+    <Card sx={{
+      ...sx,
+      m: {
+        xs: "0 1rem 1rem",
+        sm: "0 0 1rem"
+      }
+    }}>
       {data.image && (
         <CardMedia
           component="img"
           src={data.image}
+          sx={{
+            borderRadius: "4px"
+          }}
+        />
+      )}
+      {data.title && (
+        <CardHeader
+          title={data.title}
+          titleTypographyProps={{variant: "h3"}}
         />
       )}
       <CardContent>
-        {data.title && (
-          <Typography variant="h3">
-            {data.title}
-          </Typography>
-        )}
-        <List>
+        <List sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          columnGap: 2
+        }}>
           {data.subtitles.map((entry, index) => {
             return (
-              <ListItem key={index}>
+              <ListItem key={index} sx={{
+                width: "auto"
+              }}>
                 <ListItemIcon>
                   {entry.icon}
                 </ListItemIcon>
@@ -49,11 +66,16 @@ const GenericCard = ({
         </List>
       </CardContent>
       <CardActions>
-        <Button variant="outlined" component={Link} to={action.to}>
-          <Typography variant="button">
-            {action.text}
-          </Typography>
-        </Button>
+        {data.actions.map((action, index) => {
+            return (
+              <Button variant={index ? "outlined" : "contained"} component={Link} to={action.link} key={index}>
+                <Typography variant="button">
+                  {action.text}
+                </Typography>
+              </Button>
+            );
+          })
+        }
       </CardActions>
     </Card>
   );

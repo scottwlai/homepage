@@ -1,15 +1,7 @@
 import React from "react";
 import GenericCard from "../common/GenericCard";
-import HistoryEdu from "@mui/icons-material/HistoryEdu";
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import PlaceIcon from '@mui/icons-material/Place';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-
-const action = {
-  "to": "/portfolio",
-  "text": "More Info"
-}
 
 const ProjectCard = ({
   project
@@ -18,7 +10,13 @@ const ProjectCard = ({
     let newProject = {
       "image": project.screenshot,
       "title": project.name,
-      "subtitles": []
+      "subtitles": [],
+      "actions": [
+        {
+          "text": "Details",
+          "link": "/portfolio"
+        }
+      ]
     };
     newProject.subtitles.push(
       {
@@ -28,23 +26,27 @@ const ProjectCard = ({
       {
         "subtitle": `${project.startDate} - ${project.endDate}`,
         "icon": <CalendarMonthIcon />
-      },
-      {
-        "subtitle": project.city,
-        "icon": <PlaceIcon />
       }
     );
-    project.impact.map((bullet) => {
-      newProject.subtitles.push({
-        "subtitle": bullet,
-        "icon": <ArrowRightIcon />
-      })
-    });
+    if (project.repo) {
+      newProject.actions.push({
+        "text": "Repo",
+        "link": project.repo
+      });
+    }
     return newProject;
   });
 
   return (
-    <GenericCard data={prepProject(project)} action={action} />
+    <GenericCard
+      data={prepProject(project)}
+      sx={{
+        display: "grid",
+        gridTemplateColumns: {
+          xs: "1fr",
+        }
+      }}
+    />
   );
 };
 

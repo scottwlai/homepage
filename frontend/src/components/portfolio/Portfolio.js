@@ -2,22 +2,14 @@ import React from "react"
 import Wrapper from "../common/Wrapper";
 import EducationSection from "./EducationSection"
 import {
-  Card,
-  CardContent,
   Grid,
   Typography
 } from "@mui/material";
 import SkillsSection from "./SkillsSection";
-import Section from "./Section";
 import ProjectsSection from "./ProjectsSection";
 import ExperienceSection from "./ExperienceSection";
 import HonorsSection from "./HonorsSection";
 import CertificationsSection from "./CertificationsSection";
-// import Projects from "../Projects";
-// import Experience from "../Experience";
-// import Certifications from "../Certifications";
-// import Honors from "../Honors";
-// import Skills from "../Skills";
 
 const Portfolio = () => {
   return (
@@ -37,7 +29,7 @@ const Portfolio = () => {
           spacing={{
             xs: 4,
             sm: 2,
-            md: 4
+            md: 3
           }}
         >
           <Grid

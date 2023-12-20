@@ -1,13 +1,10 @@
 import {
-  Button,
   Card,
   CardContent,
-  CardActions,
   List,
   ListItem,
   ListItemIcon,
-  ListItemText,
-  Typography
+  ListItemText
 } from "@mui/material";
 import CodeIcon from '@mui/icons-material/Code';
 import DeveloperModeIcon from '@mui/icons-material/DeveloperMode';
@@ -16,16 +13,8 @@ import StorageIcon from '@mui/icons-material/Storage';
 import CloudIcon from '@mui/icons-material/Cloud';
 import TerminalIcon from '@mui/icons-material/Terminal';
 import React from "react";
-import {
-  Link
-} from "react-router-dom";
 import Section from "./Section";
 import MilitaryTech from "@mui/icons-material/MilitaryTech";
-
-const action = {
-  "to": "/portfolio",
-  "text": "View More"
-}
 
 const skills = [
   {
@@ -86,10 +75,19 @@ const SkillsSection = () => {
     <Section
       title="Skills"
       icon={<MilitaryTech />}
+      action={{
+        "text": "View More",
+        "link": "/portfolio"
+      }}
     >
-      <Card>
+      <Card sx={{boxShadow: "none"}}>
         <CardContent>
-          <List>
+          <List sx={{
+            columnCount: {
+              xs: 2,
+              sm: 1
+            }
+          }}>
             {skills.map((skill, index) => {
               return (
                 <ListItem key={index}>
@@ -104,13 +102,6 @@ const SkillsSection = () => {
             })}
           </List>
         </CardContent>
-        <CardActions>
-          <Button variant="outlined" component={Link} to={action.to}>
-            <Typography variant="button">
-              {action.text}
-            </Typography>
-          </Button>
-        </CardActions>
       </Card>
     </Section>
   );

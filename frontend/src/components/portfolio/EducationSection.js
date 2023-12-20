@@ -1,20 +1,17 @@
 import React, {
   useState,
   useEffect
-} from "react"
+} from "react";
 import EducationCard from "./EducationCard";
 import {
   getEducation
 } from "../../api";
-import {
-  CardContent,
-  CardHeader
-} from "@mui/material";
 import Section from "./Section";
 import School from '@mui/icons-material/School';
 
 const Education = () => {
   const [ education, setEducation ] = useState([]);
+  const [ sx, setSx ] = useState({});
 
   useEffect(() => {
     // try to find the education data in the cache
@@ -37,6 +34,11 @@ const Education = () => {
       console.log("cache miss :(");
       getEducationData();
     }
+    if (education.length <= 1) {
+      setSx({
+        boxShadow: "none"
+      });
+    }
   }, []);
 
   return (
@@ -46,7 +48,11 @@ const Education = () => {
     >
       {education.map((school, index) => {
         return (
-          <EducationCard school={school} key={index} />
+          <EducationCard
+            school={school}
+            sx={sx}
+            key={index}  
+          />
         );
       })}
     </Section>
