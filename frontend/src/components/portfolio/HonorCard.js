@@ -3,7 +3,7 @@ import GenericCard from "../common/GenericCard";
 import BusinessIcon from '@mui/icons-material/Business';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-const HonorsCard = ({
+const HonorCard = ({
   honor
 }) => {
   const prepHonor = ((honor) => {
@@ -34,4 +34,4 @@ const HonorsCard = ({
   );
 };
 
-export default HonorsCard;
+export default HonorCard;

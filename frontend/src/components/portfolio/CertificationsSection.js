@@ -1,7 +1,7 @@
 import React from "react";
 import Section from "./Section";
 import VerifiedIcon from '@mui/icons-material/Verified';
-import CertificationsCard from "./CertificationsCard";
+import CertificationCard from "./CertificationCard";
 
 const certifications = [
   {
@@ -48,7 +48,7 @@ const CertificationsSection = () => {
     >
       {certifications.map((certification, index) => {
         return (
-          <CertificationsCard certification={certification} key={index} />
+          <CertificationCard certification={certification} key={index} />
         );
       })}
     </Section>

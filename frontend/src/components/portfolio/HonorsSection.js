@@ -1,7 +1,7 @@
 import React from "react";
 import Section from "./Section";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import HonorsCard from "./HonorsCard";
+import HonorCard from "./HonorCard";
 
 const honors = [
   {
@@ -36,7 +36,7 @@ const HonorsSection = () => {
     >
       {honors.map((honor, index) => {
         return (
-          <HonorsCard honor={honor} key={index} />
+          <HonorCard honor={honor} key={index} />
         );
       })}
     </Section>
