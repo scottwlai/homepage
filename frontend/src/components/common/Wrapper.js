@@ -5,13 +5,16 @@ import {
 } from "@mui/material";
 
 const Wrapper = ({
+  boxSx,
+  containerSx,
   children
 }) => {
   return (
     <Box
       sx={{
         height: "100%",
-        py: "5rem"
+        py: "5rem",
+        ...boxSx
       }}
     >
       <Container
@@ -19,7 +22,8 @@ const Wrapper = ({
           display: "grid",
           justifyItems: "center",
           alignContent: "center",
-          height: "100%"
+          height: "100%",
+          ...containerSx
         }}
       >
         {children}
