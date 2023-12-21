@@ -27,7 +27,7 @@ const Home = () => {
         </Typography>
       </Wrapper>
       <Wrapper boxSx={{
-        height: "50vh"
+        height: "75vh"
       }} containerSx={{
         gridTemplateColumns: {
           xs: "1fr",
