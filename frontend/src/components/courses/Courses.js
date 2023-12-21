@@ -1,5 +1,6 @@
 import React, {
-  useState, useEffect
+  useState,
+  useEffect
 } from "react"
 import Wrapper from "../common/Wrapper";
 import {
@@ -154,13 +155,6 @@ const Courses = () => {
   useEffect(() => {
     let cachedData = JSON.parse(localStorage.getItem(getCacheKey()));
 
-    /*
-    33 classes
-    8: 2 rows
-    16: 4 rows
-    32: 8 rows
-    64: 16 rows
-    */
     async function getCoursesData() {
       console.log(searchParams.toString());
       try {
@@ -254,7 +248,7 @@ const Courses = () => {
   };
 
   const getCacheKey = () => {
-    return `page:${currentPage}_perPage:${perPage}_semester:${semester.sort()}_department:${department.sort()}_minGrade:${grade[0]}_maxGrade:${grade[1]}`;
+    return `courses_page:${currentPage}_perPage:${perPage}_semester:${semester.sort()}_department:${department.sort()}_minGrade:${grade[0]}_maxGrade:${grade[1]}`;
   };
 
   const handleGradeChange = (event, newGrade) => {

@@ -20,6 +20,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const coursesRouter = require('./routes/courses');
 const educationRouter = require('./routes/education');
+const projectRouter = require('./routes/projects');
 
 // the app variable
 var app = express();
@@ -47,6 +48,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/courses', coursesRouter);
 app.use('/education', educationRouter);
+app.use('/projects', projectRouter);
 
 /**
  * if none of the middleware functions handle the

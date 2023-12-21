@@ -3,6 +3,9 @@ import GenericCard from "../common/GenericCard";
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import {
+  formatDate
+} from "../common/timeUtils";
 
 const ProjectCard = ({
   project
@@ -25,7 +28,7 @@ const ProjectCard = ({
         "icon": <PersonIcon />
       },
       {
-        "subtitle": `${project.startDate} - ${project.endDate}`,
+        "subtitle": `${formatDate(project.startDate)} - ${formatDate(project.endDate)}`,
         "icon": <CalendarMonthIcon />
       },
       {

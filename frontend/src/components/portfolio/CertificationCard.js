@@ -3,7 +3,7 @@ import GenericCard from "../common/GenericCard";
 import BusinessIcon from '@mui/icons-material/Business';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-const CertificationsCard = ({
+const CertificationCard = ({
   certification
 }) => {
   const prepCertification = ((certification) => {
@@ -31,4 +31,4 @@ const CertificationsCard = ({
   );
 };
 
-export default CertificationsCard;
+export default CertificationCard;

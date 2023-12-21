@@ -36,4 +36,13 @@ export const getCourses = (searchParams) => {
 export const getEducation = () => {
   const url = `${API}/education`;
   return Axios.get(url);
-}
+};
+
+export const getProjects = (limit) => {
+  let params = [];
+  if (limit != null) {
+    params.push(`limit=${limit}`);
+  }
+  const url = `${API}/projects?${params.join("&")}`;
+  return Axios.get(url);
+};
