@@ -93,7 +93,7 @@ const GenericCard = ({
             };
 
             return (
-              <>
+              <React.Fragment key={index}>
                 {!action.link && (
                   <Dialog
                     open={open}
@@ -155,7 +155,7 @@ const GenericCard = ({
                     {action.text}
                   </Typography>
                 </Button>
-              </>
+              </React.Fragment>
             );
           })}
         </CardActions>

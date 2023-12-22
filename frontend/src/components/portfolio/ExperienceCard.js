@@ -3,6 +3,9 @@ import GenericCard from "../common/GenericCard";
 import BusinessIcon from '@mui/icons-material/Business';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PlaceIcon from '@mui/icons-material/Place';
+import {
+  formatDate
+} from "../common/timeUtils";
 
 const ExperienceCard = ({
   experience
@@ -17,7 +20,7 @@ const ExperienceCard = ({
           "icon": <BusinessIcon />
         },
         {
-          "subtitle": `${experience.startDate} - ${experience.endDate}`,
+          "subtitle": `${formatDate(experience.startDate)} - ${formatDate(experience.endDate)}`,
           "icon": <CalendarMonthIcon />
         },
         {

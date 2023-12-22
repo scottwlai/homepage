@@ -46,3 +46,8 @@ export const getProjects = (limit) => {
   const url = `${API}/projects?${params.join("&")}`;
   return Axios.get(url);
 };
+
+export const getExperience = () => {
+  const url = `${API}/experience`;
+  return Axios.get(url);
+};
