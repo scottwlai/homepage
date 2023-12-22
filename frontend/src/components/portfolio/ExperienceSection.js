@@ -17,12 +17,6 @@ const experiences = [
     "impact": [
       "Retrieved lab equipment on-demand within 30 seconds by memorizing the layout of the supply room, saving 90 minutes per semester & allowing all classes to start on time",
       "Performed various tech-related tasks: machine start-up, organizing equipment, tech support, software installation"
-    ],
-    "actions": [
-      {
-        "text": "Details",
-        "link": "/portfolio"
-      }
     ]
   }
 ];

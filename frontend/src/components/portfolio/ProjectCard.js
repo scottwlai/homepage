@@ -17,10 +17,10 @@ const ProjectCard = ({
       "subtitles": [],
       "actions": [
         {
-          "text": "Details",
-          "link": "/portfolio"
+          "text": "More Info"
         }
-      ]
+      ],
+      "info": project.impact
     };
     newProject.subtitles.push(
       {

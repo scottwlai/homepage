@@ -1,4 +1,6 @@
-import React from "react";
+import React, {
+  useState
+} from "react";
 import {
   Button,
   Card,
@@ -6,15 +8,21 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Stack,
   Typography
 } from "@mui/material";
 import {
   Link
 } from "react-router-dom";
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 const GenericCard = ({
   data,
@@ -74,12 +82,80 @@ const GenericCard = ({
           alignItems: "flex-start"
         }}>
           {data.actions.map((action, index) => {
+            const [ open, setOpen ] = useState(false);
+
+            const handleClickOpen = () => {
+              setOpen(true);
+            };
+
+            const handleClose = () => {
+              setOpen(false);
+            };
+
             return (
-              <Button variant={index ? "outlined" : "contained"} component={Link} to={action.link} key={index}>
-                <Typography variant="button">
-                  {action.text}
-                </Typography>
-              </Button>
+              <>
+                {!action.link && (
+                  <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="dialog-title"
+                    aria-describedby="dialog-description"
+                  >
+                    <DialogTitle>
+                      {data.title}
+                    </DialogTitle>
+                    <DialogContent dividers>
+                      <List>
+                        {data.info.map((entry, index) => {
+                          return (
+                            <ListItem key={index}>
+                              <ListItemIcon>
+                                <ArrowRightIcon />
+                              </ListItemIcon>
+                              <ListItemText>
+                                {entry}
+                              </ListItemText>
+                            </ListItem>
+                          );
+                        })}
+                      </List>
+                    </DialogContent>
+                    <Stack spacing={1} direction="row" component={DialogActions}>
+                      {data.actions.map((action, index) => {
+                        return (action.link ? (
+                          <Button
+                            variant={index ? "outlined" : "contained"}
+                            component={Link}
+                            to={action.link ? action.link : null}
+                            target={action.link ? "_blank" : "_self"}
+                            rel="noopener noreferrer"
+                            onClick={action.link ? null : handleClickOpen}
+                            key={index}>
+                            <Typography variant="button">
+                              {action.text}
+                            </Typography>
+                          </Button>
+                        ) : (<></>));
+                      })}
+                      <Button onClick={handleClose}>
+                        Close
+                      </Button>
+                    </Stack>
+                  </Dialog>
+                )}
+                <Button
+                  variant={index ? "outlined" : "contained"}
+                  component={Link}
+                  to={action.link ? action.link : null}
+                  target={index ? "_blank" : "_self"}
+                  rel="noopener noreferrer"
+                  onClick={action.link ? null : handleClickOpen}
+                  key={index}>
+                  <Typography variant="button">
+                    {action.text}
+                  </Typography>
+                </Button>
+              </>
             );
           })}
         </CardActions>

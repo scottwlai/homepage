@@ -25,14 +25,13 @@ const ExperienceCard = ({
           "icon": <PlaceIcon />
         }
       ],
-      "actions": experience.actions
+      "actions": [
+        {
+          "text": "More Info"
+        }
+      ],
+      "info": experience.impact
     };
-    // experience.impact.map((entry) => {
-    //   newExperience.subtitles.push({
-    //     "subtitle": entry,
-    //     "icon": <ArrowRightIcon />
-    //   })
-    // })
     return newExperience;
   });
 
