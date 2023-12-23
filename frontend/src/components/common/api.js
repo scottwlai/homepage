@@ -51,3 +51,17 @@ export const getExperience = () => {
   const url = `${API}/experience`;
   return Axios.get(url);
 };
+
+export const getHonors = () => {
+  const url = `${API}/honors`;
+  return Axios.get(url);
+};
+
+export const getSkills = (category) => {
+  let params = [];
+  if (category != null) {
+    params.push(`category=${category}`);
+  }
+  const url = `${API}/skills?${params.join("&")}`;
+  return Axios.get(url);
+};

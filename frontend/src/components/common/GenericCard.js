@@ -61,9 +61,9 @@ const GenericCard = ({
           flexWrap: "wrap",
           columnGap: 2
         }}>
-          {data.subtitles.map((entry, index) => {
+          {data.subtitles.map((entry) => {
             return (
-              <ListItem key={index} sx={{
+              <ListItem key={entry.subtitle} sx={{
                 width: "auto"
               }}>
                 <ListItemIcon>
@@ -106,9 +106,9 @@ const GenericCard = ({
                     </DialogTitle>
                     <DialogContent dividers>
                       <List>
-                        {data.info.map((entry, index) => {
+                        {data.info.map((entry) => {
                           return (
-                            <ListItem key={index}>
+                            <ListItem key={entry}>
                               <ListItemIcon>
                                 <ArrowRightIcon />
                               </ListItemIcon>
@@ -121,21 +121,21 @@ const GenericCard = ({
                       </List>
                     </DialogContent>
                     <Stack spacing={1} direction="row" component={DialogActions}>
-                      {data.actions.map((action, index) => {
+                      {data.actions.map((action, dialogIndex) => {
                         return (action.link ? (
                           <Button
-                            variant={index ? "outlined" : "contained"}
+                            variant={dialogIndex ? "outlined" : "contained"}
                             component={Link}
                             to={action.link ? action.link : null}
                             target={action.link ? "_blank" : "_self"}
                             rel="noopener noreferrer"
                             onClick={action.link ? null : handleClickOpen}
-                            key={index}>
+                            key={dialogIndex}>
                             <Typography variant="button">
                               {action.text}
                             </Typography>
                           </Button>
-                        ) : (<></>));
+                        ) : (<React.Fragment key={dialogIndex} />));
                       })}
                       <Button onClick={handleClose}>
                         Close
@@ -150,7 +150,7 @@ const GenericCard = ({
                   target={index ? "_blank" : "_self"}
                   rel="noopener noreferrer"
                   onClick={action.link ? null : handleClickOpen}
-                  key={index}>
+                >
                   <Typography variant="button">
                     {action.text}
                   </Typography>

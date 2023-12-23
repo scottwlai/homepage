@@ -1,23 +1,40 @@
-import React from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 import Section from "./Section";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HonorCard from "./HonorCard";
-
-const honors = [
-  {
-    "name": "University Honors",
-    "issuer": "University of Texas at Austin",
-    "startDate": "2020",
-    "endDate": "2022"
-  },
-  {
-    "name": "Rodeo Scholar",
-    "issuer": "Houston Livestock Show & Rodeo",
-    "startDate": "2020"
-  }
-];
+import {
+  getHonors
+} from "../common/api";
 
 const HonorsSection = () => {
+  const [ honors, setHonors ] = useState([]);
+
+  useEffect(() => {
+    // try to find the honors data in the cache
+    let cachedData = JSON.parse(localStorage.getItem("honors"));
+    // function to make the API call
+    async function getHonorsData() {
+      try {
+        const response = await getHonors();
+        let data = response.data;
+        localStorage.setItem("honors", JSON.stringify(data));
+        setHonors(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (cachedData) {
+      console.log("cache HIT! :D");
+      setHonors(cachedData);
+    } else {
+      console.log("cache miss :(");
+      getHonorsData();
+    }
+  }, []);
+
   return (
     <Section
       title="Honors"
