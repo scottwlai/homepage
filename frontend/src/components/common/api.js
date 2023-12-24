@@ -65,3 +65,12 @@ export const getSkills = (category) => {
   const url = `${API}/skills?${params.join("&")}`;
   return Axios.get(url);
 };
+
+export const getCertifications = (limit) => {
+  let params = [];
+  if (limit != null) {
+    params.push(`limit=${limit}`);
+  }
+  const url = `${API}/certifications?${params.join("&")}`;
+  return Axios.get(url);
+};

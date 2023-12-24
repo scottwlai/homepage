@@ -2,6 +2,9 @@ import React from "react";
 import GenericCard from "../common/GenericCard";
 import BusinessIcon from '@mui/icons-material/Business';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import {
+  formatDate
+} from "../common/timeUtils";
 
 const CertificationCard = ({
   certification
@@ -16,7 +19,7 @@ const CertificationCard = ({
           "icon": <BusinessIcon />
         },
         {
-          "subtitle": certification.date,
+          "subtitle": formatDate(certification.date),
           "icon": <CalendarMonthIcon />
         }
       ]
