@@ -15,7 +15,7 @@ const router = express.Router();
  */
 router.get('/', function(req, res, next) {
   // renders the view template index using the given parameters
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Homepage API' });
 });
 
 // exports the router object to be mounted to / in app.js
