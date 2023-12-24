@@ -1,13 +1,10 @@
 import React from "react";
 import Wrapper from "./common/Wrapper";
 import {
-  Typography,
-  useTheme
+  Typography
 } from "@mui/material";
 
-const Interests = () => {
-  const theme = useTheme();
-
+const Hobbies = () => {
   return (
     <main>
       <Wrapper>
@@ -18,7 +15,7 @@ const Interests = () => {
             my: "6rem"
           }}
         >
-          Interests
+          Hobbies
         </Typography>
       </Wrapper>
       <Wrapper>
@@ -34,4 +31,4 @@ const Interests = () => {
   );
 }
 
-export default Interests;
+export default Hobbies;

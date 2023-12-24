@@ -133,13 +133,13 @@ const Home = () => {
           <HashLink
             tabIndex={-1}
             smooth
-            to={"/interests#"}
+            to={"/hobbies/#"}
           >
             <Button
               variant="contained"
               size="large"
             >
-              My Interests
+              My Hobbies
             </Button>
           </HashLink>
         </Box>
