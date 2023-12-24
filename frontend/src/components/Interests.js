@@ -1,10 +1,13 @@
 import React from "react";
 import Wrapper from "./common/Wrapper";
 import {
-  Typography
+  Typography,
+  useTheme
 } from "@mui/material";
 
 const Interests = () => {
+  const theme = useTheme();
+
   return (
     <main>
       <Wrapper>
@@ -17,7 +20,15 @@ const Interests = () => {
         >
           Interests
         </Typography>
-        <Typography>I have none lol</Typography>
+      </Wrapper>
+      <Wrapper>
+        <Typography>I kickbox.</Typography>
+      </Wrapper>
+      <Wrapper>
+        <Typography>I edit videos.</Typography>
+      </Wrapper>
+      <Wrapper>
+        <Typography>I play piano.</Typography>
       </Wrapper>
     </main>
   );
