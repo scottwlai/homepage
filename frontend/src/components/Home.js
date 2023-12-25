@@ -12,6 +12,8 @@ import {
 
 const Home = () => {
   const theme = useTheme();
+  const height = "100%";
+
   return (
     <main>
       <Wrapper>
@@ -27,13 +29,14 @@ const Home = () => {
         </Typography>
       </Wrapper>
       <Wrapper boxSx={{
-        height: "75vh"
+        height: height
       }} containerSx={{
         gridTemplateColumns: {
           xs: "1fr",
           sm: "auto 1fr"
         },
-        gap: theme.typography.h1.fontSize
+        gap: theme.typography.h1.fontSize,
+        alignItems: "center"
       }}>
         <img
           src="https://www.cs.utexas.edu/~scottlai/images/scottlai.png"
@@ -51,26 +54,37 @@ const Home = () => {
             sm: "start"
           }
         }}>
-          <Typography variant="h2" paragraph>
+          <Typography variant="body2" paragraph>
             I&apos;m a senior studying <b>Computer Science</b> and <b>Business</b> at the <b>University of Texas at Austin</b>.
           </Typography>
         </Box>
       </Wrapper>
       <Wrapper boxSx={{
         background: theme.palette.background.paper,
-        height: "75vh"
+        height: height
       }} containerSx={{
         gridTemplateColumns: {
           xs: "1fr",
-          sm: "auto 1fr"
+          sm: "1fr auto"
         },
-        gap: theme.typography.h1.fontSize
+        gridTemplateAreas: {
+          xs: `
+            "img"\n
+            "txt"
+          `,
+          sm: `
+            "txt img"
+          `
+        },
+        gap: theme.typography.h1.fontSize,
+        alignItems: "center"
       }}>
         <img
           src="https://www.cs.utexas.edu/~scottlai/images/swe.jpg"
           width={300}
           style={{
-            borderRadius: "5%"
+            borderRadius: "5%",
+            gridArea: "img"
           }}
         />
         <Box sx={{
@@ -79,10 +93,15 @@ const Home = () => {
           justifyContent: "center",
           textAlign: {
             xs: "center",
-            sm: "start"
+            sm: "end"
+          },
+          gridArea: "txt",
+          alignItems: {
+            xs: "center",
+            sm: "end"
           }
         }}>
-          <Typography variant="h2" paragraph>
+          <Typography variant="body2" paragraph>
             I&apos;m currently concentrating my studies in <b>Software Engineering</b> and have a growing interest in <b>Web Development</b>.
           </Typography>
           <HashLink
@@ -100,7 +119,7 @@ const Home = () => {
         </Box>
       </Wrapper>
       <Wrapper boxSx={{
-        height: "75vh"
+        height: height
       }} containerSx={{
         gridTemplateColumns: {
           xs: "1fr",
@@ -122,12 +141,16 @@ const Home = () => {
           textAlign: {
             xs: "center",
             sm: "start"
+          },
+          alignItems: {
+            xs: "center",
+            sm: "start"
           }
         }}>
-          <Typography variant="h2" paragraph>
+          <Typography variant="body2" paragraph>
             I&apos;m a native <b>Houstonian</b> and am currently based in <b>Austin</b>.
           </Typography>
-          <Typography variant="h2" paragraph>
+          <Typography variant="body2" paragraph>
             Outside of school, I enjoy kickboxing, video editing, and playing piano.
           </Typography>
           <HashLink
