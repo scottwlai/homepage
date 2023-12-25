@@ -8,10 +8,16 @@ import {
 } from "../common/api";
 import Section from "./Section";
 import School from '@mui/icons-material/School';
+import {
+  Skeleton,
+  theme
+} from "@mui/material";
+import { useTheme } from "@emotion/react";
 
 const Education = () => {
   const [ education, setEducation ] = useState([]);
   const [ sx, setSx ] = useState({});
+  const theme = useTheme();
 
   useEffect(() => {
     // try to find the education data in the cache
@@ -43,18 +49,34 @@ const Education = () => {
 
   return (
     <Section
-      title="Education"
+      title={education.length === 0 ? "" : "Education"}
       icon={<School />}
     >
-      {education.map((school, index) => {
-        return (
+      {education.length === 0 ? (
+        <Skeleton>
           <EducationCard
-            school={school}
-            sx={sx}
-            key={index}
+            school={{}}
           />
-        );
-      })}
+        </Skeleton>
+      ) : (
+        education.map((school, index) => {
+          return (
+            <EducationCard
+              school={school}
+              sx={{
+                ...sx,
+                backgroundImage: theme.palette.mode === "light"
+                  ? "none"
+                  : `linear-gradient(
+                    rgba(255, 255, 255, 0.05),
+                    rgba(255, 255, 255, 0.05)
+                )`
+              }}
+              key={index}
+            />
+          );
+        })
+      )}
     </Section>
   );
 };

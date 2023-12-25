@@ -4,7 +4,7 @@ import {
   Typography
 } from "@mui/material";
 
-const Interests = () => {
+const Hobbies = () => {
   return (
     <main>
       <Wrapper>
@@ -15,12 +15,20 @@ const Interests = () => {
             my: "6rem"
           }}
         >
-          Interests
+          Hobbies
         </Typography>
-        <Typography>I have none lol</Typography>
+      </Wrapper>
+      <Wrapper>
+        <Typography>I kickbox.</Typography>
+      </Wrapper>
+      <Wrapper>
+        <Typography>I edit videos.</Typography>
+      </Wrapper>
+      <Wrapper>
+        <Typography>I play piano.</Typography>
       </Wrapper>
     </main>
   );
 }
 
-export default Interests;
+export default Hobbies;

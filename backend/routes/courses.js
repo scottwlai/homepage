@@ -90,7 +90,7 @@ const corsOptions = {
  * @param translator - map of equivalences
  * @param field - field name in the database
  */
-const updateQuery = (select, parameter, translator, field) => {
+const updateQuery = (select, parameter, field, translator) => {
   if (parameter) {
     parameter = parameter.split(',');
     if (translator) {
@@ -111,7 +111,7 @@ const updateQuery = (select, parameter, translator, field) => {
  * @param translator - map of equivalences
  * @param field - field name in the database
  */
-const updateRange = (select, min, max, order, translator, field) => {
+const updateRange = (select, min, max, order, field, translator) => {
   if (min || max) {
     const minIndex = min ? order.indexOf(translator[min]) : 0;
     const maxIndex = max ? order.indexOf(translator[max]) : order.length;
@@ -137,9 +137,9 @@ router.get('/', cors(corsOptions), async(req, res, next) => {
   // parses URL query parameters, setting default values if null
   const query = req.query;
   let select = new Map();
-  updateQuery(select, query.department, departmentTranslator, "courseNumber.department");
-  updateQuery(select, query.term, termTranslator, "term");
-  updateRange(select, query.minGrade, query.maxGrade, gradeArray, gradeTranslator, "grade");
+  updateQuery(select, query.department, "courseNumber.department", departmentTranslator);
+  updateQuery(select, query.term, "term", termTranslator);
+  updateRange(select, query.minGrade, query.maxGrade, gradeArray, "grade", gradeTranslator);
   const page = parseInt(query.page) || 1;
   const perPage = parseInt(query.perPage) || 10;
   // calculates the number of entries that match the query

@@ -21,6 +21,9 @@ const baseTheme = createTheme({
     },
     body1: {
       fontSize: "clamp(0.75rem, 3.125vw, 1rem)"
+    },
+    body2: {
+      fontSize: "clamp(1.25rem, 5vw, 1.5rem)"
     }
   },
   components: {

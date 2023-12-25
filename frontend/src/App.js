@@ -7,7 +7,7 @@ import {
 import Home from "./components/Home";
 import Portfolio from "./components/portfolio/Portfolio";
 import Courses from "./components/courses/Courses";
-import Interests from "./components/Interests";
+import Hobbies from "./components/Hobbies";
 import NoMatch from "./components/NoMatch";
 import {
   CssBaseline,
@@ -36,7 +36,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/courses" element={<Courses />} />
-          <Route path="/interests" element={<Interests />} />
+          <Route path="/hobbies" element={<Hobbies />} />
           <Route path="/*" element={<NoMatch />} />
         </Routes>
         <Footer />

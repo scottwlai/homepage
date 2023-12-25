@@ -24,6 +24,8 @@ const Portfolio = () => {
         >
           Portfolio
         </Typography>
+      </Wrapper>
+      <Wrapper>
         <Grid
           container
           spacing={{

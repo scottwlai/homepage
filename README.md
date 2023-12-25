@@ -28,7 +28,9 @@ This allows the instance to be accessed at https://api.scottlai.tech.
 The frontend uses the backend's API to query data from the database.
 It features the following endpoints, each with some options/query parameters to narrow down results. Separate multiple options with an ampersand (`&`).
 
-#### Courses: `/courses?[OPTIONS]` - classes I've taken at UT
+#### Education: `/education` - universities I've attended (just UT, for now)
+
+#### Courses: `/courses?[QUERY]` - classes I've taken
 * `page=PAGE_NUMBER`
     * the API is paginated based on the page size
     * default: `1`
@@ -92,6 +94,35 @@ It features the following endpoints, each with some options/query parameters to 
         `Aminus` | A-
         `A`      | A
     * default: A
+
+#### Skills: `/skills?[QUERY]` - skills I've developed
+* `category=CATEGORY_1,CATEGORY_2,...`
+    * filter the skills by their category
+    * separate multiple categories with a comma (`,`)
+    * options:
+        * `Main` - select few I chose to display on the front page
+        * `Programming Languages`
+        * `Other Languages`
+        * `Tools`
+        * `Database`
+        * `Cloud`
+        * `Frameworks/Libraries`
+        * `Digital Media Production`
+    * default: all
+
+#### Projects: `/projects?[QUERY]` - projects I've done
+* `limit=N`
+    * limits the query to the `N` most recent projects
+    * default: the total number of projects
+
+#### Experience: `/experience` - work experience I've attained
+
+#### Honors: `/honors` - honors I've been awarded
+
+#### Certifications: `/certifications?[QUERY]` - certifications I've gotten
+* `limit=N`
+    * limits the query to the `N` most recent certifications
+    * default: the total number of certifications
 
 ## Database
 The data used in this project is stored across several collections of a MongoDB instance.

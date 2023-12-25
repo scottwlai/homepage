@@ -7,7 +7,8 @@ import {
   CardHeader,
   CardContent,
   Typography,
-  useTheme
+  useTheme,
+  Skeleton
 } from "@mui/material";
 import {
   Link
@@ -33,20 +34,31 @@ const Section = ({
         }
       }}
     >
-      <CardHeader
-        title={title}
-        avatar={
-          <Avatar variant="rounded" sx={{
-            background: "none",
-            color: theme.palette.text.primary
-          }}>
-            {icon}
-          </Avatar>
-        }
-        titleTypographyProps={{
-          variant: "h2"
-        }}
-      />
+      {title === "" ? (
+        <Skeleton>
+          <CardHeader
+            title="Title"
+            titleTypographyProps={{
+              variant: "h2"
+            }}
+          />
+        </Skeleton>
+      ) : (
+        <CardHeader
+          title={title}
+          avatar={
+            <Avatar variant="rounded" sx={{
+              background: "none",
+              color: theme.palette.text.primary
+            }}>
+              {icon}
+            </Avatar>
+          }
+          titleTypographyProps={{
+            variant: "h2"
+          }}
+        />
+      )}
       <CardContent sx={sx}>
         {children}
       </CardContent>

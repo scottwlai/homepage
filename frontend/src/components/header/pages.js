@@ -8,7 +8,7 @@ export const pages = [
     "link": "/portfolio/#"
   },
   {
-    "name": "Interests",
-    "link": "/interests/#"
+    "name": "Hobbies",
+    "link": "/hobbies/#"
   }
 ];

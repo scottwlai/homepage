@@ -27,12 +27,14 @@ const EducationCard = ({
     } else {
       newSchool["title"] = school.name
     }
-    school.degrees.map((degree) => {
-      newSchool.subtitles.push({
-        "subtitle": degree,
-        "icon": <HistoryEduIcon/>
-      })
-    });
+    if (school.degrees != null) {
+      school.degrees.map((degree) => {
+        newSchool.subtitles.push({
+          "subtitle": degree,
+          "icon": <HistoryEduIcon/>
+        })
+      });
+    }
     newSchool.subtitles.push(
       {
         "subtitle": `GPA: ${school.gpa}`,

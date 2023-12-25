@@ -1,43 +1,54 @@
-import React from "react";
+import React, {
+  useEffect,
+  useState
+} from "react";
 import Section from "./Section";
-import {
-  Typography
-} from "@mui/material";
 import WorkIcon from '@mui/icons-material/Work';
 import ExperienceCard from "./ExperienceCard";
-
-const experiences = [
-  {
-    "photo": "https://cs.utexas.edu/~scottlai/images/supply-600.jpg",
-    "title": "Student Lab Assistant",
-    "employer": "UT Austin School of Nursing, Simulation & Skills Center",
-    "startDate": "Sep 2020",
-    "endDate": "Dec 2020",
-    "city": "Austin, TX",
-    "impact": [
-      "Retrieved lab equipment on-demand within 30 seconds by memorizing the layout of the supply room, saving 90 minutes per semester & allowing all classes to start on time",
-      "Performed various tech-related tasks: machine start-up, organizing equipment, tech support, software installation"
-    ],
-    "actions": [
-      {
-        "text": "Details",
-        "link": "/portfolio"
-      }
-    ]
-  }
-];
+import {
+  getExperience
+} from "../common/api";
 
 const ExperienceSection = () => {
+  const [ experiences, setExperience ] = useState([]);
+
+  useEffect(() => {
+    // try to find the experience data in the cache
+    let cachedData = JSON.parse(localStorage.getItem("experience"));
+    // function to make the API call
+    async function getExperienceData() {
+      try {
+        const response = await getExperience();
+        let data = response.data;
+        localStorage.setItem("experience", JSON.stringify(data));
+        setExperience(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    if (cachedData) {
+      console.log("cache HIT! :D");
+      setExperience(cachedData);
+    } else {
+      console.log("cache miss :(");
+      getExperienceData();
+    }
+  }, []);
+
   return (
     <Section
-      title="Experience"
+      title={experiences.length === 0 ? "" : "Experience"}
       icon={<WorkIcon />}
     >
-      {experiences.map((experience, index) => {
-        return (
-          <ExperienceCard experience={experience} key={index} />
-        );
-      })}
+      {experiences.length === 0 ? (
+        <ExperienceCard experience={{}} />
+      ) : (
+        experiences.map((experience, index) => {
+          return (
+            <ExperienceCard experience={experience} key={index} />
+          );
+        })
+      )}
     </Section>
   );
 };

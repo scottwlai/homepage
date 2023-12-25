@@ -17,8 +17,7 @@ const ProjectCard = ({
       "subtitles": [],
       "actions": [
         {
-          "text": "Details",
-          "link": "/portfolio"
+          "text": "More Info"
         }
       ]
     };
@@ -41,6 +40,9 @@ const ProjectCard = ({
         "text": "Repo",
         "link": project.repo
       });
+    }
+    if (project.impact) {
+      newProject["info"] = project.impact;
     }
     return newProject;
   });

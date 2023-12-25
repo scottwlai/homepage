@@ -14,5 +14,8 @@ export const formatTime = (dateTime) => {
 };
 
 export const formatDate = (dateTime) => {
+  if (dateTime === undefined) {
+    return "";
+  }
   return new Intl.DateTimeFormat("en-US", dateOptions).format(new Date(dateTime));
 }
