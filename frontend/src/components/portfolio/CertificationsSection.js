@@ -8,6 +8,12 @@ import CertificationCard from "./CertificationCard";
 import {
   getCertifications
 } from "../common/api";
+import {
+  Skeleton
+} from "@mui/material";
+import {
+  threeItems
+} from "../common/placeholderUtils"
 
 const CertificationsSection = () => {
   const cacheKey = "certifications_limit:3";
@@ -38,7 +44,7 @@ const CertificationsSection = () => {
 
   return (
     <Section
-      title="Certifications"
+      title={certifications.length === 0 ? "" : "Certifications"}
       icon={<VerifiedIcon />}
       action={{
         "text": "View More",
@@ -57,11 +63,23 @@ const CertificationsSection = () => {
         }
       }}
     >
-      {certifications.map((certification, index) => {
-        return (
-          <CertificationCard certification={certification} key={index} />
-        );
-      })}
+      {certifications.length === 0 ? (
+        threeItems.map((_, index) => {
+          return (
+            <Skeleton key={index}>
+              <CertificationCard
+                certification={{}}
+              />
+            </Skeleton>
+          );
+        })
+      ) : (
+        certifications.map((certification, index) => {
+          return (
+            <CertificationCard certification={certification} key={index} />
+          );
+        })
+      )}
     </Section>
   );
 };

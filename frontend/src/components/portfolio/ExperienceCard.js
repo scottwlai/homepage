@@ -32,9 +32,11 @@ const ExperienceCard = ({
         {
           "text": "More Info"
         }
-      ],
-      "info": experience.impact
+      ]
     };
+    if (experience.impact) {
+      newExperience["info"] = experience.impact;
+    }
     return newExperience;
   });
 

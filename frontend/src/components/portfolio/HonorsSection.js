@@ -8,6 +8,12 @@ import HonorCard from "./HonorCard";
 import {
   getHonors
 } from "../common/api";
+import {
+  Skeleton
+} from "@mui/material";
+import {
+  twoItems
+} from "../common/placeholderUtils";
 
 const HonorsSection = () => {
   const [ honors, setHonors ] = useState([]);
@@ -37,7 +43,7 @@ const HonorsSection = () => {
 
   return (
     <Section
-      title="Honors"
+      title={honors.length === 0 ? "" : "Honors"}
       icon={<EmojiEventsIcon />}
       sx={{
         display: "grid",
@@ -51,11 +57,23 @@ const HonorsSection = () => {
         }
       }}
     >
-      {honors.map((honor, index) => {
-        return (
-          <HonorCard honor={honor} key={index} />
-        );
-      })}
+      {honors.length === 0 ? (
+        twoItems.map((_, index) => {
+          return (
+            <Skeleton key={index}>
+              <HonorCard
+                honor={{}}
+              />
+            </Skeleton>
+          );
+        })
+      ) : (
+        honors.map((honor, index) => {
+          return (
+            <HonorCard honor={honor} key={index} />
+          );
+        })
+      )}
     </Section>
   );
 };

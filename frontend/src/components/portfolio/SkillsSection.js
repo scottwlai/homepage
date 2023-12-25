@@ -5,7 +5,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography
+  Skeleton
 } from "@mui/material";
 import CodeIcon from '@mui/icons-material/Code';
 import SourceIcon from '@mui/icons-material/Source';
@@ -21,6 +21,9 @@ import MilitaryTech from "@mui/icons-material/MilitaryTech";
 import {
   getSkills
 } from "../common/api";
+import {
+  eightItems
+} from "../common/placeholderUtils";
 
 const getIcon = (name) => {
   switch (name) {
@@ -62,7 +65,7 @@ const SkillsSection = () => {
 
   return (
     <Section
-      title="Skills"
+      title={skills.length === 0 ? "" : "Skills"}
       icon={<MilitaryTech />}
       action={{
         "text": "View More",
@@ -73,29 +76,46 @@ const SkillsSection = () => {
         boxShadow: "none"
       }}>
         <CardContent>
-          {skills.map((skill) => {
-            return (
-              <List key={skill.category} sx={{
-                columnCount: {
-                  xs: 2,
-                  sm: 1
-                }
-              }}>
-                {skill.list.map((skill, index) => {
-                  return (
-                    <ListItem key={index}>
-                      <ListItemIcon>
-                        {getIcon(skill.category)}
-                      </ListItemIcon>
-                      <ListItemText>
-                        {skill.name}
-                      </ListItemText>
-                    </ListItem>
-                  );
-                })}
-              </List>
-            );
-          })}
+          {skills.length === 0 ? (
+            <List sx={{
+              columnCount: {
+                xs: 2,
+                sm: 1
+              }
+            }}>
+              {eightItems.map((_, index) => {
+                return (
+                  <ListItem key={index}>
+                    <Skeleton width={150} height={16}/>
+                  </ListItem>
+                );
+              })}
+            </List>
+          ) : (
+            skills.map((skill) => {
+              return (
+                <List key={skill.category} sx={{
+                  columnCount: {
+                    xs: 2,
+                    sm: 1
+                  }
+                }}>
+                  {skill.list.map((skill, index) => {
+                    return (
+                      <ListItem key={index}>
+                        <ListItemIcon>
+                          {getIcon(skill.category)}
+                        </ListItemIcon>
+                        <ListItemText>
+                          {skill.name}
+                        </ListItemText>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              );
+            })
+          )}
         </CardContent>
       </Card>
     </Section>

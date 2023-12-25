@@ -8,6 +8,12 @@ import ProjectCard from "./ProjectCard";
 import {
   getProjects
 } from "../common/api";
+import {
+  Skeleton
+} from "@mui/material";
+import {
+  threeItems
+} from "../common/placeholderUtils";
 
 const ProjectsSection = () => {
   const cacheKey = "projects_limit:3";
@@ -38,7 +44,7 @@ const ProjectsSection = () => {
 
   return (
     <Section
-      title="Projects"
+      title={projects.length === 0 ? "" : "Projects"}
       icon={<DataObjectIcon />}
       action={{
         "text": "View More",
@@ -57,11 +63,23 @@ const ProjectsSection = () => {
         }
       }}
     >
-      {projects.map((project, index) => {
-        return (
-          <ProjectCard project={project} key={index}/>
-        );
-      })}
+      {projects.length === 0 ? (
+        threeItems.map((_, index) => {
+          return (
+            <Skeleton key={index}>
+              <ProjectCard
+                project={{}}
+              />
+            </Skeleton>
+          );
+        })
+      ) : (
+        projects.map((project, index) => {
+          return (
+            <ProjectCard project={project} key={index}/>
+          );
+        })
+      )}
     </Section>
   );
 };

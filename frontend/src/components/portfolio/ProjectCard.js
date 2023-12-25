@@ -19,8 +19,7 @@ const ProjectCard = ({
         {
           "text": "More Info"
         }
-      ],
-      "info": project.impact
+      ]
     };
     newProject.subtitles.push(
       {
@@ -41,6 +40,9 @@ const ProjectCard = ({
         "text": "Repo",
         "link": project.repo
       });
+    }
+    if (project.impact) {
+      newProject["info"] = project.impact;
     }
     return newProject;
   });

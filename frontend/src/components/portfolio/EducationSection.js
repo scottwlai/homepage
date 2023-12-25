@@ -8,6 +8,9 @@ import {
 } from "../common/api";
 import Section from "./Section";
 import School from '@mui/icons-material/School';
+import {
+  Skeleton
+} from "@mui/material";
 
 const Education = () => {
   const [ education, setEducation ] = useState([]);
@@ -43,18 +46,26 @@ const Education = () => {
 
   return (
     <Section
-      title="Education"
+      title={education.length === 0 ? "" : "Education"}
       icon={<School />}
     >
-      {education.map((school, index) => {
-        return (
+      {education.length === 0 ? (
+        <Skeleton>
           <EducationCard
-            school={school}
-            sx={sx}
-            key={index}
+            school={{}}
           />
-        );
-      })}
+        </Skeleton>
+      ) : (
+        education.map((school, index) => {
+          return (
+            <EducationCard
+              school={school}
+              sx={sx}
+              key={index}
+            />
+          );
+        })
+      )}
     </Section>
   );
 };

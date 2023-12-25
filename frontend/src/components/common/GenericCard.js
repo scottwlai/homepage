@@ -61,9 +61,9 @@ const GenericCard = ({
           flexWrap: "wrap",
           columnGap: 2
         }}>
-          {data.subtitles.map((entry) => {
+          {data.subtitles.map((entry, index) => {
             return (
-              <ListItem key={entry.subtitle} sx={{
+              <ListItem key={index} sx={{
                 width: "auto"
               }}>
                 <ListItemIcon>
@@ -104,22 +104,24 @@ const GenericCard = ({
                     <DialogTitle>
                       {data.title}
                     </DialogTitle>
-                    <DialogContent dividers>
-                      <List>
-                        {data.info.map((entry) => {
-                          return (
-                            <ListItem key={entry}>
-                              <ListItemIcon>
-                                <ArrowRightIcon />
-                              </ListItemIcon>
-                              <ListItemText>
-                                {entry}
-                              </ListItemText>
-                            </ListItem>
-                          );
-                        })}
-                      </List>
-                    </DialogContent>
+                    {data.info && (
+                      <DialogContent dividers>
+                        <List>
+                          {data.info.map((entry) => {
+                            return (
+                              <ListItem key={entry}>
+                                <ListItemIcon>
+                                  <ArrowRightIcon />
+                                </ListItemIcon>
+                                <ListItemText>
+                                  {entry}
+                                </ListItemText>
+                              </ListItem>
+                            );
+                          })}
+                        </List>
+                      </DialogContent>
+                    )}
                     <Stack spacing={1} direction="row" component={DialogActions}>
                       {data.actions.map((action, dialogIndex) => {
                         return (action.link ? (

@@ -37,14 +37,18 @@ const ExperienceSection = () => {
 
   return (
     <Section
-      title="Experience"
+      title={experiences.length === 0 ? "" : "Experience"}
       icon={<WorkIcon />}
     >
-      {experiences.map((experience, index) => {
-        return (
-          <ExperienceCard experience={experience} key={index} />
-        );
-      })}
+      {experiences.length === 0 ? (
+        <ExperienceCard experience={{}} />
+      ) : (
+        experiences.map((experience, index) => {
+          return (
+            <ExperienceCard experience={experience} key={index} />
+          );
+        })
+      )}
     </Section>
   );
 };
