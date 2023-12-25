@@ -29,7 +29,7 @@ const GenericCard = ({
   sx
 }) => {
   return (
-    <Card sx={{
+    <Card elevation={3} sx={{
       ...sx,
       m: {
         xs: "0 1rem 1rem",

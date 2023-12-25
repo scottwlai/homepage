@@ -3,6 +3,7 @@ import Wrapper from "./common/Wrapper";
 import {
   Box,
   Button,
+  Paper,
   Typography,
   useTheme
 } from "@mui/material";
@@ -12,7 +13,10 @@ import {
 
 const Home = () => {
   const theme = useTheme();
-  const height = "100%";
+  const height = {
+    xs: "100%",
+    sm: "75vh"
+  };
 
   return (
     <main>
@@ -38,13 +42,19 @@ const Home = () => {
         gap: theme.typography.h1.fontSize,
         alignItems: "center"
       }}>
-        <img
-          src="https://www.cs.utexas.edu/~scottlai/images/scottlai.png"
-          width={300}
-          style={{
-            borderRadius: "5%"
-          }}
-        />
+        <Paper elevation={3} sx={{
+          display: "flex",
+          borderRadius: "5%"
+        }}>
+          <img
+            src="https://www.cs.utexas.edu/~scottlai/images/scottlai.png"
+            alt="Scott Lai"
+            width={300}
+            style={{
+              borderRadius: "5%"
+            }}
+          />
+        </Paper>
         <Box sx={{
           display: "flex",
           flexDirection: "column",
@@ -79,14 +89,20 @@ const Home = () => {
         gap: theme.typography.h1.fontSize,
         alignItems: "center"
       }}>
-        <img
-          src="https://www.cs.utexas.edu/~scottlai/images/swe.jpg"
-          width={300}
-          style={{
-            borderRadius: "5%",
-            gridArea: "img"
-          }}
-        />
+        <Paper elevation={3} sx={{
+          display: "flex",
+          borderRadius: "5%"
+        }}>
+          <img
+            src="https://www.cs.utexas.edu/~scottlai/images/swe.jpg"
+            alt="CI/CD pipeline"
+            width={300}
+            style={{
+              borderRadius: "5%",
+              gridArea: "img"
+            }}
+          />
+        </Paper>
         <Box sx={{
           display: "flex",
           flexDirection: "column",
@@ -127,13 +143,19 @@ const Home = () => {
         },
         gap: theme.typography.h1.fontSize
       }}>
-        <img
-          src="https://www.cs.utexas.edu/~scottlai/images/piano.jpg"
-          width={300}
-          style={{
-            borderRadius: "5%"
-          }}
-        />
+        <Paper elevation={3} sx={{
+          display: "flex",
+          borderRadius: "5%"
+        }}>
+          <img
+            src="https://www.cs.utexas.edu/~scottlai/images/piano.jpg"
+            alt="piano keys"
+            width={300}
+            style={{
+              borderRadius: "5%"
+            }}
+          />
+        </Paper>
         <Box sx={{
           display: "flex",
           flexDirection: "column",
