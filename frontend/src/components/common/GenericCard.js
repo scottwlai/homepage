@@ -23,6 +23,8 @@ import {
   Link
 } from "react-router-dom";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ActionButton from "./ActionButton";
+import ActionButtonWithDialog from "./ActionButtonWithDialog";
 
 const GenericCard = ({
   data,
@@ -77,91 +79,25 @@ const GenericCard = ({
           })}
         </List>
       </CardContent>
-      {data.actions && (
-        <CardActions sx={{
-          alignItems: "flex-start"
-        }}>
-          {data.actions.map((action, index) => {
-            const [ open, setOpen ] = useState(false);
-
-            const handleClickOpen = () => {
-              setOpen(true);
-            };
-
-            const handleClose = () => {
-              setOpen(false);
-            };
-
-            return (
-              <React.Fragment key={index}>
-                {!action.link && (
-                  <Dialog
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="dialog-title"
-                    aria-describedby="dialog-description"
-                  >
-                    <DialogTitle>
-                      {data.title}
-                    </DialogTitle>
-                    {data.info && (
-                      <DialogContent dividers>
-                        <List>
-                          {data.info.map((entry) => {
-                            return (
-                              <ListItem key={entry}>
-                                <ListItemIcon>
-                                  <ArrowRightIcon />
-                                </ListItemIcon>
-                                <ListItemText>
-                                  {entry}
-                                </ListItemText>
-                              </ListItem>
-                            );
-                          })}
-                        </List>
-                      </DialogContent>
-                    )}
-                    <Stack spacing={1} direction="row" component={DialogActions}>
-                      {data.actions.map((action, dialogIndex) => {
-                        return (action.link ? (
-                          <Button
-                            variant={dialogIndex ? "outlined" : "contained"}
-                            component={Link}
-                            to={action.link ? action.link : null}
-                            target={action.link ? "_blank" : "_self"}
-                            rel="noopener noreferrer"
-                            onClick={action.link ? null : handleClickOpen}
-                            key={dialogIndex}>
-                            <Typography variant="button">
-                              {action.text}
-                            </Typography>
-                          </Button>
-                        ) : (<React.Fragment key={dialogIndex} />));
-                      })}
-                      <Button onClick={handleClose}>
-                        Close
-                      </Button>
-                    </Stack>
-                  </Dialog>
-                )}
-                <Button
-                  variant={index ? "outlined" : "contained"}
-                  component={Link}
-                  to={action.link ? action.link : null}
-                  target={index ? "_blank" : "_self"}
-                  rel="noopener noreferrer"
-                  onClick={action.link ? null : handleClickOpen}
-                >
-                  <Typography variant="button">
-                    {action.text}
-                  </Typography>
-                </Button>
-              </React.Fragment>
-            );
-          })}
-        </CardActions>
-      )}
+      {data.actions && (<CardActions sx={{ alignItems: "flex-start" }}>
+        {data.actions.map((action, index) => action.link ? (
+          <ActionButton
+            key={index}
+            variant={index ? "outlined" : "contained"}
+            link={action.link}
+            target={index ? "_blank" : "_self"}
+          >
+            {action.text}
+          </ActionButton>
+        ) : (
+          <ActionButtonWithDialog
+            key={index}
+            data={data}
+          >
+            {action.text}
+          </ActionButtonWithDialog>
+        ))}
+      </CardActions>)}
     </Card>
   );
 }
