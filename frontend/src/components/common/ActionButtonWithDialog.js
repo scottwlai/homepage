@@ -65,7 +65,7 @@ const ActionButtonWithDialog = ({
               key={index}
               variant="outlined"
               link={action.link}
-              target={index ? "_blank" : "_self"}
+              target="_blank"
             >
               {action.text}
             </ActionButton>
