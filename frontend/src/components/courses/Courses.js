@@ -25,6 +25,7 @@ import {
   getCourses
 } from "../common/api";
 import CourseCard from "./CourseCard";
+import Title from "../common/Title";
 
 const departments = [
   "Accounting",
@@ -344,15 +345,9 @@ const Courses = () => {
 
   return (
     <Wrapper>
-      <Typography
-        variant="h1"
-        align="center"
-        sx={{
-          my: "6rem"
-        }}
-      >
+      <Title>
         Courses
-      </Typography>
+      </Title>
       <Grid item xs={12} sx={{
         display: "grid"
       }}>

@@ -10,20 +10,15 @@ import ProjectsSection from "./ProjectsSection";
 import ExperienceSection from "./ExperienceSection";
 import HonorsSection from "./HonorsSection";
 import CertificationsSection from "./CertificationsSection";
+import Title from "../common/Title";
 
 const Portfolio = () => {
   return (
     <main>
       <Wrapper>
-        <Typography
-          variant="h1"
-          align="center"
-          sx={{
-            my: "6rem"
-          }}
-        >
+        <Title>
           Portfolio
-        </Typography>
+        </Title>
       </Wrapper>
       <Wrapper>
         <Grid
