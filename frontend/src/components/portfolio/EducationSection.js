@@ -10,9 +10,8 @@ import Section from "./Section";
 import School from '@mui/icons-material/School';
 import {
   Skeleton,
-  theme
+  useTheme
 } from "@mui/material";
-import { useTheme } from "@emotion/react";
 
 const Education = () => {
   const [ education, setEducation ] = useState([]);
