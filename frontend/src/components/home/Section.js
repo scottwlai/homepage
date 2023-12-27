@@ -11,9 +11,7 @@ const Section = ({
   const theme = useTheme();
 
   return (
-    <Wrapper boxSx={{
-      height: "100%"
-    }} containerSx={{
+    <Wrapper sx={{
       gridTemplateColumns: {
         xs: "1fr",
         sm: "auto 1fr"

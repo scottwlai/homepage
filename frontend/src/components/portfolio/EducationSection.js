@@ -6,7 +6,7 @@ import EducationCard from "./EducationCard";
 import {
   getEducation
 } from "../common/api";
-import Section from "./Section";
+import GenericSection from "../common/GenericSection";
 import School from '@mui/icons-material/School';
 import {
   Skeleton,
@@ -47,7 +47,7 @@ const Education = () => {
   }, []);
 
   return (
-    <Section
+    <GenericSection
       title={education.length === 0 ? "" : "Education"}
       icon={<School />}
     >
@@ -76,7 +76,7 @@ const Education = () => {
           );
         })
       )}
-    </Section>
+    </GenericSection>
   );
 };
 

@@ -22,7 +22,6 @@ import {
 import {
   Link
 } from "react-router-dom";
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import ActionButton from "./ActionButton";
 import ActionButtonWithDialog from "./ActionButtonWithDialog";
 

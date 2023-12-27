@@ -2,8 +2,8 @@ import React, {
   useState,
   useEffect
 } from "react";
-import Section from "./Section";
-import DataObjectIcon from '@mui/icons-material/DataObject';
+import GenericSection from "../common/GenericSection";
+import DataArrayIcon from '@mui/icons-material/DataArray';
 import ProjectCard from "./ProjectCard";
 import {
   getProjects
@@ -43,9 +43,9 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <Section
+    <GenericSection
       title={projects.length === 0 ? "" : "Projects"}
-      icon={<DataObjectIcon />}
+      icon={<DataArrayIcon />}
       action={{
         "text": "View More",
         "link": "/portfolio"
@@ -80,7 +80,7 @@ const ProjectsSection = () => {
           );
         })
       )}
-    </Section>
+    </GenericSection>
   );
 };
 

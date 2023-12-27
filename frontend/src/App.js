@@ -19,6 +19,7 @@ import {
 } from "./components/common/themeUtils";
 import Header from "./components/header/Header.js";
 import Footer from "./components/footer/Footer.js";
+import Skills from "./components/skills/Skills.js";
 
 const App = () => {
   const [ darkMode, setDarkMode ] = useState(false);
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/portfolio/courses" element={<Courses />} />
+          <Route path="/portfolio/skills" element={<Skills />} />
           <Route path="/hobbies" element={<Hobbies />} />
           <Route path="/*" element={<NoMatch />} />
         </Routes>

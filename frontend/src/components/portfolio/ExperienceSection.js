@@ -2,7 +2,7 @@ import React, {
   useEffect,
   useState
 } from "react";
-import Section from "./Section";
+import GenericSection from "../common/GenericSection";
 import WorkIcon from '@mui/icons-material/Work';
 import ExperienceCard from "./ExperienceCard";
 import {
@@ -36,7 +36,7 @@ const ExperienceSection = () => {
   }, []);
 
   return (
-    <Section
+    <GenericSection
       title={experiences.length === 0 ? "" : "Experience"}
       icon={<WorkIcon />}
     >
@@ -49,7 +49,7 @@ const ExperienceSection = () => {
           );
         })
       )}
-    </Section>
+    </GenericSection>
   );
 };
 

@@ -7,7 +7,7 @@ import {
   ListItemText,
   Skeleton
 } from "@mui/material";
-import CodeIcon from '@mui/icons-material/Code';
+import DataObjectIcon from '@mui/icons-material/DataObject';
 import SourceIcon from '@mui/icons-material/Source';
 import StorageIcon from '@mui/icons-material/Storage';
 import CloudIcon from '@mui/icons-material/Cloud';
@@ -16,7 +16,7 @@ import React, {
   useState,
   useEffect
 } from "react";
-import Section from "./Section";
+import GenericSection from "../common/GenericSection";
 import MilitaryTech from "@mui/icons-material/MilitaryTech";
 import {
   getSkills
@@ -27,8 +27,8 @@ import {
 
 const getIcon = (name) => {
   switch (name) {
-  case "Programming Languages": return <CodeIcon />
-  case "Framrworks/Libraries": return <SourceIcon />
+  case "Programming Languages": return <DataObjectIcon />
+  case "Frameworks / Libraries": return <SourceIcon />
   case "Database": return <StorageIcon />
   case "Cloud": return <CloudIcon />
   case "Tools": return <TerminalIcon />
@@ -64,12 +64,12 @@ const SkillsSection = () => {
   }, []);
 
   return (
-    <Section
+    <GenericSection
       title={skills.length === 0 ? "" : "Skills"}
       icon={<MilitaryTech />}
       action={{
         "text": "View More",
-        "link": "/portfolio"
+        "link": "/portfolio/skills/#"
       }}
     >
       <Card sx={{
@@ -118,7 +118,7 @@ const SkillsSection = () => {
           )}
         </CardContent>
       </Card>
-    </Section>
+    </GenericSection>
   );
 };
 

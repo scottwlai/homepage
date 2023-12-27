@@ -14,10 +14,11 @@ import {
   Link
 } from "react-router-dom";
 
-const Section = ({
+const GenericSection = ({
   title,
   icon,
   action,
+  containerSx,
   sx,
   children
 }) => {
@@ -26,6 +27,7 @@ const Section = ({
   return (
     <Card
       sx={{
+        ...containerSx,
         height: "100%",
         p: {
           xs: "clamp(0rem, 3vw - 0.5rem, 2rem)",
@@ -75,4 +77,4 @@ const Section = ({
   );
 };
 
-export default Section;
+export default GenericSection;

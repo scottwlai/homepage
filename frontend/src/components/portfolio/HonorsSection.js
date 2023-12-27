@@ -2,7 +2,7 @@ import React, {
   useEffect,
   useState
 } from "react";
-import Section from "./Section";
+import GenericSection from "../common/GenericSection";
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import HonorCard from "./HonorCard";
 import {
@@ -42,7 +42,7 @@ const HonorsSection = () => {
   }, []);
 
   return (
-    <Section
+    <GenericSection
       title={honors.length === 0 ? "" : "Honors"}
       icon={<EmojiEventsIcon />}
       sx={{
@@ -74,7 +74,7 @@ const HonorsSection = () => {
           );
         })
       )}
-    </Section>
+    </GenericSection>
   );
 };
 
