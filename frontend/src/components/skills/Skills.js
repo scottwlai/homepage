@@ -6,12 +6,17 @@ import Wrapper from "../common/Wrapper";
 import Title from "../common/Title";
 import GenericSection from "../common/GenericSection";
 import Chips from "../common/Chips";
+import LinkButton from "../common/LinkButton";
 import {
   getIcon
 } from "../common/skillsIcons";
 import {
   getSkills
 } from "../common/api";
+import {
+  Breadcrumbs
+} from "@mui/material";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const cacheKey = "skills";
 
@@ -42,6 +47,14 @@ const Skills = () => {
         <Title>
           Skills
         </Title>
+        <Breadcrumbs separator={<ChevronRightIcon />}>
+          <LinkButton link="/portfolio/#" variant="text">
+            Portfolio
+          </LinkButton>
+          <LinkButton link="/portfolio/skills/#" variant="text">
+            Skills
+          </LinkButton>
+        </Breadcrumbs>
       </Wrapper>
       <Wrapper sx={{
         gap: "1rem",

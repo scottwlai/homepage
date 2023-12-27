@@ -6,8 +6,9 @@ import {
   HashLink
 } from "react-router-hash-link";
 
-const CallToActionButton = ({
+const LinkButton = ({
   link,
+  variant,
   children
 }) => {
   return (
@@ -17,7 +18,7 @@ const CallToActionButton = ({
       to={link}
     >
       <Button
-        variant="contained"
+        variant={variant ? variant : "contained"}
         size="large"
       >
         {children}
@@ -26,4 +27,4 @@ const CallToActionButton = ({
   )
 };
 
-export default CallToActionButton;
+export default LinkButton;

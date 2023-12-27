@@ -4,7 +4,7 @@ import Title from "../common/Title";
 import Section from "./Section";
 import SectionImage from "./SectionImage";
 import SectionText from "./SectionText";
-import CallToActionButton from "./CallToActionButton";
+import LinkButton from "../common/LinkButton";
 import {
   Typography
 } from "@mui/material";
@@ -49,9 +49,9 @@ const Home = () => {
           <Typography variant="body2" paragraph>
             I&apos;m currently concentrating my studies in <b>Software Engineering</b> and have a growing interest in <b>Web Development</b>.
           </Typography>
-          <CallToActionButton link="/portfolio#">
+          <LinkButton link="/portfolio#">
             My Portfolio
-          </CallToActionButton>
+          </LinkButton>
         </SectionText>
       </Section>
       <Section>
@@ -72,9 +72,9 @@ const Home = () => {
           <Typography variant="body2" paragraph>
             Outside of school, I enjoy kickboxing, video editing, and playing piano.
           </Typography>
-          <CallToActionButton link="/hobbies/#">
+          <LinkButton link="/hobbies/#">
             My Hobbies
-          </CallToActionButton>
+          </LinkButton>
         </SectionText>
       </Section>
     </main>

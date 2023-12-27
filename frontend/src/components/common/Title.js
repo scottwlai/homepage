@@ -11,7 +11,7 @@ const Title = ({
       variant="h1"
       align="center"
       sx={{
-        my: "6rem"
+        m: "6rem 0 1rem"
       }}
     >
       {children}
