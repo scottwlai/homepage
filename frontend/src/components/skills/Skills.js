@@ -65,25 +65,36 @@ const Skills = () => {
       </Wrapper>
       <Wrapper sx={{
         gap: "1rem",
-        gridTemplateColumns: "4fr 3fr 3fr",
-        gridTemplateAreas: `
-          "pro pro dat"\n
-          "clo clo dat"\n
-          "clo clo too"\n
-          "oth oth too"\n
-          "fra dig dig"
-        `
-        /*
-        gridTemplateColumns: "7fr 3fr",
-        gridTemplateAreas: `
-          "pro dat"\n
-          "clo dat"\n
-          "clo too"\n
-          "oth too"\n
-          "fra fra"\n
-          "dig dig"
-        `
-        */
+        gridTemplateColumns: {
+          xs: "1fr",
+          sm: "9fr 1fr 8fr",
+          md: "4fr 3fr 3fr"
+        },
+        gridTemplateAreas: {
+          xs: `
+            "pro"\n
+            "clo"\n
+            "oth"\n
+            "dat"\n
+            "too"\n
+            "fra"\n
+            "dig"
+          `,
+          sm: `
+            "pro pro fra"\n
+            "clo clo fra"\n
+            "clo clo oth"\n
+            "dat too too"\n
+            "dig dig dig"
+          `,
+          md: `
+            "pro pro dat"\n
+            "clo clo dat"\n
+            "clo clo too"\n
+            "oth oth too"\n
+            "fra dig dig"
+          `
+        }
       }}>
         {skills.map((skill) => {
           return (
