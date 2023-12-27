@@ -48,7 +48,7 @@ const CertificationsSection = () => {
       icon={<VerifiedIcon />}
       action={{
         "text": "View More",
-        "link": "/portfolio"
+        "link": "/portfolio/certifications/#"
       }}
       sx={{
         display: "grid",

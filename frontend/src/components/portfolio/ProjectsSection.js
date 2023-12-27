@@ -48,7 +48,7 @@ const ProjectsSection = () => {
       icon={<DataArrayIcon />}
       action={{
         "text": "View More",
-        "link": "/portfolio"
+        "link": "/portfolio/projects/#"
       }}
       sx={{
         display: "grid",
