@@ -3,29 +3,24 @@ import Wrapper from "./common/Wrapper";
 import {
   Typography
 } from "@mui/material";
+import Title from "./common/Title";
 
 const Hobbies = () => {
   return (
     <main>
       <Wrapper>
-        <Typography
-          variant="h1"
-          align="center"
-          sx={{
-            my: "6rem"
-          }}
-        >
+        <Title>
           Hobbies
-        </Typography>
+        </Title>
       </Wrapper>
       <Wrapper>
-        <Typography>I kickbox.</Typography>
+        <Typography variant="body2">I kickbox.</Typography>
       </Wrapper>
       <Wrapper>
-        <Typography>I edit videos.</Typography>
+        <Typography variant="body2">I edit videos.</Typography>
       </Wrapper>
       <Wrapper>
-        <Typography>I play piano.</Typography>
+        <Typography variant="body2">I play piano.</Typography>
       </Wrapper>
     </main>
   );

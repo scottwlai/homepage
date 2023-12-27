@@ -6,13 +6,12 @@ import EducationCard from "./EducationCard";
 import {
   getEducation
 } from "../common/api";
-import Section from "./Section";
+import GenericSection from "../common/GenericSection";
 import School from '@mui/icons-material/School';
 import {
   Skeleton,
-  theme
+  useTheme
 } from "@mui/material";
-import { useTheme } from "@emotion/react";
 
 const Education = () => {
   const [ education, setEducation ] = useState([]);
@@ -48,7 +47,7 @@ const Education = () => {
   }, []);
 
   return (
-    <Section
+    <GenericSection
       title={education.length === 0 ? "" : "Education"}
       icon={<School />}
     >
@@ -77,7 +76,7 @@ const Education = () => {
           );
         })
       )}
-    </Section>
+    </GenericSection>
   );
 };
 

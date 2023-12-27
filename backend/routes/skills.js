@@ -65,7 +65,7 @@ router.get('/', cors(corsOptions), async(req, res, next) => {
   let select = new Map();
   updateQuery(select, query.category, 'category', null);
   // executes the query
-  const data = await skills.find(select).toArray();
+  const data = await skills.find(select, { sort: { priority: 1 } }).toArray();
   // sends the client a JSON response containing the resulting array
   res.json(data);
 });

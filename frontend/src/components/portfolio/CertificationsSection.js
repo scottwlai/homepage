@@ -2,7 +2,7 @@ import React, {
   useEffect,
   useState
 } from "react";
-import Section from "./Section";
+import GenericSection from "../common/GenericSection";
 import VerifiedIcon from '@mui/icons-material/Verified';
 import CertificationCard from "./CertificationCard";
 import {
@@ -43,12 +43,12 @@ const CertificationsSection = () => {
   }, []);
 
   return (
-    <Section
+    <GenericSection
       title={certifications.length === 0 ? "" : "Certifications"}
       icon={<VerifiedIcon />}
       action={{
         "text": "View More",
-        "link": "/portfolio"
+        "link": "/portfolio/certifications/#"
       }}
       sx={{
         display: "grid",
@@ -80,7 +80,7 @@ const CertificationsSection = () => {
           );
         })
       )}
-    </Section>
+    </GenericSection>
   );
 };
 
