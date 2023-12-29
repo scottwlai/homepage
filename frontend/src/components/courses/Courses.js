@@ -361,169 +361,167 @@ const Courses = () => {
         </Breadcrumbs>
       </Wrapper>
       <Wrapper>
-        <Grid item xs={12} sx={{
-          display: "grid"
+        <Stack direction="row" spacing={2} my={2} sx={{
+          justifySelf: "normal"
         }}>
-          <Stack direction="row" spacing={2} my={2}>
-            <FormControl fullWidth>
-              <InputLabel id="select-semester-label">
-                Semester
-              </InputLabel>
-              <Select
-                labelId="select-semester-label"
-                id="select-semester"
-                multiple
-                value={semester}
-                onChange={handleSemesterChange}
-                input={
-                  <OutlinedInput
-                    id="select-semester-chip"
-                    label="Semester"
-                  />
-                }
-                renderValue={(selected) => (
-                  <Box sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 0.5
-                  }}>
-                    {selected.map((value) => {
-                      return (
-                        <Chip
-                          key={value}
-                          label={value}
-                        />
-                      );
-                    })}
-                  </Box>
-                )}
-              >
-                {semesters.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl fullWidth>
-              <InputLabel id="select-department-label">
-                Department
-              </InputLabel>
-              <Select
-                labelId="select-department-label"
-                id="select-department"
-                multiple
-                value={department}
-                onChange={handleDepartmentChange}
-                input={
-                  <OutlinedInput
-                    id="select-department-chip"
-                    label="Department"
-                  />
-                }
-                renderValue={(selected) => (
-                  <Box sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 0.5
-                  }}>
-                    {selected.map((value) => {
-                      return (
-                        <Chip
-                          key={value}
-                          label={value}
-                        />
-                      );
-                    })}
-                  </Box>
-                )}
-              >
-                {departments.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Stack>
-          <Typography>
-            Grade
-          </Typography>
-          <Slider
-            getAriaValueText={(grade) => {
-              return `${grade[0]} to ${grade[1]}`;
-            }}
-            value={grade}
-            onChange={handleGradeChange}
-            marks={grades}
-            step={null}
-            max={4}
-            sx={{
-              marginBottom: 8
-            }}
-          />
-          <Grid container spacing={4}>
-            {courses.map((course, index) => {
-              return (
-                <Grid
-                  item
-                  key={index}
-                  xs={12} sm={6} md={4} lg={3}
-                >
-                  <CourseCard
-                    name={course.nickname ? course.nickname : course.name}
-                    courseNumber={course.courseNumber}
-                    instructors={course.instructors}
-                    term={course.term}
-                  />
-                </Grid>
-              );
-            })}
-          </Grid>
-          <Pagination
-            count={Math.ceil(count / perPage)}
-            onChange={handlePageChange}
-            page={currentPage}
-            showFirstButton
-            showLastButton
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              marginY: 2
-            }}
-          />
-          <FormControl sx={{
-            width: 100,
-            justifySelf: "center",
-            textAlign: "center"
-          }}>
-            <InputLabel
-              id="per-page-label"
-            >
-              Page Size
+          <FormControl fullWidth>
+            <InputLabel id="select-semester-label">
+              Semester
             </InputLabel>
             <Select
-              labelId="per-page-label"
-              id="per-page-select"
-              label="Page Size"
-              defaultValue={10}
-              onChange={handlePerPageChange}
+              labelId="select-semester-label"
+              id="select-semester"
+              multiple
+              value={semester}
+              onChange={handleSemesterChange}
+              input={
+                <OutlinedInput
+                  id="select-semester-chip"
+                  label="Semester"
+                />
+              }
+              renderValue={(selected) => (
+                <Box sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 0.5
+                }}>
+                  {selected.map((value) => {
+                    return (
+                      <Chip
+                        key={value}
+                        label={value}
+                      />
+                    );
+                  })}
+                </Box>
+              )}
             >
-              <MenuItem value={5}>5</MenuItem>
-              <MenuItem value={10}>10</MenuItem>
-              <MenuItem value={15}>15</MenuItem>
-              <MenuItem value={20}>20</MenuItem>
-              <MenuItem value={25}>25</MenuItem>
-              <MenuItem value={30}>30</MenuItem>
+              {semesters.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                >
+                  {name}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
+          <FormControl fullWidth>
+            <InputLabel id="select-department-label">
+              Department
+            </InputLabel>
+            <Select
+              labelId="select-department-label"
+              id="select-department"
+              multiple
+              value={department}
+              onChange={handleDepartmentChange}
+              input={
+                <OutlinedInput
+                  id="select-department-chip"
+                  label="Department"
+                />
+              }
+              renderValue={(selected) => (
+                <Box sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 0.5
+                }}>
+                  {selected.map((value) => {
+                    return (
+                      <Chip
+                        key={value}
+                        label={value}
+                      />
+                    );
+                  })}
+                </Box>
+              )}
+            >
+              {departments.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                >
+                  {name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Stack>
+        <Typography variant="h3">
+          Grade
+        </Typography>
+        <Slider
+          getAriaValueText={(grade) => {
+            return `${grade[0]} to ${grade[1]}`;
+          }}
+          value={grade}
+          onChange={handleGradeChange}
+          marks={grades}
+          step={null}
+          max={4}
+          sx={{
+            marginBottom: 8
+          }}
+        />
+        <Grid container spacing={4}>
+          {courses.map((course, index) => {
+            return (
+              <Grid
+                item
+                key={index}
+                xs={12} sm={6} md={4} lg={3}
+              >
+                <CourseCard
+                  name={course.nickname ? course.nickname : course.name}
+                  courseNumber={course.courseNumber}
+                  instructors={course.instructors}
+                  term={course.term}
+                />
+              </Grid>
+            );
+          })}
         </Grid>
+        <Pagination
+          count={Math.ceil(count / perPage)}
+          onChange={handlePageChange}
+          page={currentPage}
+          showFirstButton
+          showLastButton
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            marginY: 2
+          }}
+        />
+        <FormControl sx={{
+          width: 100,
+          justifySelf: "center",
+          textAlign: "center"
+        }}>
+          <InputLabel
+            id="per-page-label"
+          >
+            Page Size
+          </InputLabel>
+          <Select
+            labelId="per-page-label"
+            id="per-page-select"
+            label="Page Size"
+            defaultValue={10}
+            onChange={handlePerPageChange}
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+            <MenuItem value={20}>20</MenuItem>
+            <MenuItem value={25}>25</MenuItem>
+            <MenuItem value={30}>30</MenuItem>
+          </Select>
+        </FormControl>
       </Wrapper>
     </main>
   );
