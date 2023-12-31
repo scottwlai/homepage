@@ -20,7 +20,7 @@ const HonorCard = ({
       ]
     };
     let date = formatDate(honor.startDate);
-    if (honor.endDate) {
+    if (honor.startDate != honor.endDate) {
       date += ` - ${formatDate(honor.endDate)}`
     }
     newHonor.subtitles.push({

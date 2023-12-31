@@ -42,7 +42,7 @@ router.get('/', cors(corsOptions), async(req, res, next) => {
   // selects the Experience collection in the database
   const experience = db.collection('Experience');
   // executes the query
-  const data = await experience.find().toArray();
+  const data = await experience.find({}, { sort: { endDate: -1 } }).toArray();
   // sends the client a JSON response containing the resulting array
   res.json(data);
 });
