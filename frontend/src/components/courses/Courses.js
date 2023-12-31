@@ -12,6 +12,7 @@ import CourseCard from "./CourseCard";
 import {
   Box,
   Breadcrumbs,
+  Button,
   Chip,
   FormControl,
   Grid,
@@ -146,7 +147,7 @@ const grades = [
 const Courses = () => {
   const [ courses, setCourses ] = useState([]);
   const [ currentPage, setCurrentPage ] = useState(1);
-  const [ perPage, setPerPage ] = useState(10);
+  const [ perPage, setPerPage ] = useState(12);
   const [ count, setCount ] = useState(0);
   const [ grade, setGrade ] = useState([ 0, 4 ]);
   const [ semester, setSemester ] = useState([]);
@@ -355,9 +356,9 @@ const Courses = () => {
           <LinkButton link="/portfolio/#" variant="text">
             Portfolio
           </LinkButton>
-          <LinkButton link="/portfolio/courses/#" variant="text">
+          <Button size="large">
             Courses
-          </LinkButton>
+          </Button>
         </Breadcrumbs>
       </Wrapper>
       <Wrapper>
@@ -473,7 +474,7 @@ const Courses = () => {
               <Grid
                 item
                 key={index}
-                xs={12} sm={6} md={4} lg={3}
+                xs={12} sm={4} md={3} lg={3}
               >
                 <CourseCard
                   name={course.nickname ? course.nickname : course.name}
@@ -511,15 +512,12 @@ const Courses = () => {
             labelId="per-page-label"
             id="per-page-select"
             label="Page Size"
-            defaultValue={10}
+            defaultValue={12}
             onChange={handlePerPageChange}
           >
-            <MenuItem value={5}>5</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-            <MenuItem value={15}>15</MenuItem>
-            <MenuItem value={20}>20</MenuItem>
-            <MenuItem value={25}>25</MenuItem>
-            <MenuItem value={30}>30</MenuItem>
+            <MenuItem value={12}>12</MenuItem>
+            <MenuItem value={24}>24</MenuItem>
+            <MenuItem value={36}>36</MenuItem>
           </Select>
         </FormControl>
       </Wrapper>

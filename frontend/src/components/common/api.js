@@ -13,9 +13,7 @@ export const getCourses = (searchParams) => {
   if (currentPage != null) {
     params.push(`page=${currentPage}`);
   }
-  if (perPage != null) {
-    params.push(`perPage=${perPage}`);
-  }
+  params.push(`perPage=${perPage == null ? 12 : perPage}`);
   if (department != null) {
     params.push(`department=${department}`);
   }
