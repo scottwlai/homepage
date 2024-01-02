@@ -474,7 +474,7 @@ const Courses = () => {
               <Grid
                 item
                 key={index}
-                xs={12} sm={4} md={3} lg={3}
+                xs={12} sm={6} md={4}
               >
                 <CourseCard
                   name={course.nickname ? course.nickname : course.name}

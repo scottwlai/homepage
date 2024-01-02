@@ -2,15 +2,16 @@ import React from "react";
 import {
   Card,
   CardContent,
+  CardHeader,
   CardMedia,
-  Divider,
   List,
-  Typography
+  ListItem,
+  ListItemIcon,
+  ListItemText
 } from "@mui/material";
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import CustomListItem from "./CustomListItem";
 
 const abbreviations = {
   "C S": "Computer Science",
@@ -51,42 +52,48 @@ const CourseCard = ({
   ]
 
   return (
-    <Card sx={{
-      height: "100%"
+    <Card raised sx={{
+      height: "100%",
+      display: "grid",
+      gridTemplateAreas: `
+        "img"\n
+        "header"\n
+        "content"
+      `,
+      gridTemplateRows: "auto 1fr auto"
     }}>
       <CardMedia
         component="img"
         src="../logo192.png"
         sx={{
-          width: "50%",
-          margin: "8px auto"
+          gridArea: "img"
         }}
       />
-      <CardContent>
-        <Typography variant="h5" align="center">
-          {name}
-        </Typography>
-        <Typography variant="subtitle1" fontFamily="monospace" align="center">
-          {courseNumber.department} {courseNumber.number}
-        </Typography>
-        <List>
-          {details.map((detail, index) => {
-            return (
-              <React.Fragment key={index}>
-                {Boolean(index) && (
-                  <Divider component="li"/>
-                )}
-                <CustomListItem
-                  icon={detail.icon}
-                  text={detail.text}
-                  textProps={{
-                    variant: "subtitle2"
-                  }}
-                />
-              </React.Fragment>
-            );
-          })}
-        </List>
+      <CardHeader
+        title={name}
+        subheader={`${courseNumber.department} ${courseNumber.number}`}
+        subheaderTypographyProps={{
+          fontFamily: "'Ubuntu Mono', monospace"
+        }}
+        sx={{
+          gridArea: "header",
+          alignSelf: "start"
+        }}
+      />
+      <CardContent component={List} sx={{
+        gridArea: "content",
+        alignSelf: "end"
+      }}>
+        {details.map((detail, index) => (
+          <ListItem key={index}>
+            <ListItemIcon>
+              {detail.icon}
+            </ListItemIcon>
+            <ListItemText>
+              {detail.text}
+            </ListItemText>
+          </ListItem>
+        ))}
       </CardContent>
     </Card>
   );
