@@ -29,25 +29,23 @@ const abbreviations = {
   "UGS": "Undergraduate Studies"
 }
 
-const iconProps = {
-  fontSize: "1.25rem"
-}
-
 const CourseCard = ({
-  name, courseNumber, instructors, term
+  course
 }) => {
+  const courseNumber = `${course.courseNumber.department} ${course.courseNumber.number}`;
+
   const details = [
     {
-      "icon": <MenuBookIcon sx={iconProps} />,
-      "text": abbreviations[courseNumber.department]
+      "icon": <MenuBookIcon />,
+      "text": abbreviations[course.courseNumber.department]
     },
     {
-      "icon": <AssignmentIndIcon sx={iconProps} />,
-      "text": instructors.join(" & ")
+      "icon": <AssignmentIndIcon />,
+      "text": course.instructors.join(" & ")
     },
     {
-      "icon": <CalendarMonthIcon sx={iconProps} />,
-      "text": term.semester + " " + term.year
+      "icon": <CalendarMonthIcon />,
+      "text": course.term.semester + " " + course.term.year
     }
   ]
 
@@ -64,14 +62,18 @@ const CourseCard = ({
     }}>
       <CardMedia
         component="img"
-        src="../logo192.png"
+        src={`https://www.cs.utexas.edu/~scottlai/courses/${courseNumber.replaceAll(" ", "").toLowerCase()}.jpg`}
+        alt={course.name}
+        width={230}
+        height={150}
         sx={{
-          gridArea: "img"
+          gridArea: "img",
+          objectFit: "cover"
         }}
       />
       <CardHeader
-        title={name}
-        subheader={`${courseNumber.department} ${courseNumber.number}`}
+        title={course.nickname}
+        subheader={courseNumber}
         subheaderTypographyProps={{
           fontFamily: "'Ubuntu Mono', monospace"
         }}

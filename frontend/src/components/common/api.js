@@ -2,22 +2,30 @@ import Axios from "axios";
 
 const API = "https://api.scottlai.tech";
 
-export const getCourses = (searchParams) => {
-  const currentPage = searchParams.get("page");
-  const perPage = searchParams.get("perPage");
-  const department = searchParams.get("department")
-  const semester = searchParams.get("term");
-  const minGrade = searchParams.get("minGrade");
-  const maxGrade = searchParams.get("maxGrade");
+const numToGrade = {
+  0: "Bminus",
+  1: "B",
+  2: "Bplus",
+  3: "Aminus",
+  4: "A"
+}
+
+export const getCourses = (filters) => {
+  const currentPage = filters.page;
+  const perPage = filters.perPage;
+  const department = filters.departments;
+  const semester = filters.semesters;
+  const minGrade = numToGrade[filters.minGrade];
+  const maxGrade = numToGrade[filters.maxGrade];
   let params = [];
   if (currentPage != null) {
     params.push(`page=${currentPage}`);
   }
   params.push(`perPage=${perPage == null ? 12 : perPage}`);
-  if (department != null) {
+  if (department.length > 0) {
     params.push(`department=${department}`);
   }
-  if (semester != null) {
+  if (semester.length > 0) {
     params.push(`term=${semester}`);
   }
   if (minGrade != null) {
