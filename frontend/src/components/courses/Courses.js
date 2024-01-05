@@ -9,143 +9,34 @@ import {
   getCourses
 } from "../common/api";
 import CourseCard from "./CourseCard";
+import ExactFilter from "./ExactFilter";
+import RangeFilter from "./RangeFilter";
 import {
-  Box,
+  pageSizes,
+  departments,
+  deptToAbbr,
+  abbrToDept,
+  semToAbbr,
+  abbrToSem,
+  semesters,
+  gradeToNum,
+  numToGrade,
+  grades
+} from "./filters";
+import {
   Breadcrumbs,
   Button,
   Card,
   CardContent,
   CardHeader,
-  Chip,
   CircularProgress,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  OutlinedInput,
   Pagination,
-  Select,
-  Slider,
-  Typography
+  Unstable_Grid2 as Grid
 } from "@mui/material";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   useSearchParams
 } from "react-router-dom";
-
-const departments = [
-  "Accounting",
-  "Asian Studies",
-  "Chemistry",
-  "Computer Science",
-  "Government",
-  "History",
-  "Legal Environment of Business",
-  "Mathematics",
-  "Management",
-  "Management Information Systems",
-  "Music",
-  "Statistics and Data Sciences",
-  "Undergraduate Studies"
-];
-
-const deptToAbbr = {
-  "Accounting": "ACC",
-  "Asian Studies": "ANS",
-  "Chemistry": "CH",
-  "Computer Science": "CS",
-  "Government": "GOV",
-  "History": "HIS",
-  "Legal Environment of Business": "LEB",
-  "Mathematics": "M",
-  "Management": "MAN",
-  "Management Information Systems": "MIS",
-  "Music": "MUS",
-  "Statistics and Data Sciences": "SDS",
-  "Undergraduate Studies": "UGS"
-};
-
-const abbrToDept = {
-  "CS": "Computer Science",
-  "MAN": "Management",
-  "MIS": "Management Information Systems",
-  "ACC": "Accounting",
-  "ANS": "Asian Studies",
-  "LEB": "Legal Environment of Business",
-  "CH": "Chemistry",
-  "M": "Mathematics",
-  "HIS": "History",
-  "SDS": "Statistics and Data Sciences",
-  "MUS": "Music",
-  "GOV": "Government",
-  "UGS": "Undergraduate Studies"
-};
-
-const semToAbbr = {
-  "Fall 2020": "f20",
-  "Spring 2021": "s21",
-  "Fall 2021": "f21",
-  "Spring 2022": "s22",
-  "Fall 2022": "f22",
-  "Spring 2023": "s23"
-};
-
-const abbrToSem = {
-  "f20": "Fall 2020",
-  "s21": "Spring 2021",
-  "f21": "Fall 2021",
-  "s22": "Spring 2022",
-  "f22": "Fall 2022",
-  "s23": "Spring 2023"
-};
-
-const semesters = [
-  "Fall 2020",
-  "Spring 2021",
-  "Fall 2021",
-  "Spring 2022",
-  "Fall 2022",
-  "Spring 2023"
-]
-
-const gradeToNum = {
-  "Bminus": 0,
-  "B": 1,
-  "Bplus": 2,
-  "Aminus": 3,
-  "A": 4
-}
-
-const numToGrade = {
-  0: "Bminus",
-  1: "B",
-  2: "Bplus",
-  3: "Aminus",
-  4: "A"
-}
-
-const grades = [
-  {
-    value: 0,
-    label: "B-"
-  },
-  {
-    value: 1,
-    label: "B"
-  },
-  {
-    value: 2,
-    label: "B+"
-  },
-  {
-    value: 3,
-    label: "A-"
-  },
-  {
-    value: 4,
-    label: "A"
-  }
-];
 
 /**
  * Read and parse the search parameters to get the filters
@@ -214,9 +105,13 @@ async function getCoursesData(filters, setData) {
 }
 
 const Courses = () => {
+  // response from the API (courses and pagination data)
   const [ data, setData ] = useState({});
+  // whether the data is being fetched
   const [ loading, setLoading ] = useState(true);
+  // search parameters from the URL
   const [ searchParams, setSearchParams ] = useSearchParams();
+  // filters from the search parameters; used to update the UI
   const [ filters, setFilters ] = useState({});
 
   useEffect(() => {
@@ -248,6 +143,8 @@ const Courses = () => {
     setSearchParams((prevSearchParams) => {
       // update the search parameter
       prevSearchParams.set("page", newPage);
+      // remove the search parameter if it is the default value
+      prevSearchParams.delete("page", 1);
       return new URLSearchParams(prevSearchParams);
     });
   };
@@ -267,6 +164,8 @@ const Courses = () => {
       prevSearchParams.set("perPage", newPerPage);
       // reset the page to 1
       prevSearchParams.delete("page");
+      // remove the search parameter if it is the default value
+      prevSearchParams.delete("perPage", 12);
       return new URLSearchParams(prevSearchParams);
     });
   };
@@ -289,6 +188,9 @@ const Courses = () => {
       prevSearchParams.set("maxGrade", maxGrade);
       // reset the page to 1
       prevSearchParams.delete("page");
+      // remove the search parameters if they are the default value
+      prevSearchParams.delete("minGrade", "Bminus");
+      prevSearchParams.delete("maxGrade", "A");
       return new URLSearchParams(prevSearchParams);
     });
   };
@@ -308,7 +210,7 @@ const Courses = () => {
     setSearchParams((prevSearchParams) => {
       // update the search parameter
       prevSearchParams.set("term", abbreviations.join(","));
-      // if there are no abbreviations, remove the search parameter
+      // remove the search parameter if it is the default value
       prevSearchParams.delete("term", []);
       // reset the page to 1
       prevSearchParams.delete("page");
@@ -331,7 +233,7 @@ const Courses = () => {
     setSearchParams((prevSearchParams) => {
       // update the search parameter
       prevSearchParams.set("department", abbreviations.join(","));
-      // if there are no abbreviations, remove the search parameter
+      // remove the search parameter if it is the default value
       prevSearchParams.delete("department", []);
       // reset the page to 1
       prevSearchParams.delete("page");
@@ -358,132 +260,49 @@ const Courses = () => {
         justifyItems: "normal",
         gap: "2rem"
       }}>
-        <Card>
-          <CardHeader title="Filters" />
+        <Card raised>
+          <CardHeader title="Filters"/>
           <CardContent sx={{
             display: "grid",
             gridTemplateAreas: `
               "semester department"\n
-              "grade grade"\n
+              "grade grade"
             `,
             gridTemplateColumns: "1fr 1fr",
             gap: "1rem"
           }}>
-            <FormControl fullWidth sx={{
-              gridArea: "semester"
-            }}>
-              <InputLabel id="select-semester-label">
-                Semester
-              </InputLabel>
-              {filters.semesters && (<Select
-                labelId="select-semester-label"
-                id="select-semester"
-                multiple
-                value={filters.semesters}
-                onChange={handleSemesterChange}
-                input={
-                  <OutlinedInput
-                    id="select-semester-chip"
-                    label="Semester"
-                  />
-                }
-                renderValue={(selected) => (
-                  <Box sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 0.5
-                  }}>
-                    {selected.map((value) => {
-                      return (
-                        <Chip
-                          key={value}
-                          label={value}
-                        />
-                      );
-                    })}
-                  </Box>
-                )}
-                sx={{
-                  height: "100%"
-                }}
-              >
-                {semesters.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>)}
-            </FormControl>
-            <FormControl fullWidth sx={{ gridArea: "department" }}>
-              <InputLabel id="select-department-label">
-                Department
-              </InputLabel>
-              {filters.departments && (<Select
-                labelId="select-department-label"
-                id="select-department"
-                multiple
-                value={filters.departments}
-                onChange={handleDepartmentChange}
-                input={
-                  <OutlinedInput
-                    id="select-department-chip"
-                    label="Department"
-                  />
-                }
-                renderValue={(selected) => (
-                  <Box sx={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 0.5
-                  }}>
-                    {selected.map((value) => {
-                      return (
-                        <Chip
-                          key={value}
-                          label={value}
-                        />
-                      );
-                    })}
-                  </Box>
-                )}
-                sx={{
-                  height: "100%"
-                }}
-              >
-                {departments.map((name) => (
-                  <MenuItem
-                    key={name}
-                    value={name}
-                  >
-                    {name}
-                  </MenuItem>
-                ))}
-              </Select>)}
-            </FormControl>
-            <Box sx={{
-              gridArea: "grade",
-              borderRadius: "4px",
-              border: "0.8px solid rgba(0, 0, 0, 0.23)",
-              p: "1.5rem"
-            }}>
-              <Typography align="center" variant="h3" id="grade-slider">
-                Grade
-              </Typography>
-              <Slider
-                getAriaValueText={(grade) => {
-                  return `${grade[0]} to ${grade[1]}`;
-                }}
-                aria-labelledby="grade-slider"
-                value={[ filters.minGrade, filters.maxGrade ]}
-                onChange={handleGradeChange}
-                marks={grades}
-                step={null}
-                max={4}
-              />
-            </Box>
+            <ExactFilter
+              multiple
+              label="Semester"
+              id="select-semester"
+              value={filters.semesters}
+              onChange={handleSemesterChange}
+              options={semesters}
+              sx={{
+                gridArea: "semester"
+              }}
+            />
+            <ExactFilter
+              multiple
+              label="Department"
+              id="select-department"
+              value={filters.departments}
+              onChange={handleDepartmentChange}
+              options={departments}
+              sx={{
+                gridArea: "department"
+              }}
+            />
+            <RangeFilter
+              label="Grade"
+              id="grade-slider"
+              value={[ filters.minGrade, filters.maxGrade ]}
+              onChange={handleGradeChange}
+              options={grades}
+              sx={{
+                gridArea: "grade"
+              }}
+            />
           </CardContent>
         </Card>
         {loading ? (
@@ -494,17 +313,14 @@ const Courses = () => {
         ) : (
           <>
             <Grid container spacing={4}>
-              {data.courses?.map((course, index) => {
-                return (
-                  <Grid
-                    item
-                    key={index}
-                    xs={12} sm={6} md={4}
-                  >
-                    <CourseCard course={course} />
-                  </Grid>
-                );
-              })}
+              {data.courses?.map((course, index) => (
+                <Grid
+                  key={index}
+                  xs={12} sm={6} md={4}
+                >
+                  <CourseCard course={course} />
+                </Grid>
+              ))}
             </Grid>
             <Pagination
               count={Math.ceil(data.total / data.pageSize)}
@@ -517,28 +333,18 @@ const Courses = () => {
                 justifyContent: "center"
               }}
             />
-            <FormControl sx={{
-              width: 100,
-              justifySelf: "center",
-              textAlign: "center"
-            }}>
-              <InputLabel
-                id="per-page-label"
-              >
-                Page Size
-              </InputLabel>
-              <Select
-                labelId="per-page-label"
-                id="per-page-select"
-                label="Page Size"
-                value={data.pageSize}
-                onChange={handlePerPageChange}
-              >
-                <MenuItem value={12}>12</MenuItem>
-                <MenuItem value={24}>24</MenuItem>
-                <MenuItem value={36}>36</MenuItem>
-              </Select>
-            </FormControl>
+            <ExactFilter
+              label="Page Size"
+              id="per-page"
+              value={data.pageSize}
+              onChange={handlePerPageChange}
+              options={pageSizes}
+              sx={{
+                width: 100,
+                justifySelf: "center",
+                textAlign: "center"
+              }}
+            />
           </>
         )}
       </Wrapper>

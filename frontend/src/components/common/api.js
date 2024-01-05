@@ -1,20 +1,17 @@
 import Axios from "axios";
+import {
+  semToAbbr,
+  deptToAbbr,
+  numToGrade
+} from "../courses/filters";
 
 const API = "https://api.scottlai.tech";
-
-const numToGrade = {
-  0: "Bminus",
-  1: "B",
-  2: "Bplus",
-  3: "Aminus",
-  4: "A"
-}
 
 export const getCourses = (filters) => {
   const currentPage = filters.page;
   const perPage = filters.perPage;
-  const department = filters.departments;
-  const semester = filters.semesters;
+  const department = filters.departments.map((dept) => deptToAbbr[dept]);
+  const semester = filters.semesters.map((sem) => semToAbbr[sem]);
   const minGrade = numToGrade[filters.minGrade];
   const maxGrade = numToGrade[filters.maxGrade];
   let params = [];
