@@ -8,32 +8,28 @@ import {
 const API = "https://api.scottlai.tech";
 
 export const getCourses = (filters) => {
-  const currentPage = filters.page;
+  const page = filters.page;
   const perPage = filters.perPage;
   const department = filters.departments.map((dept) => deptToAbbr[dept]);
   const semester = filters.semesters.map((sem) => semToAbbr[sem]);
   const minGrade = numToGrade[filters.minGrade];
   const maxGrade = numToGrade[filters.maxGrade];
   let params = [];
-  if (currentPage != null) {
-    params.push(`page=${currentPage}`);
-  }
-  params.push(`perPage=${perPage == null ? 12 : perPage}`);
+  params.push(`page=${page}`);
+  params.push(`perPage=${perPage}`);
   if (department.length > 0) {
     params.push(`department=${department}`);
   }
   if (semester.length > 0) {
     params.push(`term=${semester}`);
   }
-  if (minGrade != null) {
+  if (minGrade !== 0 || maxGrade !== 4) {
     params.push(`minGrade=${minGrade}`)
-  }
-  if (maxGrade != null) {
     params.push(`maxGrade=${maxGrade}`)
   }
-  const final = `${API}/courses?${params.join("&")}`;
-  console.log(final);
-  return Axios.get(final);
+  const url = `${API}/courses?${params.join("&")}`;
+  console.log(url);
+  return Axios.get(url);
 };
 
 export const getEducation = () => {

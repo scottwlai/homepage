@@ -1,7 +1,7 @@
 import React, {
   useState,
   useEffect
-} from "react"
+} from "react";
 import Wrapper from "../common/Wrapper";
 import Title from "../common/Title";
 import LinkButton from "../common/LinkButton";
@@ -10,25 +10,15 @@ import {
 } from "../common/api";
 import CourseCard from "./CourseCard";
 import ExactFilter from "./ExactFilter";
-import RangeFilter from "./RangeFilter";
 import {
   pageSizes,
-  departments,
-  deptToAbbr,
   abbrToDept,
-  semToAbbr,
   abbrToSem,
-  semesters,
-  gradeToNum,
-  numToGrade,
-  grades
+  gradeToNum
 } from "./filters";
 import {
   Breadcrumbs,
   Button,
-  Card,
-  CardContent,
-  CardHeader,
   CircularProgress,
   Pagination,
   Unstable_Grid2 as Grid
@@ -37,28 +27,49 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   useSearchParams
 } from "react-router-dom";
+import CourseFilters from "./CourseFilters";
 
 /**
- * Read and parse the search parameters to get the filters
+ * Translates a search parameter to its equivalent state value
+ *
+ * @param {string | string[]} param a key in `translator` or an array whose elements might be keys
+ * @param translator object mapping search parameters to their equivalent state values
+ * @returns the equivalent state value of the search parameter
+ */
+const translate = (param, translator) => {
+  if (typeof param === "string") {
+    return translator[param];
+  } else if (Array.isArray(param)) {
+    return param
+      .filter((param) => param in translator)
+      .map((param) => translator[param])
+      .sort();
+  } else {
+    return [];
+  }
+};
+
+/**
+ * Read, parse, error-check, and return the filters from the search parameters
  *
  * @param {URLSearchParams} searchParams the query parameters from the URL
  * @returns an object containing the filters
  */
 const getFilters = (searchParams) => {
   // semester filter
-  const s = searchParams.get("term");
-  const semesters = s ? s.split(",").map((sem) => abbrToSem[sem]).sort() : [];
+  const sem = searchParams.get("term");
+  const semesters = translate(sem ? sem.split(",") : [], abbrToSem);
   // department filter
-  const d = searchParams.get("department");
-  const departments = d ? d.split(",").map((dept) => abbrToDept[dept]).sort() : [];
+  const dept = searchParams.get("department");
+  const departments = translate(dept ? dept.split(",") : [], abbrToDept);
   // grade filter
-  let minGrade = searchParams.get("minGrade");
-  minGrade = minGrade == null ? 0 : gradeToNum[minGrade];
-  let maxGrade = searchParams.get("maxGrade");
-  maxGrade = maxGrade == null ? 4 : gradeToNum[maxGrade];
+  const min = searchParams.get("minGrade");
+  const max = searchParams.get("maxGrade");
+  const minGrade = translate(min in gradeToNum ? min : "Bminus", gradeToNum);
+  const maxGrade = translate(max in gradeToNum ? max : "A", gradeToNum);
   // pagination
-  const page = searchParams.get("page") || 1;
-  const perPage = searchParams.get("perPage") || 12;
+  const page = Number(searchParams.get("page")) || 1;
+  const perPage = Number(searchParams.get("perPage")) || 12;
   // build the filters object
   return {
     semesters: semesters,
@@ -93,7 +104,7 @@ const getCacheKey = (filters) => {
  * @param filters an object containing the filters
  * @param setData function to update the data
  */
-async function getCoursesData(filters, setData) {
+const getCoursesData = async(filters, setData) => {
   try {
     const response = await getCourses(filters);
     let data = response.data;
@@ -102,7 +113,7 @@ async function getCoursesData(filters, setData) {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 const Courses = () => {
   // response from the API (courses and pagination data)
@@ -111,7 +122,7 @@ const Courses = () => {
   const [ loading, setLoading ] = useState(true);
   // search parameters from the URL
   const [ searchParams, setSearchParams ] = useSearchParams();
-  // filters from the search parameters; used to update the UI
+  // error checked filters from the search parameters
   const [ filters, setFilters ] = useState({});
 
   useEffect(() => {
@@ -149,98 +160,6 @@ const Courses = () => {
     });
   };
 
-  /**
-   * Updates the search parameters to reflect the new page size
-   *
-   * Also resets the page to 1
-   *
-   * @param {React.ChangeEvent} event the event source of the callback
-   */
-  const handlePerPageChange = (event) => {
-    // extract the new value (number of courses per page)
-    const newPerPage = parseInt(event.target.value);
-    setSearchParams((prevSearchParams) => {
-      // update the search parameter
-      prevSearchParams.set("perPage", newPerPage);
-      // reset the page to 1
-      prevSearchParams.delete("page");
-      // remove the search parameter if it is the default value
-      prevSearchParams.delete("perPage", 12);
-      return new URLSearchParams(prevSearchParams);
-    });
-  };
-
-  /**
-   * Updates the search parameters to reflect the new grade range
-   *
-   * Also resets the page to 1
-   *
-   * @param {Event} _ the event source of the callback (not used)
-   * @param {number} newGrade the new range of grades selected
-   */
-  const handleGradeChange = (_, newGrade) => {
-    // extract the new values ([minGrade, maxGrade])
-    const minGrade = numToGrade[newGrade[0]];
-    const maxGrade = numToGrade[newGrade[1]];
-    setSearchParams((prevSearchParams) => {
-      // update the search parameter
-      prevSearchParams.set("minGrade", minGrade);
-      prevSearchParams.set("maxGrade", maxGrade);
-      // reset the page to 1
-      prevSearchParams.delete("page");
-      // remove the search parameters if they are the default value
-      prevSearchParams.delete("minGrade", "Bminus");
-      prevSearchParams.delete("maxGrade", "A");
-      return new URLSearchParams(prevSearchParams);
-    });
-  };
-
-  /**
-   * Updates the search parameters to reflect the new semester filter
-   *
-   * Also resets the page to 1
-   *
-   * @param {SelectChangeEvent} event the event source of the callback
-   */
-  const handleSemesterChange = (event) => {
-    // extract the new value (array of selected semesters)
-    const newSemesters = event.target.value;
-    // turn semesters into abbreviations
-    let abbreviations = newSemesters.map(sem => semToAbbr[sem]);
-    setSearchParams((prevSearchParams) => {
-      // update the search parameter
-      prevSearchParams.set("term", abbreviations.join(","));
-      // remove the search parameter if it is the default value
-      prevSearchParams.delete("term", []);
-      // reset the page to 1
-      prevSearchParams.delete("page");
-      return new URLSearchParams(prevSearchParams);
-    });
-  };
-
-  /**
-   * Updates the search parameters to reflect the new department filter
-   *
-   * Also resets the page to 1
-   *
-   * @param {SelectChangeEvent} event the event source of the callback
-   */
-  const handleDepartmentChange = (event) => {
-    // extract the new value (array of selected departments)
-    const newDepartments = event.target.value;
-    // turn departments into abbreviations
-    let abbreviations = newDepartments.map(dept => deptToAbbr[dept]);
-    setSearchParams((prevSearchParams) => {
-      // update the search parameter
-      prevSearchParams.set("department", abbreviations.join(","));
-      // remove the search parameter if it is the default value
-      prevSearchParams.delete("department", []);
-      // reset the page to 1
-      prevSearchParams.delete("page");
-      return new URLSearchParams(prevSearchParams);
-    });
-  };
-
   return (
     <main>
       <Wrapper>
@@ -260,51 +179,10 @@ const Courses = () => {
         justifyItems: "normal",
         gap: "2rem"
       }}>
-        <Card raised>
-          <CardHeader title="Filters"/>
-          <CardContent sx={{
-            display: "grid",
-            gridTemplateAreas: `
-              "semester department"\n
-              "grade grade"
-            `,
-            gridTemplateColumns: "1fr 1fr",
-            gap: "1rem"
-          }}>
-            <ExactFilter
-              multiple
-              label="Semester"
-              id="select-semester"
-              value={filters.semesters}
-              onChange={handleSemesterChange}
-              options={semesters}
-              sx={{
-                gridArea: "semester"
-              }}
-            />
-            <ExactFilter
-              multiple
-              label="Department"
-              id="select-department"
-              value={filters.departments}
-              onChange={handleDepartmentChange}
-              options={departments}
-              sx={{
-                gridArea: "department"
-              }}
-            />
-            <RangeFilter
-              label="Grade"
-              id="grade-slider"
-              value={[ filters.minGrade, filters.maxGrade ]}
-              onChange={handleGradeChange}
-              options={grades}
-              sx={{
-                gridArea: "grade"
-              }}
-            />
-          </CardContent>
-        </Card>
+        <CourseFilters
+          filters={filters}
+          setSearchParams={setSearchParams}
+        />
         {loading ? (
           <CircularProgress sx={{
             justifySelf: "center",
@@ -337,7 +215,9 @@ const Courses = () => {
               label="Page Size"
               id="per-page"
               value={data.pageSize}
-              onChange={handlePerPageChange}
+              searchParam="perPage"
+              setSearchParams={setSearchParams}
+              defaultValue={12}
               options={pageSizes}
               sx={{
                 width: 100,

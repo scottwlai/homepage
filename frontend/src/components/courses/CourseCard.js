@@ -1,5 +1,8 @@
 import React from "react";
 import {
+  abbrToDept
+} from "./filters";
+import {
   Card,
   CardContent,
   CardHeader,
@@ -13,31 +16,17 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
-const abbreviations = {
-  "C S": "Computer Science",
-  "MAN": "Management",
-  "MIS": "Management Information Systems",
-  "ACC": "Accounting",
-  "ANS": "Asian Studies",
-  "LEB": "Legal Environment of Business",
-  "CH": "Chemistry",
-  "M": "Mathematics",
-  "HIS": "History",
-  "SDS": "Statistics and Data Sciences",
-  "MUS": "Music",
-  "GOV": "Government",
-  "UGS": "Undergraduate Studies"
-}
-
 const CourseCard = ({
   course
 }) => {
-  const courseNumber = `${course.courseNumber.department} ${course.courseNumber.number}`;
+  const department = course.courseNumber.department;
+  const number = course.courseNumber.number;
+  const courseNumber = `${department} ${number}`;
 
   const details = [
     {
       "icon": <MenuBookIcon />,
-      "text": abbreviations[course.courseNumber.department]
+      "text": abbrToDept[department.replace(" ", "")]
     },
     {
       "icon": <AssignmentIndIcon />,
@@ -47,7 +36,7 @@ const CourseCard = ({
       "icon": <CalendarMonthIcon />,
       "text": course.term.semester + " " + course.term.year
     }
-  ]
+  ];
 
   return (
     <Card raised sx={{
