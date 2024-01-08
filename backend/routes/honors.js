@@ -42,7 +42,7 @@ router.get('/', cors(corsOptions), async(req, res, next) => {
   // selects the Honors collection in the database
   const honors = db.collection('Honors');
   // executes the query
-  const data = await honors.find().toArray();
+  const data = await honors.find({}, { sort: { endDate: -1 } }).toArray();
   // sends the client a JSON response containing the resulting array
   res.json(data);
 });

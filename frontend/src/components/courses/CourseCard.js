@@ -1,92 +1,90 @@
 import React from "react";
 import {
+  abbrToDept
+} from "./filters";
+import {
   Card,
   CardContent,
+  CardHeader,
   CardMedia,
-  Divider,
   List,
-  Typography
+  ListItem,
+  ListItemIcon,
+  ListItemText
 } from "@mui/material";
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
-import CustomListItem from "./CustomListItem";
-
-const abbreviations = {
-  "C S": "Computer Science",
-  "MAN": "Management",
-  "MIS": "Management Information Systems",
-  "ACC": "Accounting",
-  "ANS": "Asian Studies",
-  "LEB": "Legal Environment of Business",
-  "CH": "Chemistry",
-  "M": "Mathematics",
-  "HIS": "History",
-  "SDS": "Statistics and Data Sciences",
-  "MUS": "Music",
-  "GOV": "Government",
-  "UGS": "Undergraduate Studies"
-}
-
-const iconProps = {
-  fontSize: "1.25rem"
-}
 
 const CourseCard = ({
-  name, courseNumber, instructors, term
+  course
 }) => {
+  const department = course.courseNumber.department;
+  const number = course.courseNumber.number;
+  const courseNumber = `${department} ${number}`;
+
   const details = [
     {
-      "icon": <MenuBookIcon sx={iconProps} />,
-      "text": abbreviations[courseNumber.department]
+      "icon": <MenuBookIcon />,
+      "text": abbrToDept[department.replace(" ", "")]
     },
     {
-      "icon": <AssignmentIndIcon sx={iconProps} />,
-      "text": instructors.join(" & ")
+      "icon": <AssignmentIndIcon />,
+      "text": course.instructors.join(" & ")
     },
     {
-      "icon": <CalendarMonthIcon sx={iconProps} />,
-      "text": term.semester + " " + term.year
+      "icon": <CalendarMonthIcon />,
+      "text": course.term.semester + " " + course.term.year
     }
-  ]
+  ];
 
   return (
-    <Card sx={{
-      height: "100%"
+    <Card raised sx={{
+      height: "100%",
+      display: "grid",
+      gridTemplateAreas: `
+        "img"\n
+        "header"\n
+        "content"
+      `,
+      gridTemplateRows: "auto 1fr auto"
     }}>
       <CardMedia
         component="img"
-        src="../logo192.png"
+        src={`https://www.cs.utexas.edu/~scottlai/courses/${courseNumber.replaceAll(" ", "").toLowerCase()}.jpg`}
+        alt={course.name}
+        width={230}
+        height={150}
         sx={{
-          width: "50%",
-          margin: "8px auto"
+          gridArea: "img",
+          objectFit: "cover"
         }}
       />
-      <CardContent>
-        <Typography variant="h5" align="center">
-          {name}
-        </Typography>
-        <Typography variant="subtitle1" fontFamily="monospace" align="center">
-          {courseNumber.department} {courseNumber.number}
-        </Typography>
-        <List>
-          {details.map((detail, index) => {
-            return (
-              <React.Fragment key={index}>
-                {Boolean(index) && (
-                  <Divider component="li"/>
-                )}
-                <CustomListItem
-                  icon={detail.icon}
-                  text={detail.text}
-                  textProps={{
-                    variant: "subtitle2"
-                  }}
-                />
-              </React.Fragment>
-            );
-          })}
-        </List>
+      <CardHeader
+        title={course.nickname}
+        subheader={courseNumber}
+        subheaderTypographyProps={{
+          fontFamily: "'Ubuntu Mono', monospace"
+        }}
+        sx={{
+          gridArea: "header",
+          alignSelf: "start"
+        }}
+      />
+      <CardContent component={List} sx={{
+        gridArea: "content",
+        alignSelf: "end"
+      }}>
+        {details.map((detail, index) => (
+          <ListItem key={index}>
+            <ListItemIcon>
+              {detail.icon}
+            </ListItemIcon>
+            <ListItemText>
+              {detail.text}
+            </ListItemText>
+          </ListItem>
+        ))}
       </CardContent>
     </Card>
   );

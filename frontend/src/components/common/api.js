@@ -1,36 +1,35 @@
 import Axios from "axios";
+import {
+  semToAbbr,
+  deptToAbbr,
+  numToGrade
+} from "../courses/filters";
 
 const API = "https://api.scottlai.tech";
 
-export const getCourses = (searchParams) => {
-  const currentPage = searchParams.get("page");
-  const perPage = searchParams.get("perPage");
-  const department = searchParams.get("department")
-  const semester = searchParams.get("term");
-  const minGrade = searchParams.get("minGrade");
-  const maxGrade = searchParams.get("maxGrade");
+export const getCourses = (filters) => {
+  const page = filters.page;
+  const perPage = filters.perPage;
+  const department = filters.departments.map((dept) => deptToAbbr[dept]);
+  const semester = filters.semesters.map((sem) => semToAbbr[sem]);
+  const minGrade = numToGrade[filters.minGrade];
+  const maxGrade = numToGrade[filters.maxGrade];
   let params = [];
-  if (currentPage != null) {
-    params.push(`page=${currentPage}`);
-  }
-  if (perPage != null) {
-    params.push(`perPage=${perPage}`);
-  }
-  if (department != null) {
+  params.push(`page=${page}`);
+  params.push(`perPage=${perPage}`);
+  if (department.length > 0) {
     params.push(`department=${department}`);
   }
-  if (semester != null) {
+  if (semester.length > 0) {
     params.push(`term=${semester}`);
   }
-  if (minGrade != null) {
+  if (minGrade !== 0 || maxGrade !== 4) {
     params.push(`minGrade=${minGrade}`)
-  }
-  if (maxGrade != null) {
     params.push(`maxGrade=${maxGrade}`)
   }
-  const final = `${API}/courses?${params.join("&")}`;
-  console.log(final);
-  return Axios.get(final);
+  const url = `${API}/courses?${params.join("&")}`;
+  console.log(url);
+  return Axios.get(url);
 };
 
 export const getEducation = () => {
