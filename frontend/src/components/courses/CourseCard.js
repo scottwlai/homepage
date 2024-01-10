@@ -19,22 +19,18 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 const CourseCard = ({
   course
 }) => {
-  const department = course.courseNumber.department;
-  const number = course.courseNumber.number;
-  const courseNumber = `${department} ${number}`;
-
   const details = [
     {
       "icon": <MenuBookIcon />,
-      "text": abbrToDept[department.replace(" ", "")]
+      "text": course.department
     },
     {
       "icon": <AssignmentIndIcon />,
-      "text": course.instructors.join(" & ")
+      "text": course.instructors.map((instructor) => `${instructor.first} ${instructor.last}`).join(" & ")
     },
     {
       "icon": <CalendarMonthIcon />,
-      "text": course.term.semester + " " + course.term.year
+      "text": course.semester
     }
   ];
 
@@ -51,7 +47,7 @@ const CourseCard = ({
     }}>
       <CardMedia
         component="img"
-        src={`https://www.cs.utexas.edu/~scottlai/courses/${courseNumber.replaceAll(" ", "").toLowerCase()}.jpg`}
+        src={`https://www.cs.utexas.edu/~scottlai/courses/${course.courseNumber.replaceAll(" ", "").toLowerCase()}.jpg`}
         alt={course.name}
         width={230}
         height={150}
@@ -62,7 +58,7 @@ const CourseCard = ({
       />
       <CardHeader
         title={course.nickname}
-        subheader={courseNumber}
+        subheader={course.courseNumber}
         subheaderTypographyProps={{
           fontFamily: "'Ubuntu Mono', monospace"
         }}

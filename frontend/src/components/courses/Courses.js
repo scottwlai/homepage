@@ -57,7 +57,7 @@ const translate = (param, translator) => {
  */
 const getFilters = (searchParams) => {
   // semester filter
-  const sem = searchParams.get("term");
+  const sem = searchParams.get("semester");
   const semesters = translate(sem ? sem.split(",") : [], abbrToSem);
   // department filter
   const dept = searchParams.get("department");
@@ -65,7 +65,7 @@ const getFilters = (searchParams) => {
   // grade filter
   const min = searchParams.get("minGrade");
   const max = searchParams.get("maxGrade");
-  const minGrade = translate(min in gradeToNum ? min : "Bminus", gradeToNum);
+  const minGrade = translate(min in gradeToNum ? min : "CR", gradeToNum);
   const maxGrade = translate(max in gradeToNum ? max : "A", gradeToNum);
   // pagination
   const page = Number(searchParams.get("page")) || 1;
@@ -201,7 +201,7 @@ const Courses = () => {
               ))}
             </Grid>
             <Pagination
-              count={Math.ceil(data.total / data.pageSize)}
+              count={Math.ceil(data.total / data.perPage)}
               onChange={handlePageChange}
               page={data.page}
               showFirstButton
@@ -214,7 +214,7 @@ const Courses = () => {
             <ExactFilter
               label="Page Size"
               id="per-page"
-              value={data.pageSize}
+              value={data.perPage}
               searchParam="perPage"
               setSearchParams={setSearchParams}
               defaultValue={12}
