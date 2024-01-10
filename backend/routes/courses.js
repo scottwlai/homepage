@@ -99,7 +99,7 @@ const updateRange = (select, min, max, field, order, translator) => {
   if (!min && !max) return;
   const minIndex = min in translator ? translator[min] : 0;
   const maxIndex = max in translator ? translator[max] : order.length;
-  const range = order.slice(minIndex, maxIndex);
+  const range = order.slice(minIndex, maxIndex + 1);
   select.set(field, {$in: range});
 };
 

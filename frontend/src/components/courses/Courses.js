@@ -214,7 +214,7 @@ const Courses = () => {
             <ExactFilter
               label="Page Size"
               id="per-page"
-              value={data.pageSize}
+              value={data.perPage}
               searchParam="perPage"
               setSearchParams={setSearchParams}
               defaultValue={12}
