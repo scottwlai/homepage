@@ -21,7 +21,7 @@ export const getCourses = (filters) => {
     params.push(`department=${department}`);
   }
   if (semester.length > 0) {
-    params.push(`term=${semester}`);
+    params.push(`semester=${semester}`);
   }
   if (minGrade !== 0 || maxGrade !== 4) {
     params.push(`minGrade=${minGrade}`)

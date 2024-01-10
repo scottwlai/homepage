@@ -65,7 +65,7 @@ const CourseFilters = ({
         translator={numToGrade}
         searchParam={[ "minGrade", "maxGrade" ]}
         setSearchParams={setSearchParams}
-        defaultValue={[ 0, 4 ]}
+        defaultValue={[ 0, 5 ]}
         options={grades}
         sx={{
           gridArea: "grade"
