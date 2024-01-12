@@ -10,6 +10,7 @@ const API = "https://api.scottlai.tech";
 export const getCourses = (filters) => {
   const page = filters.page;
   const perPage = filters.perPage;
+  const search = filters.search;
   const department = filters.departments.map((dept) => deptToAbbr[dept]);
   const semester = filters.semesters.map((sem) => semToAbbr[sem]);
   const minGrade = numToGrade[filters.minGrade];
@@ -17,6 +18,9 @@ export const getCourses = (filters) => {
   let params = [];
   params.push(`page=${page}`);
   params.push(`perPage=${perPage}`);
+  if (search) {
+    params.push(`search=${search}`);
+  }
   if (department.length > 0) {
     params.push(`department=${department}`);
   }
