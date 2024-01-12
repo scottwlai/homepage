@@ -115,21 +115,44 @@ router.get("/", cors(corsOptions), async(req, res, next) => {
   const db = mongodb.db("Homepage");
   // selects the Courses collection in the database
   const courses = db.collection("Courses");
-  // parses URL query parameters, setting default values if null
+  // parses URL query parameters, setting default values if necessary
   const query = req.query;
+  const search = query.search.trim();
   let select = new Map();
   updateQuery(select, query.department, "department", abbrToDept);
   updateQuery(select, query.semester, "semester", abbrToSem);
   updateRange(select, query.minGrade, query.maxGrade, "grade", gradeOrder, gradeToNum);
   const page = parseInt(query.page) || 1;
   const perPage = parseInt(query.perPage) || 10;
-  // calculates the number of entries that match the query
-  const total = await courses.countDocuments(select);
   // calculates the number of entries to skip ahead to simulate pages
   const skip = (page - 1) * perPage;
-  // executes the query and navigates to the correct "page"
-  const data = await courses.find(select).skip(skip).limit(perPage).toArray();
-  // sends the client a JSON response containing the resulting array and metadata
+  // the stages of the aggregation pipeline
+  const pipeline = [];
+  // adds a $search stage if there is a search query
+  search && pipeline.push({
+    $search: {
+      index: "default",
+      text: {
+        query: search,
+        path: { wildcard: "*" }
+      }
+    }
+  });
+  // adds a $match stage for the rest of the filters
+  pipeline.push({ $match: select });
+  // adds a $count stage to count the number of documents matching the query
+  pipeline.push({ $count: "count" });
+  const total = (await courses.aggregate(pipeline).toArray())[0].count;
+  // removes the $count stage so we can add the $skip and $limit stages
+  pipeline.pop();
+  // adds the $skip and $limit stages to simulate pagination
+  pipeline.push(
+    { $skip: skip },
+    { $limit: perPage }
+  );
+  // executes the pipeline and turns the result into an array
+  const data = await courses.aggregate(pipeline).toArray();
+  // sends the client a JSON response containing the resulting array and pagination metadata
   res.json({
     "courses": data,
     "page": page,

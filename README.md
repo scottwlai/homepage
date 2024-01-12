@@ -33,6 +33,17 @@ It features the following endpoints, each with some options/query parameters to 
 #### Education: `/education` - universities I've attended (just [UT](https://www.utexas.edu/), for now)
 
 #### Courses: `/courses?[QUERY]` - classes I've taken in residence
+* `search=QUERY`
+    * text search by:
+        * course name
+        * course number
+        * semester
+        * department
+        * instructor
+        * building
+        * room number
+        * technologies used
+    * default: nothing
 * `page=PAGE_NUMBER`
     * the API is paginated based on the page size
     * default: `1`
