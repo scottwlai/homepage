@@ -117,7 +117,7 @@ router.get("/", cors(corsOptions), async(req, res, next) => {
   const courses = db.collection("Courses");
   // parses URL query parameters, setting default values if necessary
   const query = req.query;
-  const search = query.search.trim();
+  const search = (query.search || "").trim();
   let select = new Map();
   updateQuery(select, query.department, "department", abbrToDept);
   updateQuery(select, query.semester, "semester", abbrToSem);
