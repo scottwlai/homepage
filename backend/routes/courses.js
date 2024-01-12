@@ -134,7 +134,8 @@ router.get("/", cors(corsOptions), async(req, res, next) => {
       index: "default",
       text: {
         query: search,
-        path: { wildcard: "*" }
+        path: { wildcard: "*" },
+        fuzzy: {}
       }
     }
   });
