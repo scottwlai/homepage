@@ -56,6 +56,8 @@ const translate = (param, translator) => {
  * @returns an object containing the filters
  */
 const getFilters = (searchParams) => {
+  // search filter
+  const search = searchParams.get("search");
   // semester filter
   const sem = searchParams.get("semester");
   const semesters = translate(sem ? sem.split(",") : [], abbrToSem);
@@ -72,6 +74,7 @@ const getFilters = (searchParams) => {
   const perPage = Number(searchParams.get("perPage")) || 12;
   // build the filters object
   return {
+    search: search,
     semesters: semesters,
     departments: departments,
     minGrade: minGrade,
@@ -89,6 +92,7 @@ const getFilters = (searchParams) => {
  */
 const getCacheKey = (filters) => {
   return `courses
+    _search:${filters.search}
     _semesters:${filters.semesters}
     _departments:${filters.departments}
     _minGrade:${filters.minGrade}
