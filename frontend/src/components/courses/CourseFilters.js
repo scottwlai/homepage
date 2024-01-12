@@ -12,7 +12,8 @@ import {
 import {
   Card,
   CardContent,
-  CardHeader
+  CardHeader,
+  TextField
 } from "@mui/material";
 
 const CourseFilters = ({
@@ -24,12 +25,19 @@ const CourseFilters = ({
     <CardContent sx={{
       display: "grid",
       gridTemplateAreas: `
+        "search search"\n
         "semester department"\n
         "grade grade"
       `,
       gridTemplateColumns: "1fr 1fr",
       gap: "1rem"
     }}>
+      <TextField
+        label="Search"
+        sx={{
+          gridArea: "search"
+        }}
+      />
       <ExactFilter
         multiple
         label="Semester"
