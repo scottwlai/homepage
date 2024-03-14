@@ -1,5 +1,6 @@
 import React from "react";
 import Wrapper from "./common/Wrapper";
+import SectionImage from "./home/SectionImage";
 import {
   Typography
 } from "@mui/material";
@@ -17,6 +18,14 @@ const Hobbies = () => {
         <Typography gutterBottom variant="h2">
           I kickbox
         </Typography>
+        <SectionImage
+          src="https://cs.utexas.edu/~scottlai/images/tsl.jpg"
+          alt="Kickboxing Club"
+          width={500}
+          sx={{
+            borderRadius: "5%"
+          }}
+        />
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
@@ -33,6 +42,14 @@ const Hobbies = () => {
           I&apos;ve been learning Muay Thai for a year now and have
           begun sparring.
         </Typography>
+        <SectionImage
+          src="https://cs.utexas.edu/~scottlai/images/sparring.jpg"
+          alt="sparring practice"
+          width={500}
+          sx={{
+            borderRadius: "5%"
+          }}
+        />
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
@@ -51,6 +68,14 @@ const Hobbies = () => {
           environment for anyone interested in learning martial
           arts.
         </Typography>
+        <SectionImage
+          src="https://cs.utexas.edu/~scottlai/images/box.jpg"
+          alt="shadowboxing practice"
+          width={500}
+          sx={{
+            borderRadius: "5%"
+          }}
+        />
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
@@ -63,6 +88,8 @@ const Hobbies = () => {
         <Typography gutterBottom variant="h2">
           I color grade
         </Typography>
+      </Wrapper>
+      <Wrapper>
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
@@ -70,8 +97,14 @@ const Hobbies = () => {
           I enjoy producing digital media, and I&apos;m happy to use
           my skills in service to the club.
         </Typography>
-      </Wrapper>
-      <Wrapper>
+        <SectionImage
+          src="https://cs.utexas.edu/~scottlai/images/james.jpg"
+          alt="My friend James sparring Coach Chartouni"
+          width={500}
+          sx={{
+            borderRadius: "5%"
+          }}
+        />
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
@@ -91,6 +124,15 @@ const Hobbies = () => {
           While I&apos;m new to photo editing, I&apos;ve been making
           videos since 2015.
         </Typography>
+        <iframe
+          width="338"
+          height="600"
+          src="https://youtube.com/embed/sXkTO50NP8o?si=lUC9vJQME0-19wcl"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
@@ -100,6 +142,15 @@ const Hobbies = () => {
         </Typography>
       </Wrapper>
       <Wrapper>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/_Q5rz9_2JBE?si=MZqTG_fCV84kZ3BE"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
@@ -112,6 +163,15 @@ const Hobbies = () => {
         <Typography gutterBottom variant="h2">
           I play piano
         </Typography>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/w4H24nnJ4x8?si=5MTGh9mDWoJM_eU6"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
@@ -129,6 +189,15 @@ const Hobbies = () => {
           it interesting to see how my experience transfers over to
           piano.
         </Typography>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/L9Ue_GJvoVI?si=EkLsxgaTM3p-WifK"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
         <Typography paragraph align="center" sx={{
           textWrap: "balance",
           maxWidth: "60%"
