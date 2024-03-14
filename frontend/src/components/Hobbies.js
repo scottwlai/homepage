@@ -54,7 +54,7 @@ const Hobbies = () => {
             <Typography variant="body2" paragraph sx={{
               textWrap: "balance"
             }}>
-              I&apos;ve been learning Muay Thai for a year now and have
+              I&apos;ve been learning Muay Thai for over a year now and have
               begun sparring.
             </Typography>
             <Typography variant="body2" paragraph sx={{
@@ -81,7 +81,7 @@ const Hobbies = () => {
               textWrap: "balance"
             }}>
               This past semester, I became an officer in the club,
-              because I wanted to help provide a safe and welcoming
+              because I wanted to help provide a welcoming
               environment for anyone interested in learning martial
               arts.
             </Typography>
@@ -149,8 +149,13 @@ const Hobbies = () => {
             <Typography variant="body2" paragraph sx={{
               textWrap: "balance"
             }}>
+              In a special seminar, we taught a group of taekwondo students how to box.
+            </Typography>
+            <Typography variant="body2" paragraph sx={{
+              textWrap: "balance"
+            }}>
               While I&apos;m new to photo editing, I&apos;ve been making
-              ideos since 2015.
+              videos since 2015.
             </Typography>
             <Typography variant="body2" paragraph sx={{
               textWrap: "balance"
