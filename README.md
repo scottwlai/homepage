@@ -8,23 +8,23 @@ This portfolio is a full-stack web app meant to replace my current personal webs
 The React app is hosted on [AWS Amplify](https://aws.amazon.com/amplify/) at [https://main.dawqj0vyeni7s.amplifyapp.com](https://main.dawqj0vyeni7s.amplifyapp.com).
 A new instance is set to deploy every time the `main` branch is updated.
 
-I used Amplify's built-in domain management tool to enable HTTPS and connect the instance to [https://www.scottlai.tech](https://www.scottlai.tech).
-This involved creating a `CNAME` record in my DNS provider with the name set to `www.scottlai.tech` and the value set to an AWS-provided link in the form of `<id>.cloudfront.net`.
-I also created several `A` records--one to associate [scottlai.tech](https://www.scottlai.tech) to each IP address associated with my Amplify instance.
+I used Amplify's built-in domain management tool to enable HTTPS and connect the instance to [https://www.scottwlai.com](https://www.scottwlai.com).
+This involved creating a `CNAME` record in my DNS provider with the name set to `www.scottwlai.com` and the value set to an AWS-provided link in the form of `<id>.cloudfront.net`.
+I also created several `A` records--one to associate [scottwlai.com](https://www.scottwlai.com) to each IP address associated with my Amplify instance.
 
-[scottlai.tech](https://www.scottlai.tech) is configured to redirect to [www.scottlai.tech](https://www.scottlai.tech).
+[scottwlai.com](https://www.scottwlai.com) is configured to redirect to [www.scottwlai.com](https://www.scottwlai.com).
 
 ## Backend
 ### Deployment
 The Express app is hosted on [AWS Elastic Beanstalk](https://aws.amazon.com/elasticbeanstalk/) (EB) at [http://homepage3-dev.eba-f8fxthz6.us-east-2.elasticbeanstalk.com/](http://homepage3-dev.eba-f8fxthz6.us-east-2.elasticbeanstalk.com/).
 I have disabled automatic deployment, and I deploy a new instance manually by running `eb deploy` in the EB Command Line Interface (CLI).
 
-In order to access the EB instance at my custom domain name, I created a `CNAME` record in my DNS provider with the name set to `api.scottlai.tech` and the value set to the instance's domain.
+In order to access the EB instance at my custom domain name, I created a `CNAME` record in my DNS provider with the name set to `api.scottwlai.com` and the value set to the instance's domain.
 
-To enable HTTPS, I first created an SSL certificate for [api.scottlai.tech](https://api.scottlai.tech) using [AWS Certificate Manager](https://aws.amazon.com/certificate-manager/) (ACM), which involved creating a `CNAME` record to verify I own the domain name.
+To enable HTTPS, I first created an SSL certificate for [api.scottwlai.com](https://api.scottwlai.com) using [AWS Certificate Manager](https://aws.amazon.com/certificate-manager/) (ACM), which involved creating a `CNAME` record to verify I own the domain name.
 
 I then navigated to the instance's load balancer and created a listener on port 443 with the HTTPS protocol and the SSL certificate I just created.
-This allows the instance to be accessed at [https://api.scottlai.tech](https://api.scottlai.tech).
+This allows the instance to be accessed at [https://api.scottwlai.com](https://api.scottwlai.com).
 
 ### API
 The frontend uses the backend's API to query data from the database.
