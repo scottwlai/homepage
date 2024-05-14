@@ -5,7 +5,7 @@ import {
   numToGrade
 } from "../courses/filters";
 
-const API = "https://api.scottlai.tech";
+const API = "https://api.scottwlai.com";
 
 export const getCourses = (filters) => {
   const page = filters.page;
