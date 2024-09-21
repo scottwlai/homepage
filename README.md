@@ -3,6 +3,7 @@ My magnum opus&mdash;the biggest project I've set out to do alone.
 
 This portfolio is a full-stack web app meant to replace my current personal website.
 
+**Please note, as of September 21, 2024, this project (and all links on this README) are no longer active.**
 ## Frontend
 ### Deployment
 The React app is hosted on [AWS Amplify](https://aws.amazon.com/amplify/) at [https://main.dawqj0vyeni7s.amplifyapp.com](https://main.dawqj0vyeni7s.amplifyapp.com).
